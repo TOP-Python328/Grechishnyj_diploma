@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    <div>
+        <h1>Persons</h1>
+        <div class="popup">
+            <button class="open-btn">Добавить</button>
+            <div class="back close">
+                <div class="front">
+                    <h3 class="title">Добавить человека</h3>
+                    <div class="content">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="last_name" placeholder="Фамилия" required><br>
+                            <input type="text" name="first_name" placeholder="Имя" required><br>
+                            <input type="text" name="patr_name" placeholder="Отчество" required><br>
+                            <input type="date" name="birthday" required><br>
+                            <select name="sex" required>
+                                <option value=1 selected>мужской</option>
+                                <option value=0>женский</option>
+                            </select>
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
+                    <button class="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>№</td>
+                            <td>Фамилия</td>
+                            <td>Имя</td>
+                            <td>Отчество</td>
+                            <td>Пол</td>
+                            <td>Возраст</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for person in persons %}
+                        <tr>
+                            <td><a href="{% url 'person' person.url %}">{{ person.id }}</a></td>
+                            <td><a href="{% url 'person' person.url %}">{{ person.last_name }}</a></td>
+                            <td><a href="{% url 'person' person.url %}">{{ person.first_name }}</a></td>
+                            <td><a href="{% url 'person' person.url %}">{{ person.patr_name }}</a></td>
+                            <td><a href="{% url 'person' person.url %}">{{ person.sex.name }}</a></td>
+                            <td><a href="{% url 'person' person.url %}">{{ person.birthday }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

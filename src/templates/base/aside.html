@@ -1,0 +1,37 @@
+
+<aside>
+    <ul>
+        <li>Главная
+            <ul>
+                <li><a href="{% url 'main' %}">Dashboard</a></li>
+                <li>Реквизиты</li>
+                <li>Отделы</li>
+                <li>Сотрудники</li>
+            </ul>
+        </li>
+        <li>Недвижимость
+            <ul>
+                <li><a href="{% url 'immovables/constructions' %}">Микрорайоны</a></li>
+                <li><a href="{% url 'immovables/houses' %}">Дома</a></li>
+                <li><a href="{% url 'flats' %}">Квартиры</a></li>
+                <li><a href="{% url 'rooms' %}">Комнаты</a></li>
+                <li><a href="#">Конструктор</a></li>
+            </ul>
+        </li>
+        <li>Продажи
+            <ul>
+                <li><a href="{% url 'sales/trade' %}">Сделка</a></li>
+                <li><a href="#">Клиенты</a></li>
+                <li><a href="#">Договора</a></li>
+                <li><a href="#">Продажи</a></li>
+            </ul>
+        </li>
+        <li>Списки
+            <ul>
+                <li><a href="{% url 'persons' %}">Физические лица</a></li>
+                <li><a href="{% url 'bisiness' %}">Юридические лица</a></li>
+                <li><a href="{% url 'addresses' %}">Адреса</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>

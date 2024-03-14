@@ -1,0 +1,184 @@
+{% extends 'index.html' %}
+
+{% block main %}
+<form action="" method="post">
+    <hr>
+    <h3>Общие положения</h3>
+    <h4>Данные о договоре</h4>
+    <input type="text" placeholder="Номер договора">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Дата договора">
+    <hr>
+    <h4>Данные о Застройщике</h4>
+    <input type="text" placeholder="Полное наименование застройщика">
+    <input type="text" placeholder="Сокращенное наименование застройщика">
+    <input type="text" placeholder="Представитель застройщика">
+    <input type="text" placeholder="Документ представителя">
+    <hr>
+    <h4>Данные о Клиенте(ах)</h4>
+    <input type="text" placeholder="Фамилия">
+    <input type="text" placeholder="Имя">
+    <input type="text" placeholder="Отчество">
+    <input type="text" placeholder="Пол">
+    <input type="text" placeholder="Дата рождения">
+    <input type="text" placeholder="Место рождения">
+    <input type="text" placeholder="Паспорт серия">
+    <input type="text" placeholder="Паспорт номер">
+    <input type="text" placeholder="Выдан дата">
+    <input type="text" placeholder="Выдан кем">
+    <input type="text" placeholder="Код подразделения">
+    <input type="text" placeholder="Страна">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Дом">
+    <input type="text" placeholder="Квартира">
+    <hr>
+    <h4>Данные об Объекте</h4>
+    <input type="text" placeholder="Наименование объекта">
+    <input type="text" placeholder="Вид объекта">
+    <input type="text" placeholder="Назначение объекта">
+    <input type="text" placeholder="Этажность">
+    <input type="text" placeholder="Общая площадь">
+    <input type="text" placeholder="Материал наружных стен">
+    <input type="text" placeholder="Материал перекрытий">
+    <input type="text" placeholder="Класс энергоэффективности">
+    <input type="text" placeholder="Сейсмостойкость">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Дом">
+    <hr>
+    <h4>Данные о Земельном участке</h4>
+    <input type="text" placeholder="ЗУ кадастровый номер">
+    <input type="text" placeholder="Площадь участка">
+    <input type="text" placeholder="Вид разрешенного использования">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Договор аренды ЗУ">
+    <input type="text" placeholder="Номер регистрации аренды">
+    <input type="text" placeholder="Дата регистрации аренды">
+    <hr>
+    <h4>Данные о Разрешении на строительство</h4>
+    <input type="text" placeholder="Номер разрешения">    
+    <input type="text" placeholder="Дата выдачи">
+    <input type="text" placeholder="Срок действия">
+    <input type="text" placeholder="Сайт Застройщика">  
+    <hr>
+    <h4>Данные о Банке</h4>  
+    <input type="text" placeholder="Наименование Банка">
+    <input type="text" placeholder="ОГРН">
+    <input type="text" placeholder="ИНН">   
+    <input type="text" placeholder="К/счет">
+    <input type="text" placeholder="Отделение">
+    <input type="text" placeholder="БИК">    
+    <input type="text" placeholder="Лицензия №">
+    <input type="text" placeholder="Лицензия Дата">
+    <hr>
+    <h3>Предмет договора</h3>
+    <h4>Данные о квартире</h4>
+    <input type="text" placeholder="Номер (проектный)">
+    <input type="text" placeholder="Количество комнат">
+    <input type="text" placeholder="Площадь комнат">
+    <input type="text" placeholder="Этаж">
+    <input type="text" placeholder="Секция">
+    <input type="text" placeholder="Назначение">
+    <input type="text" placeholder="Дата передачи">
+    <input type="text" placeholder="Сайт Застройщика">
+    <hr>
+    <h3>Цена договора</h3>
+    <h4>Расчет суммы</h4>
+    <input type="text" placeholder="Сумма">
+    <input type="text" placeholder="Сумма прописью">
+    <input type="text" placeholder="Собственные средства">
+    <input type="text" placeholder="Кредитные средства">
+    <input type="text" placeholder="Номер кредитного договора">
+    <input type="text" placeholder="Дата кредитного договора">
+    <input type="text" placeholder="Город Кредитного договора">
+    <input type="text" placeholder="Отделение">
+    <input type="text" placeholder="Наименование банка">
+    <input type="text" placeholder="Организационно-правовая форма банка">
+    <input type="text" placeholder="Страна">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Дом">
+    <input type="text" placeholder="ИНН">
+    <input type="text" placeholder="Р/Счет">
+    <input type="text" placeholder="К/Счет">
+    <hr>
+    <h4>"Эскроу агент"</h4>
+    <input type="text" placeholder="Наименование банка">
+    <input type="text" placeholder="Организационно-правовая форма банка">
+    <input type="text" placeholder="Страна">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Дом">
+    <input type="text" placeholder="ИНН">
+    <input type="text" placeholder="Срок депонирования">
+    <input type="text" placeholder="Срок внесения ДС">
+    <hr>
+    <h4>"Назначение платежа"</h4>
+    <input type="text" placeholder="Номер договора">
+    <input type="text" placeholder="Дата договора">
+    <hr>
+    <h3>Обязанности и права</h3>
+    <h4>Ссылка на Застройщика</h4>
+    <input type="text" placeholder="Сайт застройщика">
+    <hr>
+    <h3>Изменение договора</h3>
+    <h4>Возврат средств</h4>
+    <input type="text" placeholder="Сумма">
+    <input type="text" placeholder="Сумма прописью">
+    <input type="text" placeholder="Р/счет">
+    <input type="text" placeholder="Фамилия">
+    <input type="text" placeholder="Имя">
+    <input type="text" placeholder="Отчество">
+    <input type="text" placeholder="Кредитный договор №">
+    <input type="text" placeholder="Кредитный договор Дата">
+    <hr>
+    <h3>Реквизиты сторон</h3>
+    <h4>Застройщик</h4>
+    <input type="text" placeholder="Сокращенное наименование застройщика">
+    <input type="text" placeholder="Страна">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Дом">
+    <input type="text" placeholder="ИНН">
+    <input type="text" placeholder="КПП">
+    <input type="text" placeholder="ОГРН">
+    <input type="text" placeholder="Р/счет">
+    <input type="text" placeholder="Представитель">
+    <input type="text" placeholder="Фамилия">
+    <input type="text" placeholder="Имя">
+    <input type="text" placeholder="Отчество">
+    <h4>Участник</h4>
+    <input type="text" placeholder="Фамилия">
+    <input type="text" placeholder="Имя">
+    <input type="text" placeholder="Отчество">
+    <input type="text" placeholder="Пол">
+    <input type="text" placeholder="Дата рождения">
+    <input type="text" placeholder="Место рождения">
+    <input type="text" placeholder="Паспорт серия">
+    <input type="text" placeholder="Паспорт номер">
+    <input type="text" placeholder="Выдан дата">
+    <input type="text" placeholder="Выдан кем">
+    <input type="text" placeholder="Код подразделения">
+    <input type="text" placeholder="Страна">
+    <input type="text" placeholder="Регион">
+    <input type="text" placeholder="Город">
+    <input type="text" placeholder="Улица">
+    <input type="text" placeholder="Дом">
+    <input type="text" placeholder="Квартира">
+
+
+
+
+
+
+
+</form>
+{% endblock main %}

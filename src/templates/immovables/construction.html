@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+
+
+{% block main %} 
+    <div>
+        <h1>{{ construction.name }}</h1>   
+        {% for house in houses %}
+            <a href="">Дом № {{ house.number }}</a><br>
+        {% endfor %}
+    </div>
+{% endblock main %}

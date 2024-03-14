@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    <div>
+        <h1>Дом № {{ house.number }}</h1>
+        <div class="house">
+        {% for section in flats %}
+            <div class="section">
+                <div>Section - {{ section.number }}</div>
+                {% for floor in section.floor_set.all %}
+                    <div class="floor">
+                    {% for flat in floor.flat_set.all %}
+                        <div class="flat">
+                            <a href="{% url 'flat' flat.url %}">{{ flat.number }}</a>
+                        </div>
+                    {% endfor %} 
+                    </div>
+                {% endfor %}
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock main %}
