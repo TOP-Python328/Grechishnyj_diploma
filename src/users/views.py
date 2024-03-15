@@ -13,13 +13,9 @@ def register(request):
 
     elif request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
-        print(form.fields)
         if form.is_valid():
-            
-
             form.save()
             return redirect('main', permanent=True)
-
 
     return render(
         request,
