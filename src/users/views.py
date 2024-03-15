@@ -5,7 +5,6 @@ from users.forms import CustomUserRegisterForm
 from users.models import CustomUser
 
 
-from shutil import copyfile
 
 
 def register(request):
