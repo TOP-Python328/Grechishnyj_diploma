@@ -5,6 +5,9 @@ from users.forms import CustomUserRegisterForm
 from users.models import CustomUser
 
 
+from shutil import copyfile
+
+
 def register(request):
     """Регистрация."""
     if request.method == 'GET':
@@ -12,6 +15,7 @@ def register(request):
 
     elif request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
+        
         if form.is_valid():
             form.save()
             return redirect('user_login', permanent=True)
@@ -33,6 +37,7 @@ def login(request):
 
     elif request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
+
         if form.is_valid():
             auth_login(request, form.get_user())
             return redirect('main', permanent=True)
