@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
+from users import views as users
 from builder import views as builder
 from sales import views as sales
 from flats import views as flats
@@ -15,6 +16,8 @@ urlpatterns = [
 
 
     path('', builder.main, name='main'),
+
+    path('register', users.register, name='register'),
 
     path('immovables/constructions', flats.get_all_constructions, name='immovables/constructions'),
     path('immovables/construction/<str:uniq>', flats.get_construction, name='immovables/construction'),
