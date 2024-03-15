@@ -17,7 +17,9 @@ urlpatterns = [
 
     path('', builder.main, name='main'),
 
-    path('register', users.register, name='register'),
+    path('register', users.register, name='user_register'),
+    path('login', users.login, name='user_login'),
+    path('logout', users.logout, name='user_logout'),
 
     path('immovables/constructions', flats.get_all_constructions, name='immovables/constructions'),
     path('immovables/construction/<str:uniq>', flats.get_construction, name='immovables/construction'),
