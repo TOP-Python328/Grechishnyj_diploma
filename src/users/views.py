@@ -1,23 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login as auth_login, logout as auth_logout
+from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+
 from users.forms import CustomUserRegisterForm
 from users.models import CustomUser
-
-
 
 
 def register(request):
     """Регистрация."""
     if request.method == 'GET':
         form = CustomUserRegisterForm()
-
     elif request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
-        
         if form.is_valid():
             form.save()
-            return redirect('user_login', permanent=True)
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            auth_login(request, user)
+            return redirect('main', permanent=True)
 
     return render(
         request,
@@ -55,7 +56,3 @@ def logout(request):
     """Выход из системы."""
     auth_logout(request)
     return redirect('user_login', permanent=True)
-
-
-
-

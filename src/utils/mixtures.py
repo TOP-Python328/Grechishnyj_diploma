@@ -10,9 +10,9 @@ def randomword(length):
 
 def copy_db_file(filename):
     """Копировние файла базы данных."""
-    copyfile('database_template.sqlite3', f'data/users_databases/{filename}.sqlite3')
+    copyfile('db.sqlite3', f'data/users_databases/{filename}.sqlite3')
 
 
-def copy_contract_file(filename):
-    """Копировние файла шаблона контракта."""
-    copyfile('contract_sale_flat.txt', f'data/users_documents/contracts_templates/{filename}.txt')
+# def copy_contract_file(filename):
+#     """Копировние файла шаблона контракта."""
+#     copyfile('contract_sale_flat.txt', f'data/users_documents/contracts_templates/{filename}.txt')

@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block header %}
+{% endblock header %}
+
+
+{% block aside %}
+{% endblock aside %}
+
+
+{% block main %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <p><a href="{% url 'user_register' %}">Register</a></p>
+            <input type="submit" value="Sign in">
+        </form>
+
+{% endblock main %}
+
+{% block footer %}
+{% endblock footer %}

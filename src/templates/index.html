@@ -11,35 +11,46 @@
     
 </head>
 <body>
-    {% block header %}
-        {% include 'base/header.html' %}
-    {% endblock header %}
 
-    <div class="content">
-        {% block aside %}
-            {% include 'base/aside.html' %}
-        {% endblock aside %}
+    {% if user.is_authenticated %}
+        <h1>{{ user }}</h1>
+        {% block header %}
+            {% include 'base/header.html' %}
+        {% endblock header %}
 
-        <main>
-        {% block main %}
-            {% include 'base/main.html' %}
-        {% endblock main %}
-        </main>
-    </div>
+        <div class="content">
+            {% block aside %}
+                {% include 'base/aside.html' %}
+            {% endblock aside %}
+
+            <main>
+            {% block main %}
+                {% include 'base/main.html' %}
+            {% endblock main %}
+            </main>
+        </div>
+        
+        {% block footer %}
+            {% include 'base/footer.html' %}
+        {% endblock footer %}
+
+        {% block mainscripts %}
+            {% include 'base/scripts.html' %}
+        {% endblock mainscripts %}
+
+        {% for script in scripts %}
+            <script type="text/javascript" src="{% static script %}"></script>
+        {% endfor %}
+
+    {% else %}
+        
+        {% include 'auth/login.html' %}
+        
+    {% endif %}
+
+
+
     
-
-    
-    {% block footer %}
-        {% include 'base/footer.html' %}
-    {% endblock footer %}
-
-    {% block mainscripts %}
-        {% include 'base/scripts.html' %}
-    {% endblock mainscripts %}
-
-    {% for script in scripts %}
-        <script type="text/javascript" src="{% static script %}"></script>
-    {% endfor %}
     
 
 
