@@ -1,11 +1,26 @@
 from pathlib import Path
 from sys import path 
-from .databases import Adapter
+from system.adapter import DataBaseAdapter
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATA_BASES_PATH = Path(__file__).resolve().parent / 'db.config'
+# BASE_DIR  - каталог проекта
+# STR_PATH  - путь к файловому хранилищу
+# DB_DIR    - путь к каталогу конфиг-файлов
+# DB_CONFIG - имя конфиг-файл баз данных 
+
+BASE_DIR  = Path(__file__).resolve().parent.parent
+STR_PATH  = BASE_DIR / 'storage'
+DB_DIR    = STR_PATH / 'general'
+DB_CONFIG   = DB_DIR / 'db.config'
+
+# print(BASE_DIR)
+# print(STR_PATH)
+# print(DB_DIR)
+# print(DB_CONFIG)
+# C:\Users\User\Desktop\diploma\src
+# C:\Users\User\Desktop\diploma\src\storage
+# C:\Users\User\Desktop\diploma\src\storage\general
+# C:\Users\User\Desktop\diploma\src\storage\general\db.config
 
 DATABASE_ROUTERS = ["users.router.Router"]
 
@@ -33,8 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'index',
-    'users',
+    'app.index',
+    'app.users',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +96,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #         'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" } 
 #     },
 # }
-DATABASES = Adapter.load_bases(DATA_BASES_PATH)
+DATABASES = DataBaseAdapter.load_data_bases(DB_CONFIG)
+
 # print(DATABASES)
 
 # Password validation
