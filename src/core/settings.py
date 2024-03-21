@@ -9,9 +9,7 @@ from system.adapter import DataBaseAdapter
 # DB_CONFIG - имя конфиг-файл баз данных 
 
 BASE_DIR  = Path(__file__).resolve().parent.parent
-STR_PATH  = BASE_DIR / 'storage'
-DB_DIR    = STR_PATH / 'general'
-DB_CONFIG   = DB_DIR / 'db.config'
+
 
 # print(BASE_DIR)
 # print(STR_PATH)
@@ -22,7 +20,7 @@ DB_CONFIG   = DB_DIR / 'db.config'
 # C:\Users\User\Desktop\diploma\src\storage\general
 # C:\Users\User\Desktop\diploma\src\storage\general\db.config
 
-DATABASE_ROUTERS = ["users.router.Router"]
+DATABASE_ROUTERS = ["app.users.router.Router"]
 
 ATOMIC_REQUESTS = True
 
@@ -96,7 +94,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #         'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" } 
 #     },
 # }
-DATABASES = DataBaseAdapter.load_data_bases(DB_CONFIG)
+DATABASES = DataBaseAdapter.load_data_bases()
 
 # print(DATABASES)
 

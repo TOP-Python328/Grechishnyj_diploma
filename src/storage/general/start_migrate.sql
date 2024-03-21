@@ -1,6 +1,3 @@
-CREATE DATABASE `world` DEFAULT CHARACTER SET utf8mb4;
-USE `world`;
-
 --
 -- Create model BuildingPermit
 --

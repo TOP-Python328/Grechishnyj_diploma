@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 
+from system.adapter import DataBaseAdapter
 from app.users.forms import CustomUserRegisterForm
 from app.users.models import CustomUser
 
@@ -21,12 +22,11 @@ def register(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
-            
-            # user.create_db()
-            user.update_databases_sqlite()
-            router = Router().db_for_read(user, path=user.__dict__['dbase'])
+            DataBaseAdapter.add_db_in_config(user.dbase)
+            # DataBaseAdapter.create_data_base(user.dbase)
+            Router.db_for_read(user, path=user.__dict__['dbase'])
             user.migrate_from_sqlite() 
-            # auth_login(request, user)
+            auth_login(request, user)
             return redirect('main', permanent=True)
 
     return render(

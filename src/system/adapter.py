@@ -1,12 +1,13 @@
 from json import load as jload, dump as jdump
-from pathlib import Path, WindowsPath
+from pathlib import Path
+
 
 
 class DataBaseAdapter:
     """Адаптер баз данных."""
 
-
-
+    config = Path(__file__).resolve().parent.parent / 'storage' / 'general' / 'db.config'
+    database = Path(__file__).resolve().parent.parent / 'storage' / 'dbases'
     default = { "default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "topdip",
@@ -20,18 +21,18 @@ class DataBaseAdapter:
 
 
     @classmethod
-    def check_db_in_config(self, config_file: str, data_base_name: str) -> bool:
+    def check_db_in_config(self, data_base_name: str) -> bool:
         """Проверка наличия базы данных в конфигурационном файле."""
-        with open(config_file, encoding='utf-8') as filein:
+        with open(self.config, encoding='utf-8') as filein:
             db_config: dict = jload(filein)    
         return data_base_name in db_config
 
 
     @classmethod
-    def load_data_bases(self, config_file) -> dict[str, dict]:
+    def load_data_bases(self) -> dict[str, dict]:
         """Загрузка баз данных из конфигурационного файла.""" 
         try:
-            with open(config_file, encoding='utf-8') as filein:
+            with open(self.config, encoding='utf-8') as filein:
                 db_config: dict = jload(filein)
             return db_config
         except Exception:
@@ -39,14 +40,14 @@ class DataBaseAdapter:
 
 
     @classmethod
-    def add_db_in_config(self, config_file: WindowsPath, db_name: str) -> None:
+    def add_db_in_config(self, db_name: str) -> None:
         """Запись базы данных в конфигурационный файл."""
         try:
-            with open(config_file, 'r+', encoding='utf-8') as fileout:
+            with open(self.config, 'r+', encoding='utf-8') as fileout:
                 db_config: dict = jload(fileout)
                 db_config[db_name] = {
                     "ENGINE": "django.db.backends.sqlite3",
-                    "NAME": config_file / f'{db_name}.sqlite3'
+                    "NAME": f'{db_name}.sqlite3'
                 }
                 fileout.seek(0)
                 jdump(db_config, fileout, indent = 4)
@@ -55,10 +56,13 @@ class DataBaseAdapter:
 
 
     @classmethod
-    def create_sql(cls):
-        with open(db_config_path, encoding='utf-8') as filein:
-            dbconfig: dict = jload(filein)
+    def create_data_base(self, name):
+        """Создание базы данных для пользователя."""
+        sqlite3_file = f'{self.database / name}'
+        with open(sqlite3_file, 'w', encoding='utf-8') as newfile:
+            newfile.write('')
 
+        
 
 
 

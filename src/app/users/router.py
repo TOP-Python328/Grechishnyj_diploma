@@ -2,7 +2,8 @@ from app.users.models import CustomUser
 
 class Router:
 
-    def db_for_read(self, model, path=None, **hints):
+    @staticmethod
+    def db_for_read(model, path=None, **hints):
         if isinstance(model, CustomUser) and path:           
             return path
         return None
