@@ -19,14 +19,14 @@ def register(request):
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
+
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
+            
             DataBaseAdapter.add_db_in_config(user.dbase)
-            # DataBaseAdapter.create_data_base(user.dbase)
-            Router.db_for_read(user, path=user.__dict__['dbase'])
-            user.migrate_from_sqlite() 
             auth_login(request, user)
+            user.run_base_migrate() 
             return redirect('main', permanent=True)
 
     return render(

@@ -6,6 +6,7 @@ from shutil import copyfile
 def randomword(length):
     """Генерация строки"""
     return ''.join(choice(ascii_lowercase) for i in range(length))
+    
 
 
 def copy_db_file(filename):

@@ -58,20 +58,7 @@ class DataBaseAdapter:
     @classmethod
     def create_data_base(self, name):
         """Создание базы данных для пользователя."""
-        sqlite3_file = f'{self.database / name}'
+        sqlite3_file = f'{self.database / name}.sqlite3'
         with open(sqlite3_file, 'w', encoding='utf-8') as newfile:
             newfile.write('')
-
-        
-
-
-
-
-
-
-
-
-
-
-
 
