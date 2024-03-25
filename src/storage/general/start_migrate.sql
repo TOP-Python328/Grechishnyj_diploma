@@ -11,3 +11,4 @@ CREATE TABLE `flats` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `number`
 CREATE TABLE `houses` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `number` varchar(8) NOT NULL, `building_permit_id` integer NOT NULL, `construction_id` integer NOT NULL, `energy_save_id` varchar(4) NOT NULL, `type_id` integer NOT NULL, `seismic_id` varchar(4) NOT NULL);
 CREATE TABLE `flats_plan` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `square` double precision NOT NULL, `flat_id` integer NOT NULL, `room_id` integer NOT NULL);
 CREATE TABLE `sections` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `number` varchar(2) NOT NULL, `house_id` integer NOT NULL, `name_id` varchar(32) NOT NULL);
+

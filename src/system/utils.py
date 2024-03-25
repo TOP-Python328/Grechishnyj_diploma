@@ -9,9 +9,9 @@ def randomword(length):
     
 
 
-def copy_db_file(filename):
-    """Копировние файла базы данных."""
-    copyfile('db.sqlite3', f'data/users_databases/{filename}.sqlite3')
+# def copy_db_file(filename):
+#     """Копировние файла базы данных."""
+#     copyfile('db.sqlite3', f'data/users_databases/{filename}.sqlite3')
 
 
 # def copy_contract_file(filename):

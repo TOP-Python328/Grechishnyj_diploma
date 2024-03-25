@@ -3,8 +3,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 
 from system.adapter import DataBaseAdapter
+from system.utils import randomword
 from app.users.forms import CustomUserRegisterForm
 from app.users.models import CustomUser
+
+from core.settings import BASE_DIR, DATABASES
 
 
 
@@ -18,15 +21,26 @@ def register(request):
     elif request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-
+            # сохранение пользователя в базу данных
+            user = form.save(commit=False)
+            user.dbase = f'{randomword(16)}'
+            user.save()
+            # авторизация пользователя
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
-            
-            DataBaseAdapter.add_db_in_config(user.dbase)
             auth_login(request, user)
-            user.run_base_migrate() 
+            # создание базовых таблиц в пользовательской базе данных
+            user.run_base_migrate()
+            # добавление пользовательской базы данных системные настройки 
+
+            # DATABASES[f'{user.dbase}'] = f'{BASE_DIR / user.dbase}'
+            # print(f'{BASE_DIR / user.dbase}')
+
+            # print(DATABASES)
+            DataBaseAdapter.add_db_in_config(user.dbase)
+
+            DataBaseAdapter.update_databases(DATABASES, user.dbase)
             return redirect('main', permanent=True)
 
     return render(

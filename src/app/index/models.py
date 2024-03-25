@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+from app.users.models import CustomUser
+from system.adapter import DataBaseAdapter
+
+

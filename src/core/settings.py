@@ -20,9 +20,9 @@ BASE_DIR  = Path(__file__).resolve().parent.parent
 # C:\Users\User\Desktop\diploma\src\storage\general
 # C:\Users\User\Desktop\diploma\src\storage\general\db.config
 
-DATABASE_ROUTERS = ["app.users.router.Router"]
+# DATABASE_ROUTERS = ["system.router.Router"]
 
-ATOMIC_REQUESTS = True
+# ATOMIC_REQUESTS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'app.index',
     'app.users',
+    'app.flats',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/addons/'
+
+STATICFILES_DIRS = [ BASE_DIR / 'addons' ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

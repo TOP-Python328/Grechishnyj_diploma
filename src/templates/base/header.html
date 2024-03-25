@@ -3,10 +3,9 @@
     {% if user.is_authenticated %}
         <div class="helper">
             <span>{{ user.username }}</span>
-            <br>
             <span>{{ user.dbase }}</span>
-            <hr>
             <span><a href="{% url 'user_logout' %}">Logout</a></span>
+            <hr>
         </div>
     {% else %}
         <div class="helper">
