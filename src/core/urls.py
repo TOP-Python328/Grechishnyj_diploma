@@ -3,7 +3,7 @@ from django.urls import path
 
 from app.index import views as index
 from app.users import views as users
-from app.flats import views as rooms
+from app.flats import views as flats
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -13,8 +13,9 @@ urlpatterns = [
     path('login', users.login, name='user_login'),
     path('logout', users.logout, name='user_logout'),
 
-    path('rooms', rooms.get_all_rooms, name='app_flats_rooms'),
-
+    path('rooms', flats.get_all_rooms, name='app_flats_rooms'),
+    path('microdistricts', flats.get_all_microdistricts, name='app_flats_microdistricts'),
+    path('microdistrict/<str:microdistrict_name>', flats.get_all_houses_by_district, name='app_flats_houses'),
 
 
 

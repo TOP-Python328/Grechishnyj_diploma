@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    <title>{{ microdistrict.name }}</title>
+{% endblock title %}
+
+{% block main %}
+    <div class="popup">
+        <button class="open-btn">Добавить</button>
+        <div class="back close">
+            <div class="front">
+                <h3 class="title">Добавить жилой дом</h3>
+                <div class="content">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form_add_microdistrict }}
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+                <button class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h1>Микрорайон {{ microdistrict.name }}</h1>
+    </div>
+{% endblock main %}
