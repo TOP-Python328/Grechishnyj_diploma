@@ -1,17 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+from random import choice
+from string import ascii_lowercase
 
 from system.adapter import DataBaseAdapter
-from system.utils import randomword
 from app.users.forms import CustomUserRegisterForm
 from app.users.models import CustomUser
 
-from core.settings import BASE_DIR, DATABASES
-
-
-
-from .router import Router
+from core.settings import DATABASES
 
 
 def register(request):
@@ -23,7 +20,7 @@ def register(request):
         if form.is_valid():
             # сохранение пользователя в базу данных
             user = form.save(commit=False)
-            user.dbase = f'{randomword(16)}'
+            user.dbase = f"{''.join(choice(ascii_lowercase) for i in range(16))}"
             user.save()
             # авторизация пользователя
             username = form.cleaned_data.get('username')
@@ -33,13 +30,7 @@ def register(request):
             # создание базовых таблиц в пользовательской базе данных
             user.run_base_migrate()
             # добавление пользовательской базы данных системные настройки 
-
-            # DATABASES[f'{user.dbase}'] = f'{BASE_DIR / user.dbase}'
-            # print(f'{BASE_DIR / user.dbase}')
-
-            # print(DATABASES)
             DataBaseAdapter.add_db_in_config(user.dbase)
-
             DataBaseAdapter.update_databases(DATABASES, user.dbase)
             return redirect('main', permanent=True)
 

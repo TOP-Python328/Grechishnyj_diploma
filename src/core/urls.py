@@ -13,9 +13,13 @@ urlpatterns = [
     path('login', users.login, name='user_login'),
     path('logout', users.logout, name='user_logout'),
 
-    path('rooms', flats.get_all_rooms, name='app_flats_rooms'),
-    path('microdistricts', flats.get_all_microdistricts, name='app_flats_microdistricts'),
+    path('rooms', flats.run_rooms, name='run_rooms'),
+    path('houses', flats.run_houses, name='run_houses'),
+    # path('houses', flats.add_building_permits, name='add_building_permits'),
+    path('microdistricts', flats.run_microdistricts, name='run_microdistricts'),
     path('microdistrict/<str:microdistrict_name>', flats.get_all_houses_by_district, name='app_flats_houses'),
+
+
 
 
 

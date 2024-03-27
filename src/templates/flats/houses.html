@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+
+{% block main %}
+
+    <div>
+        <h1>Жилые дома</h1>
+        <div class="popup">
+            <button class="open-btn">Добавить жилой дом</button>
+            <div class="back close">
+                <div class="front">
+                    <h3 class="title">Добавить жилой дом</h3>
+                    <div class="content">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ add_house_form }}
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
+                    <button class="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="popup">
+            <button class="open-btn">Добавить разрешение на строительство</button>
+            <div class="back close">
+                <div class="front">
+                    <h3 class="title">Добавить разрешение на строительство</h3>
+                    <div class="content">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ add_building_permits_form }}
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
+                    <button class="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        
+
+
+
+
+
+
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>№</td>
+                            <td>Наименование</td>
+                            <td>Посмотреть</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for house in houses %}
+                        <tr>
+                            <td><a href="#">{{ house.id }}</a></td>
+                            <td><a href="#">{{ house.number }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>     
+    </div>
+{% endblock main %}
