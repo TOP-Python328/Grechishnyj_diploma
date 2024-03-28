@@ -1,0 +1,133 @@
+{% extends 'index.html' %}
+
+{% block main %}
+
+    <div>
+        <h1>Rooms {{ user }}</h1>
+        <div class="popup">
+            <button class="open-btn">Добавить</button>
+            <div class="back close">
+                <div class="front">
+                    <h3 class="title">Добавить комнату</h3>
+                    <div class="content">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="button" class="additem">Add item</button>
+                            <input type="text" name="test" valie="test" placeholder="test">
+                            <select name="seltest">
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+
+                            </select>
+
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
+                    <button class="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="popup">
+            <button class="open-btn">Добавить</button>
+            <div class="back close">
+                <div class="front">
+                    <h3 class="title">Добавить комнату</h3>
+                    <div class="content">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="button" class="additem">Add item</button>
+                            <input type="text" name="test" valie="test" placeholder="test">
+                            
+                            
+                            
+                                <div class="select cloned" name="rooms">
+                                    <div class="header">
+                                        <span class="current" data-value=""></span>
+                                        <span class="icon-close">&#9660;</span>
+                                    </div>
+                                    <div class="body">
+                                        {% for room in rooms %}
+                                        <div class="item" data-value="{{ room.id }}" name="{{ room.name }}">{{ room.name }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <span class="adder-clone">копировать</span>
+                                </div>
+                                
+                         
+
+                            <div class="cloned">
+                                <div class="select" name="rooms">
+                                    <div class="header">
+                                        <span class="current" data-value=""></span>
+                                        <span class="icon-close">&#9660;</span>
+                                    </div>
+                                    <div class="body">
+                                        {% for room in rooms %}
+                                        <div class="item" data-value="{{ room.id }}" name="{{ room.name }}">{{ room.name }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    
+                                </div>
+                                <span class="adder-clone">копировать</span>
+                            </div>
+                                
+                    
+
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
+                    <button class="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>№</td>
+                            <td>Наименование</td>
+                            <td>Жилая / не жилая</td>
+                            <td>Ценовой коэффициент</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for room in rooms %}
+                        <tr>
+                            <td><a href="#">{{ room.id }}</a></td>
+                            <td><a href="#">{{ room.name }}</a></td>
+                            {% if room.living %}
+                                <td>жилая</td>
+                            {% else %}
+                                <td>не жилая</td>
+                            {% endif %}
+                            <td><a href="#">{{ room.koef_price }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="select">
+            <div class="header">
+                <span class="current" data-value="111111111111111111111">111111111111111111111111</span>
+                <span class="icon-close">&#9660;</span>
+            </div>
+            <div class="body">
+                <div class="item" data-value="9999999999999999999">9999999999999999999</div>
+                <div class="item" data-value="2222222222222">2</div>
+                <div class="item" data-value="333333333333">3</div>
+                <div class="item" data-value="444444444444">4</div>
+                <div class="item" data-value="55555555555">5</div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+{% endblock main %}

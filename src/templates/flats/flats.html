@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block main %}
+
+    <div>
+        <h1>Квартиры</h1>
+        <div class="popup">
+            <button class="open-btn">Добавить квартиру</button>
+            <div class="back close">
+                <div class="front">
+                    <h3 class="title">Добавить квартиру</h3>
+                    <div class="content">
+                        <form action="" method="post">
+                            
+                            {% csrf_token %}
+                            {{ add_flat_form }}
+                            
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
+                    <button class="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>№</td>
+                            <td>Наименование</td>
+                            <td>Посмотреть</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for flat in flats %}
+                        <tr>
+                            <td><a href="#">{{ flat.id }}</a></td>
+                            <td><a href="#">{{ flat.number }}</a></td>
+                            <td>#</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>     
+    </div>
+{% endblock main %}

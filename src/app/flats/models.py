@@ -18,14 +18,7 @@ class SaleStatuse(models.Model):
         db_table = 'sale_statuses'
     name = models.CharField(max_length=16, primary_key=True)
 
-class Room(models.Model):
-    """Комната."""
-    class Meta:
-        db_table = 'rooms'
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32, unique=True)
-    living = models.BooleanField()
-    koef_price = models.FloatField()
+
 
 class BuildingPermit(models.Model):
     """Разрешение на строительство."""
@@ -92,6 +85,15 @@ class Flat(models.Model):
     number = models.CharField(max_length=4)
     floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
     status = models.ForeignKey(SaleStatuse, on_delete=models.CASCADE)
+
+class Room(models.Model):
+    """Комната."""
+    class Meta:
+        db_table = 'rooms'
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32, unique=True)
+    living = models.BooleanField()
+    koef_price = models.FloatField()
 
 class FlatsPlan(models.Model):
     """Планировка квартиры."""

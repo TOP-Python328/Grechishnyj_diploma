@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from re import compile
-from app.flats.models import Microdistrict, House, EnergySave, Seismic, HouseType, BuildingPermit, Room
+from app.flats.models import Microdistrict, House, EnergySave, Seismic, SaleStatuse, HouseType, BuildingPermit, Section, Floor, Flat, Room
 
 
 
@@ -10,22 +10,90 @@ def validate_name(value: str):
     if not reg_name.fullmatch(value):
         raise ValidationError(f'Валидация строки {value!r} не пройдена.')
 
+# class CustomForm(forms.Form):
+
+#     def __init__(self, *args, **kwargs):
+#         self.dbase = kwargs.pop('dbase', None)
+#         super(self.__class__.__mro__[1], self).__init__(*args, **kwargs)
+
+
 
 class AddRoomForm(forms.Form):
     class Meta:
         model = Room
         fields = ['name', 'living', 'koef_price']
 
-    name = forms.CharField(label='Наименование комнаты', max_length=32, validators=[validate_name])
-    living = forms.BooleanField(label='Жилая / нежилая', required=False)
-    koef_price = forms.ChoiceField(label='Ценовой коэффициент', choices={'1.0': '1.0', '0.5': '0.5', '0.3': '0.3'})
+    def __init__(self, *args, **kwargs):
+        self.dbase = kwargs.pop('dbase', None)
+        super(AddRoomForm, self).__init__(*args, **kwargs)
 
-    def save_to_database(self, user_database):
-        Room.objects.using(user_database).create(
+        self.fields['name'] = forms.CharField(label='Наименование комнаты', max_length=32, validators=[validate_name])
+        self.fields['living'] = forms.BooleanField(label='Жилая / нежилая', required=False)
+        self.fields['koef_price'] = forms.ChoiceField(label='Ценовой коэффициент', choices={'1.0': '1.0', '0.5': '0.5', '0.3': '0.3'})
+
+    def save_to_database(self):
+        Room.objects.using(self.dbase).create(
             name=self.cleaned_data['name'],
             living=self.cleaned_data['living'],
             koef_price=self.cleaned_data['koef_price']
         )
+
+
+
+
+
+class AddFlatForm(forms.Form):
+    class Meta:
+        model = Flat
+        fields = ['number', 'floor', 'status']
+
+    def __init__(self, *args, **kwargs):
+        self.dbase = kwargs.pop('dbase', None)
+        super(AddFlatForm, self).__init__(*args, **kwargs)
+
+        self.fields['number'] = forms.CharField(label='номер квартиры', max_length=4)
+        self.fields['floor'] = forms.CharField(label='номер квартиры', max_length=4)
+        self.fields['status'] = forms.ChoiceField(label='Статус', choices={'':''}|{
+            status.name : status.name
+            for status in SaleStatuse.objects.using(self.dbase)
+        })
+
+    def save_to_database(self):
+        Flat.objects.using(self.dbase).create(
+            number=self.cleaned_data['name'],
+            floor=self.cleaned_data['living'],
+            status=self.cleaned_data['koef_price']
+        )
+
+# class AddFlatForm(forms.Form):
+#     def __init__(self, *args, **kwargs):
+#         self.dbase = kwargs.pop('dbase', None)
+#         super(AddFlatForm, self).__init__(*args, **kwargs)
+
+#         self.fields['number'] = forms.CharField(label='номер квартиры', max_length=4)
+#         self.fields['floor'] = forms.CharField(label='номер квартиры', max_length=4)
+#         self.fields['status'] = forms.ChoiceField(label='Статус', choices={
+#             status.name: status.name
+#             for status in SaleStatuse.objects.using(self.dbase)
+#         })
+
+#     def save_to_database(self):
+#         Flat.objects.using(self.dbase).create(
+#             number=self.cleaned_data['name'],
+#             floor=self.cleaned_data['living'],
+#             status=self.cleaned_data['koef_price']
+#         )
+    
+
+    
+
+    def save_to_database(self):
+        Flat.objects.using(self.dbase).create(
+            number=self.cleaned_data['name'],
+            # floor=Floor.objects.using(self.dbase).get(pk=self.cleaned_data['floor']),
+            status=self.cleaned_data['status'],
+        )
+
 
 
 class AddMicrodistrictForm(forms.Form):
@@ -48,7 +116,7 @@ class AddHouseForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.dbase = kwargs.pop('dbase', None)
-        super().__init__(*args, **kwargs)
+        super(AddHouseForm, self).__init__(*args, **kwargs)
 
         self.fields['number'] = forms.CharField(label='Number', max_length=8)
         self.fields['microdistrict'] = forms.ChoiceField(label='Микрорайон', choices={'':''}|{
@@ -73,9 +141,6 @@ class AddHouseForm(forms.Form):
         })
 
 
-
-
-
     def save_to_database(self):
         house = House.objects.using(self.dbase).create(
             number=self.cleaned_data['number'],
@@ -85,7 +150,9 @@ class AddHouseForm(forms.Form):
             seismic=Seismic.objects.using(self.dbase).get(name=self.cleaned_data['seismic']),
             type=HouseType.objects.using(self.dbase).get(pk=self.cleaned_data['type']),
         )
-        print(house)
+
+
+
 
 class AddBuildingPermitsForm(forms.Form):
     class Meta:
@@ -104,3 +171,19 @@ class AddBuildingPermitsForm(forms.Form):
         )
         print(building.__dict__)
 
+
+class AddSectionForm(forms.Form):
+    class Meta:
+        model = Section
+        fields = ['number', 'house', 'type']
+
+        # number = models.CharField(max_length=2)
+        # house = models.ForeignKey(House, on_delete=models.CASCADE)
+        # type = models.ForeignKey(SectionType, on_delete=models.CASCADE)
+
+
+
+
+
+    
+    

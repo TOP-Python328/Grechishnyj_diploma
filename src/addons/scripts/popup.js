@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-    function controlPopup(){
-            
+    function controlPopup(){ 
+                  
         document.addEventListener('click', event =>{
             const popup = event.target.closest('.popup');
             if(!popup) return;
@@ -11,7 +11,5 @@ document.addEventListener('DOMContentLoaded', function(){
             // if(event.target.closest('.popup .back')) actionDiv.classList.add('close');
         })
     }
-
-    controlPopup();
 
 })
