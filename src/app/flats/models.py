@@ -98,8 +98,18 @@ class Room(models.Model):
 class FlatsPlan(models.Model):
     """Планировка квартиры."""
     class Meta:
-        db_table = 'flats_rooms'
+        db_table = 'flats_plan'
+
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32)
     square = models.FloatField()
-    flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+# class FlatsPlan(models.Model):
+#     """Планировка квартиры."""
+#     class Meta:
+#         db_table = 'flats_rooms'
+#     id = models.AutoField(primary_key=True)
+#     square = models.FloatField()
+#     flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
+#     room = models.ForeignKey(Room, on_delete=models.CASCADE)

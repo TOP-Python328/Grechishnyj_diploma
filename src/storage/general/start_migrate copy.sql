@@ -112,9 +112,10 @@ create table flats (
 
 create table flats_plan (
     id integer primary key,
-    name varchar(32) not null,
     square float not null,
+    flat_id integer not null,
     room_id integer not null,
+    foreign key (flat_id) references flats(id),
     foreign key (room_id) references rooms(id));
 
 

@@ -6,7 +6,7 @@ html {
 
 body {
     background: rgb(238, 238, 238);
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     /* gap: 8px; */

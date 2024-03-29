@@ -26,7 +26,10 @@ def run_rooms(request):
             'title': 'Комнаты',
             'rooms': rooms,
             'add_room_form': add_room_form,
-            'scripts': [ 'scripts/popup.js', ]
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+            ]
         }
     )
 
@@ -50,7 +53,10 @@ def run_microdistricts(request):
             'title': 'Микрорайоны',
             'microdistricts': microdistricts,
             'add_microdistrict_form': add_microdistrict_form,
-            'scripts': [ 'scripts/popup.js', ]
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+            ]
         }
     )
 
@@ -81,7 +87,10 @@ def run_houses(request):
             'houses': houses,
             'add_house_form': add_house_form,
             'add_building_permits_form': add_building_permits_form,
-            'scripts': [ 'scripts/popup.js', ]
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+            ]
         }
     )
 
@@ -106,7 +115,10 @@ def run_flats(request):
             'title': 'Квартиры',
             'flats': flats,
             'add_flat_form': add_flat_form,
-            'scripts': [ 'scripts/popup.js', ]
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+            ]
         }
     )
 
@@ -129,7 +141,10 @@ def run_rooms(request):
             'title': 'Комнаты',
             'rooms': rooms,
             'add_room_form': add_room_form,
-            'scripts': [ 'scripts/popup.js', ]
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+            ]
         }
     )
 
@@ -147,7 +162,10 @@ def get_all_houses_by_district(request, microdistrict_name: str):
         {
             'microdistrict': microdistrict,
             'houses': houses,
-            'scripts': [ 'scripts/popup.js' ]
+            'scripts': [ 
+                'scripts/popup.js', 
+                'scripts/form.js',
+             ]
         }
     )
 
@@ -157,8 +175,24 @@ def run_flat_constructor(request):
     rooms = Room.objects.using(database).order_by('name')
     flats_plans = FlatsPlan.objects.using(database)
 
+    if request.method == 'GET':
+        ...
+
+
     if request.method == 'POST':
-        print(request.POST)
+        post_rooms = request.POST.getlist('room')
+        post_square = request.POST.getlist('square')
+        post_flat_name = request.POST['flat_name']
+        
+        for i in range(len(post_rooms)):
+            FlatsPlan.objects.using(database).create(
+                name = post_flat_name,
+                square = post_square[i],
+                room = Room.objects.using(database).get(pk=post_rooms[i])
+            )
+        return redirect('run_flat_constructor', permanent=True)
+        
+        
 
     return render(
         request,
@@ -169,7 +203,8 @@ def run_flat_constructor(request):
             'flats_plans': flats_plans,
             'scripts': [ 
                 'scripts/popup.js', 
-                'scripts/form.js', 
+                'scripts/form.js',
+
             ]
         }
     )
