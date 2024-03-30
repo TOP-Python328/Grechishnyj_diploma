@@ -91,19 +91,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <td>№</td>
+                            <td>№ п/п</td>
                             <td>Тип квартиры</td>
-                            <td>Комната</td>
-                            <td>Площадь</td>
+                            <td>Общая площадь</td>
+                            <td>Количесвто помещений</td>
                         </tr>
                     </thead>
                     <tbody>
                         {% for flat_plan in flats_plans %}
                         <tr>
-                            <td><a href="#">{{ flat_plan.id }}</a></td>
+                            <td>{{ forloop.counter }}</td>
                             <td><a href="#">{{ flat_plan.name }}</a></td>
-                            <td><a href="#">{{ flat_plan.room.name }}</a></td>
-                            <td><a href="#">{{ flat_plan.square }}</a></td>
+                            <td><a href="#">{{ flat_plan.square_rooms }}</a></td>
+                            <td><a href="#">{{ flat_plan.count_rooms }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

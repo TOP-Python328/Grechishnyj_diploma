@@ -4,6 +4,7 @@ from app.flats.models import Microdistrict, House, Flat, Room, FlatsPlan
 
 from app.flats.forms import AddMicrodistrictForm, AddRoomForm, AddHouseForm, AddBuildingPermitsForm, AddFlatForm
 
+from django.db.models import Count, Avg, Sum
 
 
 def run_rooms(request):
@@ -32,6 +33,7 @@ def run_rooms(request):
             ]
         }
     )
+
 
 def run_microdistricts(request):
     microdistricts = Microdistrict.objects.using(request.user.dbase)
@@ -122,31 +124,7 @@ def run_flats(request):
         }
     )
 
-def run_rooms(request):
-    dbase=request.user.dbase
-    rooms = Room.objects.using(dbase)
-    
-    if request.method == 'GET':
-        add_room_form = AddRoomForm(dbase=dbase)
 
-    elif request.method == 'POST':
-        add_room_form = AddRoomForm(data=request.POST, dbase=dbase)
-        if add_room_form.is_valid():
-            add_room_form.save_to_database()
-    
-    return render(
-        request,
-        'flats/rooms.html',
-        {
-            'title': 'Комнаты',
-            'rooms': rooms,
-            'add_room_form': add_room_form,
-            'scripts': [                 
-                'scripts/popup.js', 
-                'scripts/form.js',
-            ]
-        }
-    )
 
 
 
@@ -173,7 +151,26 @@ def get_all_houses_by_district(request, microdistrict_name: str):
 def run_flat_constructor(request):
     database = request.user.dbase
     rooms = Room.objects.using(database).order_by('name')
-    flats_plans = FlatsPlan.objects.using(database)
+    
+    # flats_plans = FlatsPlan.objects.using(database).all()
+    # flats_plans = FlatsPlan.objects.using(database).values('name', 'square').annotate(total=Count('name')).order_by()
+    # flats_plans = FlatsPlan.objects.using(database).all().aggregate(Avg("square"))
+    # flats_plans = FlatsPlan.objects.using(database).annotate(Count("name"), Count("square"))
+
+    flats_plans = (
+        FlatsPlan.objects.using(database)
+        .values('name')
+        .annotate(square_rooms=Sum('square'))
+        .annotate(count_rooms=Count('id'))
+    )
+    # flats_plans = (
+    #     FlatsPlan.objects.using(database)
+    #     .values('name')
+    #     .annotate(total_square=Sum('square'))
+    #     .annotate(count=Count('id'))
+    # )
+    print(flats_plans)
+
 
     if request.method == 'GET':
         ...
