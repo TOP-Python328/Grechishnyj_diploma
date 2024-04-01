@@ -19,7 +19,7 @@ urlpatterns = [
     path('flatplans', flats.run_flat_constructor, name='run_flat_constructor'),
     # path('houses', flats.add_building_permits, name='add_building_permits'),
     path('microdistricts', flats.run_microdistricts, name='run_microdistricts'),
-    path('microdistrict/<str:microdistrict_name>', flats.get_all_houses_by_district, name='app_flats_houses'),
+    # path('microdistrict/<str:microdistrict_name>', flats.get_all_houses_by_district, name='app_flats_houses'),
 
 
 

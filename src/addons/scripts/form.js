@@ -9,27 +9,30 @@ document.addEventListener('DOMContentLoaded', function(){
     forms.forEach(form => controlForm(form))
 
 
-    let dataFields = document.querySelector('.select-data')
-    const btnAddSelect = document.querySelector('button.add-select')
-    const btnDelSelect = document.querySelector('.del-select')
-    const itemSelect = dataFields.querySelector('div.select-item')
-    btnAddSelect.addEventListener('click', function(){
-        const newSelect = itemSelect.cloneNode(true);
-        newSelect.querySelector('input').value = ''
-        dataFields.insertBefore(newSelect, itemSelect.nextSibling);
-    })
-    btnDelSelect.addEventListener('click', event => {
-        const selects = dataFields.querySelectorAll('div.select-item');
-        for (let i = 1; i < selects.length; i++) {
-            dataFields.removeChild(selects[i]);
-        }
-    });
+
 
 
     function controlForm(form){    
         form.addEventListener('submit', event => {
             // event.preventDefault() 
-        })  
+        }) 
+        let dataFields = form.querySelector('.select-data')
+        const btnAddSelect = form.querySelector('button.add-select')
+        const btnDelSelect = form.querySelector('.del-select')
+        const itemSelect = dataFields.querySelector('div.select-item')
+        btnAddSelect.addEventListener('click', function(){
+            const newSelect = itemSelect.cloneNode(true);
+            if (newSelect.querySelector('input')) {
+                newSelect.querySelector('input').value = ''
+            }
+            dataFields.insertBefore(newSelect, itemSelect.nextSibling);
+        })
+        btnDelSelect.addEventListener('click', event => {
+            const selects = dataFields.querySelectorAll('div.select-item');
+            for (let i = 1; i < selects.length; i++) {
+                dataFields.removeChild(selects[i]);
+            }
+        }); 
     }
 
 

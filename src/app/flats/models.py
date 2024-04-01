@@ -12,13 +12,11 @@ class Seismic(models.Model):
         db_table = 'seismics'
     name = models.CharField(max_length=4, primary_key=True)
 
-class SaleStatuse(models.Model):
+class SaleStatus(models.Model):
     """Статус продажи."""
     class Meta:
         db_table = 'sale_statuses'
     name = models.CharField(max_length=16, primary_key=True)
-
-
 
 class BuildingPermit(models.Model):
     """Разрешение на строительство."""
@@ -55,11 +53,20 @@ class House(models.Model):
     seismic = models.ForeignKey(Seismic, on_delete=models.CASCADE)
     type = models.ForeignKey(HouseType, on_delete=models.CASCADE)
 
-class SectionType(models.Model):
-    """Тип подьезда."""
+# class SectionType(models.Model):
+#     """Тип подьезда."""
+#     class Meta:
+#         db_table = 'section_types'
+#     name = models.CharField(max_length=32, primary_key=True)
+
+class SectionPlan(models.Model):
+    """Типовые секции (подъезды)."""
     class Meta:
-        db_table = 'section_types'
-    name = models.CharField(max_length=32, primary_key=True)
+        db_table = 'sections_plan'
+    
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32)
+    floor_plan_name = models.CharField(max_length=32)  
 
 class Section(models.Model):
     """Секция (подьезд)."""
@@ -68,7 +75,16 @@ class Section(models.Model):
     id = models.AutoField(primary_key=True)
     number = models.CharField(max_length=2)
     house = models.ForeignKey(House, on_delete=models.CASCADE)
-    type = models.ForeignKey(SectionType, on_delete=models.CASCADE)
+    section_plan = models.ForeignKey(SectionPlan, on_delete=models.CASCADE)
+
+class FloorPlan(models.Model):
+    """План этажа"""
+    class Meta:
+        db_table = 'floors_plan'
+    
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32)
+    flat_plan_name = models.CharField(max_length=32)
 
 class Floor(models.Model):
     """Этаж."""
@@ -76,15 +92,8 @@ class Floor(models.Model):
         db_table = 'floors'
     id = models.AutoField(primary_key=True)
     number = models.CharField(max_length=4)
-
-class Flat(models.Model):
-    """Квартира."""
-    class Meta:
-        db_table = 'flats'
-    id = models.AutoField(primary_key=True)
-    number = models.CharField(max_length=4)
-    floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
-    status = models.ForeignKey(SaleStatuse, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    floor_plan = models.ForeignKey(FloorPlan, on_delete=models.CASCADE)
 
 class Room(models.Model):
     """Комната."""
@@ -105,11 +114,19 @@ class FlatsPlan(models.Model):
     square = models.FloatField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
-# class FlatsPlan(models.Model):
-#     """Планировка квартиры."""
-#     class Meta:
-#         db_table = 'flats_rooms'
-#     id = models.AutoField(primary_key=True)
-#     square = models.FloatField()
-#     flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
-#     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+class Flat(models.Model):
+    """Квартира."""
+    class Meta:
+        db_table = 'flats'
+    id = models.AutoField(primary_key=True)
+    number = models.CharField(max_length=4)
+    floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
+    flat_plan = models.ForeignKey(FlatsPlan, on_delete=models.CASCADE)
+    status = models.ForeignKey(SaleStatus, on_delete=models.CASCADE)
+
+
+
+
+
+
+

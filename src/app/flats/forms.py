@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from re import compile
-from app.flats.models import Microdistrict, House, EnergySave, Seismic, SaleStatuse, HouseType, BuildingPermit, Section, Floor, Flat, Room
+from app.flats.models import Microdistrict, House, EnergySave, Seismic, SaleStatus, HouseType, BuildingPermit, Section, Floor, Flat, Room
 
 
 

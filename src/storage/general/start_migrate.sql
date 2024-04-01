@@ -83,32 +83,6 @@ create table houses (
     foreign key (seismic_id) references seismics(name),
     foreign key (type_id) references house_types(id));
 
-create table section_types (
-    name varchar(32) primary key);
-insert into section_types (name) values ('отдельностоящая');
-insert into section_types (name) values ('рядовая');
-insert into section_types (name) values ('торцевая');
-insert into section_types (name) values ('угловая');
-
-create table sections (
-    id integer primary key,
-    number varchar(2) not null,
-    house_id integer not null,
-    type_id varchar(32) not null,
-    foreign key (type_id) references section_types(name),
-    foreign key (house_id) references houses(id));
-
-create table floors (
-    id integer primary key,
-    number varchar(4) not null);
-
-create table flats (
-    id integer primary key,
-    number varchar(4) not null,
-    floor_id integer not null,
-    status_id varchar(16) not null default 'free',
-    foreign key (floor_id) references floors(id),
-    foreign key (status_id) references sale_statuses(name));
 
 create table flats_plan (
     id integer primary key,
@@ -116,5 +90,42 @@ create table flats_plan (
     square float not null,
     room_id integer not null,
     foreign key (room_id) references rooms(id));
+
+create table flats (
+    id integer primary key,
+    number varchar(4) not null,
+    floor_id integer not null,
+    status_id varchar(16) not null default 'free',
+    flat_plan_id integer not null,
+    foreign key (floor_id) references floors(id),
+    foreign key (status_id) references sale_statuses(name),
+    foreign key (flat_plan_id) references flats_plan(id));
+
+create table floors_plan (
+    id integer primary key,
+    name varchar(32) not null,
+    flat_plan_name varchar(32) not null);
+
+create table floors (
+    id integer primary key,
+    number varchar(4) not null,
+    section_id integer not null,
+    floor_plan_id integer not null,
+    foreign key (section_id) references sections(id),
+    foreign key (floor_plan_id) references floors_plan(id));
+
+create table sections_plan (
+    id integer primary key,
+    name varchar(32) not null,
+    floor_plan_name varchar(32) not null);
+
+create table sections (
+    id integer primary key,
+    number varchar(2) not null,
+    house_id integer not null,
+    section_plan_id integer not null,
+    foreign key (house_id) references houses(id),
+    foreign key (section_plan_id) references sections_plan(id));
+
 
 
