@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from re import compile
-from app.flats.models import Microdistrict, House, EnergySave, Seismic, SaleStatus, HouseType, BuildingPermit, Section, Floor, Flat, Room
+from app.flats.models import Microdistrict, House, EnergySave, Seismic, SaleStatus, HouseType, BuildingPermit, Section, Floor, Flat, RoomType
 
 
 
@@ -18,21 +18,21 @@ def validate_name(value: str):
 
 
 
-class AddRoomForm(forms.Form):
+class AddRoomTypeForm(forms.Form):
     class Meta:
-        model = Room
+        model = RoomType
         fields = ['name', 'living', 'koef_price']
 
     def __init__(self, *args, **kwargs):
         self.dbase = kwargs.pop('dbase', None)
-        super(AddRoomForm, self).__init__(*args, **kwargs)
+        super(AddRoomTypeForm, self).__init__(*args, **kwargs)
 
         self.fields['name'] = forms.CharField(label='Наименование комнаты', max_length=32, validators=[validate_name])
         self.fields['living'] = forms.BooleanField(label='Жилая / нежилая', required=False)
         self.fields['koef_price'] = forms.ChoiceField(label='Ценовой коэффициент', choices={'1.0': '1.0', '0.5': '0.5', '0.3': '0.3'})
 
     def save_to_database(self):
-        Room.objects.using(self.dbase).create(
+        RoomType.objects.using(self.dbase).create(
             name=self.cleaned_data['name'],
             living=self.cleaned_data['living'],
             koef_price=self.cleaned_data['koef_price']

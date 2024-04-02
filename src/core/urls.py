@@ -13,7 +13,7 @@ urlpatterns = [
     path('login', users.login, name='user_login'),
     path('logout', users.logout, name='user_logout'),
 
-    path('rooms', flats.run_rooms, name='run_rooms'),
+
     path('flats', flats.run_flats, name='run_flats'),
     path('houses', flats.run_houses, name='run_houses'),
     path('flatplans', flats.run_flat_constructor, name='run_flat_constructor'),

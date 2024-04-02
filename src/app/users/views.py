@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from random import choice
 from string import ascii_lowercase
 
 from system.adapter import DataBaseAdapter
-from app.users.forms import CustomUserRegisterForm
+from app.users.forms import CustomUserRegisterForm, CustomAuthenticationForm
 from app.users.models import CustomUser
 
 from core.settings import DATABASES
@@ -15,6 +14,7 @@ def register(request):
     """Регистрация."""
     if request.method == 'GET':
         form = CustomUserRegisterForm()
+        print(form.__dict__)
     elif request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
         if form.is_valid():
@@ -39,6 +39,7 @@ def register(request):
         'auth/register.html',
         {
             'form': form,
+            'is_existing_user': False,
             'scripts': []
         }
     )
@@ -47,10 +48,10 @@ def register(request):
 def login(request):
     """Вход в систему."""
     if request.method == 'GET':
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
 
     elif request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = CustomAuthenticationForm(data=request.POST)
 
         if form.is_valid():
             auth_login(request, form.get_user())
@@ -61,6 +62,7 @@ def login(request):
         'auth/login.html',
         {
             'form': form,
+            'is_existing_user': True,
             'scripts': [],
         }
     )

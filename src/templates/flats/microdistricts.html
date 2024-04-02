@@ -12,7 +12,7 @@
                     <div class="content">
                         <form action="" method="post">
                             {% csrf_token %}
-                            {{ add_microdistrict_form }}
+
                             <input type="submit" value="Save">
                         </form>
                     </div>
@@ -31,13 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for district in microdistricts %}
-                        <tr>
-                            <td><a href="#">{{ district.id }}</a></td>
-                            <td><a href="#">{{ district.name }}</a></td>
-                            <td><a href="{% url 'app_flats_houses' district.name %}">{{ district.name }}</a></td>
-                        </tr>
-                        {% endfor %}
+                      
                     </tbody>
                 </table>
             </div>

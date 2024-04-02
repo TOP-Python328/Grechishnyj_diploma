@@ -1,45 +1,36 @@
 {% extends 'index.html' %}
 
 {% block main %}
-
     <div>
         <h1>Квартиры</h1>
-        <div class="popup">
-            <button class="open-btn">Добавить квартиру</button>
-            <div class="back close">
-                <div class="front">
-                    <h3 class="title">Добавить квартиру</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            
-                            {% csrf_token %}
-                            {{ add_flat_form }}
-                            
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
-                </div>
-            </div>
-        </div>
-        
-
         <div class="table-wrapper">
             <div class="table-scroll">
                 <table>
                     <thead>
                         <tr>
                             <td>№</td>
-                            <td>Наименование</td>
-                            <td>Посмотреть</td>
+                            <td>Микрорайон</td>
+                            <td>Дом</td>
+                            <td>Срок ввода</td>
+                            <td>Материал</td>
+                            <td>Секция</td>
+                            <td>Этаж</td>
+                            <td>Номер</td>
+                            <td>Статус</td>
                         </tr>
                     </thead>
                     <tbody>
                         {% for flat in flats %}
                         <tr>
-                            <td><a href="#">{{ flat.id }}</a></td>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a href="#">{{ flat.floor.section.house.microdistrict.name }}</a></td>
+                            <td><a href="#">{{ flat.floor.section.house.number }}</a></td>
+                            <td><a href="#">{{ flat.floor.section.house.building_permit.dt_expiry }}</a></td>
+                            <td><a href="#">{{ flat.floor.section.house.type.name }}</a></td>
+                            <td><a href="#">{{ flat.floor.section.number }}</a></td>
+                            <td><a href="#">{{ flat.floor.number }}</a></td>
                             <td><a href="#">{{ flat.number }}</a></td>
-                            <td>#</td>
+                            <td><a href="#">{{ flat.status.name }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

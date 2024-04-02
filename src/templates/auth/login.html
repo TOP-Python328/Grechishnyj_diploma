@@ -1,13 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% include 'base/meta.html' %}
+    {% include 'base/style.html' %}
+        
+    {% block title %}
+        <title>{{ title }}</title>
+    {% endblock title %}
+    
+</head>
 
 {% block main %}
 
-        <form action="" method="post">
+    <div class="wrapper_form">
+        <form class="auth_form" action="" method="post">
             {% csrf_token %}
+            {% if is_existing_user %}
+                <h1>Вход в систему</h1>
+            {% else %}
+                <h1>Регистрация</h1>  
+            {% endif %}
             {{ form }}
-            <p><a href="{% url 'user_register' %}">Register</a></p>
-            <p><a href="{% url 'user_login' %}">Login</a></p>
-            <input type="submit" value="Sign in">
+            {% if is_existing_user %}
+                <a href="{% url 'user_register' %}">Создать аккаунт</a>
+            {% else %}
+                <a href="{% url 'user_login' %}">Уже есть аккаунт</a>  
+            {% endif %}
+            <input type="submit" value="Продолжить"> 
         </form>
+
+    </div>
 
 {% endblock main %}
 

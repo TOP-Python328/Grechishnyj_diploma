@@ -53,17 +53,10 @@ class House(models.Model):
     seismic = models.ForeignKey(Seismic, on_delete=models.CASCADE)
     type = models.ForeignKey(HouseType, on_delete=models.CASCADE)
 
-# class SectionType(models.Model):
-#     """Тип подьезда."""
-#     class Meta:
-#         db_table = 'section_types'
-#     name = models.CharField(max_length=32, primary_key=True)
-
 class SectionPlan(models.Model):
     """Типовые секции (подъезды)."""
     class Meta:
         db_table = 'sections_plan'
-    
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
     floor_plan_name = models.CharField(max_length=32)  
@@ -81,7 +74,6 @@ class FloorPlan(models.Model):
     """План этажа"""
     class Meta:
         db_table = 'floors_plan'
-    
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
     flat_plan_name = models.CharField(max_length=32)
@@ -95,38 +87,59 @@ class Floor(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     floor_plan = models.ForeignKey(FloorPlan, on_delete=models.CASCADE)
 
+class RoomType(models.Model): 
+    """Тип комнаты.""" 
+    class Meta: 
+        db_table = 'room_types' 
+    id = models.AutoField(primary_key=True) 
+    name = models.CharField(max_length=32, unique=True) 
+    living = models.BooleanField() 
+    koef_price = models.FloatField()
+
+class FlatsPlan(models.Model): 
+    """Планировка квартиры.""" 
+    class Meta: 
+        db_table = 'flats_plan'
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32)
+    square = models.FloatField()
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
+
+class Flat(models.Model): 
+    """Квартира.""" 
+    class Meta: 
+        db_table = 'flats' 
+    id = models.AutoField(primary_key=True) 
+    number = models.CharField(max_length=4) 
+    floor = models.ForeignKey(Floor, on_delete=models.CASCADE) 
+    flat_plan = models.ForeignKey(FlatsPlan, on_delete=models.CASCADE) 
+    status = models.ForeignKey(SaleStatus, on_delete=models.CASCADE)
+
 class Room(models.Model):
     """Комната."""
     class Meta:
         db_table = 'rooms'
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32, unique=True)
-    living = models.BooleanField()
-    koef_price = models.FloatField()
-
-class FlatsPlan(models.Model):
-    """Планировка квартиры."""
-    class Meta:
-        db_table = 'flats_plan'
-
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32)
     square = models.FloatField()
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
 
-class Flat(models.Model):
-    """Квартира."""
-    class Meta:
-        db_table = 'flats'
-    id = models.AutoField(primary_key=True)
-    number = models.CharField(max_length=4)
-    floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
-    flat_plan = models.ForeignKey(FlatsPlan, on_delete=models.CASCADE)
-    status = models.ForeignKey(SaleStatus, on_delete=models.CASCADE)
+# class FlatsPlan(models.Model):
+#     """Планировка квартиры."""
+#     class Meta:
+#         db_table = 'flats_plan'
 
+#     id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=32)
+#     square = models.FloatField()
+#     room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
-
-
-
-
-
+# class Flat(models.Model):
+#     """Квартира."""
+#     class Meta:
+#         db_table = 'flats'
+#     id = models.AutoField(primary_key=True)
+#     number = models.CharField(max_length=4)
+#     floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
+#     flat_plan = models.ForeignKey(FlatsPlan, on_delete=models.CASCADE)
+#     status = models.ForeignKey(SaleStatus, on_delete=models.CASCADE)

@@ -13,8 +13,6 @@
 <body>
 
     {% if user.is_authenticated %}
-        <h3>{{ user }}</h3>
-        <h4>{{ user.dbase }}</h4>
         {% block header %}
             {% include 'base/header.html' %}
         {% endblock header %}
@@ -44,8 +42,7 @@
         {% endfor %}
 
     {% else %}
-        <h3>{{ user }}</h3>
-        <h4>{{ user.dbase }}</h4>
+
         {% include 'auth/login.html' %}
         
     {% endif %}
