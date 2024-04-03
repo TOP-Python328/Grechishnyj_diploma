@@ -1,228 +1,271 @@
 {% extends 'index.html' %}
 
 {% block main %}
+<main>
 
-    <div>
-        <h2>Rooms {{ user }}</h2>
+    <h2>Rooms {{ user }}</h2>
+    <article>
+        <h2>Типы комнат</h2>
         <div class="popup">
-            <button class="open-btn">Создать тип квартиры</button>
+            <button class="open_btn">Добавить</button>
             <div class="back close">
-                <div class="front">
-                    <h3 class="title">Добавить квартиру</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input name="form" hidden value="new_flat">
-                            <div class="select-box">
-                                <div class="select-title">
-                                    <span>Создать тип квартиры</span>
-                                    <button type="button" class="add-select">Добавить комнату</button>
-                                    <button type="button" class="del-select">Очистить комнаты</button>
-                                </div>
-                                <hr>
-                                <div class="select-data">
-                                    <input name="flat_name" placeholder="Обозначение типа квартиры" value=""> 
-                                    <div class="select-item">
-                                        <select name="room" required>
-                                            <option value="">Выбрать комнату</option>
-                                            {% for room_type in room_types %}
-                                            <option value="{{ room_type.id }}">{{ room_type.name }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <input name="square" value="">
-                                    </div>
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Добавить тип комнаты</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_room_type">
+                        <input name="room_name" type="text" placeholder="наименование комнаты">
+                        <div>
+                            <select name="koef_price" required>
+                                <option value="">Установите ценовой коэффициент</option>
+                                {% for koef in koef_prices %}
+                                <option value="{{ koef }}">{{ koef }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Жилая / не жилая</label>
+                            <input type="checkbox" name="living">
+                        </div>
+                        
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+            <button class="close_btn btn_round close">X</button>
+        </div>
+    </article>
+    <article>
+        <h2>Планировки квартир</h2>
+        <div class="popup">
+            <button class="open_btn">Добавить</button>
+            <div class="back close">
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Создание планировки квартиры</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_flat">
+                        <div class="select_box">
+                            <div class="select_title">
+                                <div>Добавить комнату</div>
+                                <div class="control_box">
+                                    <button type="button" class="add_select btn_round">+</button>
+                                    <button type="button" class="del_select btn_round">-</button>
                                 </div>
                             </div>
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
-                </div>
-            </div>
-        </div>
-        <div class="popup">
-            <button class="open-btn">Создать план этажа</button>
-            <div class="back close">
-                <div class="front">
-                    <h3 class="title">Добавить план этажа</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input name="form" hidden value="new_floor">
-                            <div class="select-box">
-                                <div class="select-title">
-                                    <span>Добавить план этажа</span>
-                                    <button type="button" class="add-select">Добавить квартиру</button>
-                                    <button type="button" class="del-select">Удалить</button>
-                                </div>
-                                <hr>
-                                <div class="select-data">
-                                    <input name="floor_name" placeholder="Обозначение типа квартиры" value=""> 
-                                    <div class="select-item">
-                                        <select name="flat" required>
-                                            <option value="">Выбрать тип квартиры</option>
-                                            {% for flat in flats %}
-                                            <option value="{{ flat.name }}">{{ flat.name }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
+                            <hr>
+                            <div class="select_data">
+                                <input name="flat_name" placeholder="Обозначение типа квартиры" value=""> 
+                                <div class="select_item">
+                                    <select name="room" class="left" required>
+                                        <option value="">Выбрать комнату</option>
+                                        {% for room_type in room_types %}
+                                        <option value="{{ room_type.id }}">{{ room_type.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input name="square" class="right" value="" placeholder="0.0">
                                 </div>
                             </div>
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
+                        </div>
+                        <input type="submit" value="Save">
+                    </form>
                 </div>
             </div>
+            <button class="close_btn btn_round close">X</button>
         </div>
+    </article>
+    <article>
+        <h2>Планы этажей</h2>
         <div class="popup">
-            <button class="open-btn">Создать подъезд</button>
+            <button class="open_btn">Добавить</button>
             <div class="back close">
-                <div class="front">
-                    <h3 class="title">Добавить подъезд</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input name="form" hidden value="new_section">
-                            <div class="select-box">
-                                <div class="select-title">
-                                    <span>Добавить этаж</span>
-                                    <button type="button" class="add-select">Добавить этаж</button>
-                                    <button type="button" class="del-select">Удалить</button>
-                                </div>
-                                <hr>
-                                <div class="select-data">
-                                    <input name="section_name" placeholder="Обозначение секции" value=""> 
-                                    <div class="select-item">
-                                        <select name="floor" required>
-                                            <option value="">Выбрать планировку этажа</option>
-                                            {% for floor_plan in floors_plans %}
-                                            <option value="{{ floor_plan.name }}">{{ floor_plan.name }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Создание плана этажа</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_floor">
+                        <div class="select_box">
+                            <div class="select_title">
+                                <div>Добавить квартиру</div>
+                                <div class="control_box">
+                                    <button type="button" class="add_select btn_round">+</button>
+                                    <button type="button" class="del_select btn_round">-</button>
                                 </div>
                             </div>
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="popup">
-            <button class="open-btn">Создать дом</button>
-            <div class="back close">
-                <div class="front">
-                    <h3 class="title">Создать дом</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input name="form" hidden value="new_house">
-                            <div class="select-box">
-                                <div class="select-title">
-                                    <span>Добавить подьезд</span>
-                                    <button type="button" class="add-select">Добавить подьезд</button>
-                                    <button type="button" class="del-select">Удалить</button>
-                                </div>
-                                <hr>
-                                <div>
-                                    <select name="building_permit" required>
-                                        <option value="">Выберете разрешение на строительство</option>
-                                        {% for building_permit in building_permits %}
-                                        <option value="{{ building_permit.number }}">{{ building_permit.number }}</option>
+                            <hr>
+                            <div class="select_data">
+                                <input name="floor_name" placeholder="Обозначение плана этажа" value=""> 
+                                <div class="select_item">
+                                    <select name="flat" required>
+                                        <option value="">Выбрать тип квартиры</option>
+                                        {% for flat in flats %}
+                                        <option value="{{ flat.name }}">{{ flat.name }}</option>
                                         {% endfor %}
                                     </select>
-                                </div>
-                                <div>
-                                    <select name="microdistrict" required>
-                                        <option value="">Выберете микрорайон</option>
-                                        {% for microdistrict in microdistricts %}
-                                        <option value="{{ microdistrict.name }}">{{ microdistrict.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div>
-                                    <select name="energy_save" required>
-                                        <option value="">Класс энергосбережения</option>
-                                        {% for energy_save in energy_saves %}
-                                        <option value="{{ energy_save.name }}">{{ energy_save.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div>
-                                    <select name="seismic" required>
-                                        <option value="">Сейсмостойкость</option>
-                                        {% for seismic in seismics %}
-                                        <option value="{{ seismic.name }}">{{ seismic.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div>
-                                    <select name="house_type" required>
-                                        <option value="">Тип жилого дома</option>
-                                        {% for house_type in house_types %}
-                                        <option value="{{ house_type.name }}">{{ house_type.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="select-data">
-                                    <input name="house_number" placeholder="Номер дома" value=""> 
-                                    <div class="select-item">
-                                        <select name="section" required>
-                                            <option value="">Выбрать типовую секцию</option>
-                                            {% for section_plan in sections_plans %}
-                                            <option value="{{ section_plan.name }}">{{ section_plan.name }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
+                        </div>
+                        <input type="submit" value="Save">
+                    </form>
                 </div>
             </div>
+            <button class="close_btn btn_round close">X</button>
         </div>
-
+    </article>
+    <article>
+        <h2>Типы секций</h2>
         <div class="popup">
-            <button class="open-btn">Добавить разрешение на строительство</button>
+            <button class="open_btn">Добавить</button>
             <div class="back close">
-                <div class="front">
-                    <h3 class="title">Создать разрешение на строительство</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input name="form" hidden value="new_building_permit">
-                            <input name="number" type="text" placeholder="номер разрешения">
-                            <input name="dt_issue" type="date">
-                            <input name="dt_expiry" type="date">
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Создание типовой секции</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_section">
+                        <div class="select_box">
+                            <div class="select_title">
+                                <div>Добавить план этажа</div>
+                                <div class="control_box">
+                                    <button type="button" class="add_select btn_round">+</button>
+                                    <button type="button" class="del_select btn_round">-</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="select_data">
+                                <input name="section_name" placeholder="Обозначение типовой секции" value=""> 
+                                <div class="select_item">
+                                    <select name="floor" required>
+                                        <option value="">Выбрать планировку этажа</option>
+                                        {% for floor_plan in floors_plans %}
+                                        <option value="{{ floor_plan.name }}">{{ floor_plan.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="Save">
+                    </form>
                 </div>
             </div>
+            <button class="close_btn btn_round close">X</button>
         </div>
+    </article>
+    <article>
+        <h2>Жилые дома</h2>
         <div class="popup">
-            <button class="open-btn">Добавить микрорайон</button>
+            <button class="open_btn">Добавить</button>
             <div class="back close">
-                <div class="front">
-                    <h3 class="title">Добавить микрорайон</h3>
-                    <div class="content">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input name="form" hidden value="new_microdistrict">
-                            <input name="name" type="text" placeholder="название микрораона">
-                            <input type="submit" value="Save">
-                        </form>
-                    </div>
-                    <button class="close-btn">Close</button>
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Создание жилого дома</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_house">
+                        <div class="select_box">
+                            <div class="select_title">
+                                <div>Добавить типовую секцию</div>
+                                <div class="control_box">
+                                    <button type="button" class="add_select btn_round">+</button>
+                                    <button type="button" class="del_select btn_round">-</button>
+                                </div>
+                            </div>
+                            <div class="select_data">
+                                <input name="house_number" placeholder="Номер дома" value=""> 
+                                <div class="select_item">
+                                    <select name="section" required>
+                                        <option value="">Выбрать типовую секцию</option>
+                                        {% for section_plan in sections_plans %}
+                                        <option value="{{ section_plan.name }}">{{ section_plan.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <select name="building_permit" required>
+                                    <option value="">Выберете разрешение на строительство</option>
+                                    {% for building_permit in building_permits %}
+                                    <option value="{{ building_permit.number }}">{{ building_permit.number }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <select name="microdistrict" required>
+                                    <option value="">Выберете микрорайон</option>
+                                    {% for microdistrict in microdistricts %}
+                                    <option value="{{ microdistrict.name }}">{{ microdistrict.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <select name="energy_save" required>
+                                    <option value="">Класс энергосбережения</option>
+                                    {% for energy_save in energy_saves %}
+                                    <option value="{{ energy_save.name }}">{{ energy_save.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <select name="seismic" required>
+                                    <option value="">Сейсмостойкость</option>
+                                    {% for seismic in seismics %}
+                                    <option value="{{ seismic.name }}">{{ seismic.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <select name="house_type" required>
+                                    <option value="">Тип жилого дома</option>
+                                    {% for house_type in house_types %}
+                                    <option value="{{ house_type.name }}">{{ house_type.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <input type="submit" value="Save">
+                    </form>
                 </div>
             </div>
+            <button class="close_btn btn_round close">X</button>
         </div>
+    </article>
+    <article>
+        <h2>Разрешения на строительство</h2>
+        <div class="popup">
+            <button class="open_btn">Добавить</button>
+            <div class="back close">
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Добавить разрешение на строительство</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_building_permit">
+                        <input name="form" hidden value="new_building_permit">
+                        <input name="number" type="text" placeholder="Номер разрешения">
+                        <input name="dt_issue" type="date">
+                        <input name="dt_expiry" type="date">
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+            <button class="close_btn btn_round close">X</button>
+        </div>
+    </article>
+    <article>
+        <h2>Микрорайоны</h2>
+        <div class="popup">
+            <button class="open_btn">Добавить</button>
+            <div class="back close">
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Добавить микрорайон</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_microdistrict">
+                        <input name="name" type="text" placeholder="Название микрорайона">
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+            <button class="close_btn btn_round close">X</button>
+        </div>
+    </article>
 
 
 
@@ -320,12 +363,5 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-    </div>
+</main>
 {% endblock main %}

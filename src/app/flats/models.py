@@ -123,23 +123,3 @@ class Room(models.Model):
     square = models.FloatField()
     flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
-
-# class FlatsPlan(models.Model):
-#     """Планировка квартиры."""
-#     class Meta:
-#         db_table = 'flats_plan'
-
-#     id = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=32)
-#     square = models.FloatField()
-#     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-
-# class Flat(models.Model):
-#     """Квартира."""
-#     class Meta:
-#         db_table = 'flats'
-#     id = models.AutoField(primary_key=True)
-#     number = models.CharField(max_length=4)
-#     floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
-#     flat_plan = models.ForeignKey(FlatsPlan, on_delete=models.CASCADE)
-#     status = models.ForeignKey(SaleStatus, on_delete=models.CASCADE)

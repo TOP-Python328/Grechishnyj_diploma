@@ -56,6 +56,7 @@ def run_flats(request):
 def run_flat_constructor(request):
     """Конструктор недвижимости.""" 
     database = request.user.dbase 
+    koef_prices = ['1.0', '0.5', '0.3']
     room_types = RoomType.objects.using(database).order_by('name') 
     flats = FlatsPlan.objects.using(database).values('name').annotate(total=Count('name')).order_by() 
     building_permits = BuildingPermit.objects.using(database).order_by('number') 
@@ -68,15 +69,24 @@ def run_flat_constructor(request):
     sections_plans = SectionPlan.objects.using(database).values('name').annotate(total=Count('name')).order_by()
 
     if request.method == 'POST':
-        if request.POST['form'] == 'new_flat':
+        if request.POST['form'] == 'new_room_type':
+            post_room_name = str(request.POST['room_name'])
+            post_living = bool(request.POST.getlist('living'))
+            post_koef_price = float(request.POST['koef_price'])
+            RoomType.objects.using(database).create(
+                name = post_room_name,
+                living = post_living,
+                koef_price = post_koef_price
+            )
+        elif request.POST['form'] == 'new_flat':
             post_rooms = request.POST.getlist('room')
             post_square = request.POST.getlist('square')
             post_flat_name = request.POST['flat_name']
             for i in range(len(post_rooms)):
                 FlatsPlan.objects.using(database).create(
-                    name = post_flat_name,
-                    square = post_square[i],
-                    room_type = RoomType.objects.using(database).get(pk=post_rooms[i])
+                    name=post_flat_name,
+                    square=post_square[i],
+                    room_type=RoomType.objects.using(database).get(pk=post_rooms[i])
                 )
         elif request.POST['form'] == 'new_floor':
             post_floor = request.POST['floor_name']
@@ -168,6 +178,7 @@ def run_flat_constructor(request):
         {
             'title': 'Квартирные планы',
             'room_types': room_types,
+            'koef_prices': koef_prices,
             'flats': flats,
             'flats_plans': flats_plans,
             'floors_plans': floors_plans,

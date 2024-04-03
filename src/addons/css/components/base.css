@@ -7,42 +7,53 @@ html {
 body {
     background: rgb(238, 238, 238);
     min-height: 100vh;
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
-    /* gap: 8px; */
-    /* padding: 8px; */
 }
 
 header{
-    background: white;
-    /* border-radius: 8px; */
-    /* border: 1px solid grey; */
-    /* padding: 8px; */
+    background: rgb(252, 252, 252);
+    height: 70px;
 }
 
 .content{
     flex-grow: 1;
-    display: flex;
-    /* gap: 8px; */
-    height: 80%;
-    background: red;
+    background: rgb(144, 138, 161);
+
 }
 
-
+aside{
+    background: rgb(214, 214, 214);
+    width: calc(var(--max-w) / 12 * 2);
+}
 
 main{
     background: rgb(105, 105, 105);
-    /* border-radius: 8px; */
-    /* border: 1px solid grey; */
-    padding: 8px;
-    flex-grow: 1;
-    
+    width: calc(var(--max-w) / 12 * 10);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+}
+
+main h2{
+    background: white;
+    width: 100%;
 }
 
 footer{
-    background: white;
-    border-radius: 8px;
-    /* border: 1px solid grey; */
-    /* padding: 8px; */
+    background: rgb(255, 255, 255);
+    height: 70px;
+}
+
+header .wrapper, 
+.content .wrapper, 
+footer .wrapper{
+    display: flex;
+    width: var(--max-w);
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+
 }

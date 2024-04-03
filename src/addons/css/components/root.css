@@ -1,4 +1,7 @@
 :root {
+
+    --max-w: 1400px;
+
     --box-color-01: rgb(39, 37, 51);
     --box-color-02: rgb(47, 44, 61);
     --font-color: rgb(211, 208, 224);

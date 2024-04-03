@@ -1,0 +1,147 @@
+.wrapper_form{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    flex-basis: 100%;
+}
+
+
+form {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 30%;
+    padding: 30px 50px;
+    box-shadow: 0px 0px 10px 0px rgb(37, 37, 37);
+    border-radius: 15px;
+    background: #e7e5e5;
+}
+
+form div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+form div.form_title{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+input, select  { 
+    outline: none !important; 
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* div.checkbox{
+    height: 24px;
+} */
+input[type="checkbox"]{
+    width: 24px;
+    height: 24px;
+}
+
+input:focus {
+    border: 1px solid rgb(100, 100, 100);
+}
+
+button, input[type="submit"], a.button, button.btn_round{
+    background-color: #b3b3b3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding-left: 24px;
+    padding-right: 24px;
+    min-width: 100px;
+    border-radius: 5px;
+}
+
+button:hover, input[type="submit"]:hover, a.button:hover {
+    background-color: rgb(90, 90, 90);
+}
+
+form div.select_box{
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+form div.select_box .select_title{
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 0;
+}
+form div.select_box .select_data{
+    flex-direction: column;
+    justify-content: space-between;
+    background: #b8cffa;
+    padding: 20px;
+    max-height: 350px;
+    overflow-y: scroll;
+}
+form div.select_box .select_title .control_box{
+    gap: 10px;
+    width: auto;
+}
+
+.select_item{
+    padding: 0;
+}
+.select_item select{
+    line-height: 20px;
+}
+.select_item input{
+    line-height: 20px;
+    width: 25%;
+}
+.select_item select.left{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.select_item input.right{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    text-align: right;
+}
+
+.scrolled {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+
+button.btn_round{
+    width: 32px;
+    min-width: 0;
+    padding: 0;
+    height: 32px;
+    border-radius: 100%;
+}
+
+@media (min-width: 1200px) and (max-width: 1366px) {
+    form { flex-basis: 45%; }
+}
+@media (min-width: 1100px) and (max-width: 1201px) {
+    form { flex-basis: 50%; }
+}
+@media (min-width: 1000px) and (max-width: 1101px) {
+    form { flex-basis: 60%; }
+}
+@media (min-width: 900px) and (max-width: 1001px) {
+    form { flex-basis: 70%; }
+}
+@media (min-width: 700px) and (max-width: 901px) {
+    form { flex-basis: 80%; }
+}
+@media screen and (max-width: 701px) {
+    form { flex-basis: 100%; }
+}

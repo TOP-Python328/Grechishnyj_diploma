@@ -1,0 +1,163 @@
+@startuml
+
+scale 1920*1080
+hide class empty members
+
+title 
+	Недвижимость. Модели классов. 
+end title
+  
+class EnergySave ##[bold]grey{
+    Энергосбережение
+	..
+	+ name: CharField
+}
+
+class Seismic ##[bold]grey{
+    Сейсмоустойчивость
+	..
+	+ name: CharField
+}
+
+class SaleStatus ##[bold]grey{
+    Статус продажи
+	..
+	+ name: CharField
+}
+
+class BuildingPermit ##[bold]grey{
+    Разрешение на строительство
+	..
+	+ id: AutoField
+	+ number: CharField
+	+ dt_issue: DateField
+	+ dt_expiry: DateField
+}
+
+class HouseType ##[bold]grey{
+    Тип жилого дома
+	..
+	+ id: AutoField
+	+ name: CharField
+}
+
+class Microdistrict ##[bold]grey{
+    Микрорайон
+	..
+	+ id: AutoField
+	+ name: CharField
+}
+
+class House ##[bold]grey{
+    Жилой дом
+	..
+	+ id: AutoField
+	+ number: CharField
+	--
+	+ building_permit: ForeignKey(BuildingPermit)
+	+ microdistrict: ForeignKey(Microdistrict)
+	+ energy_save: ForeignKey(EnergySave)
+	+ seismic: ForeignKey(Seismic)
+	+ type: ForeignKey(HouseType)
+}
+
+class SectionPlan ##[bold]grey{
+    Тип секции (подъезд)
+	..
+	+ id: AutoField
+	+ name: CharField
+	--
+	+ floor_plan_name: ForeignKey(FloorPlan)
+}
+
+class Section ##[bold]grey{
+    Секция (подъезд)
+	..
+	+ id: AutoField
+	+ number: CharField
+	--
+	+ house: ForeignKey(House)
+	+ section_plan: ForeignKey(SectionPlan)
+}
+
+class FloorPlan ##[bold]grey{
+    План этажа
+	..
+	+ id: AutoField
+	+ name: CharField
+	--
+	+ flat_plan_name: ForeignKey(FlatsPlan)
+}
+
+class Floor ##[bold]grey{
+    Этаж
+	..
+	+ id: AutoField
+	+ number: CharField
+	--
+	+ section: ForeignKey(Section)
+	+ floor_plan: ForeignKey(FloorPlan)
+}
+
+class RoomType ##[bold]grey{
+    Тип комнаты
+	..
+	+ id: AutoField
+	+ name: CharField
+	+ living: BooleanField
+	+ koef_price: FloatField
+}
+
+class Room ##[bold]grey{
+    Комната
+	..
+    + id: AutoField
+    + square: FloatField
+	--
+    + flat: ForeignKey(Flat)
+    + room_type: ForeignKey(RoomType)
+}
+
+class FlatsPlan ##[bold]grey{
+    План квартиры
+	..
+	+ id: AutoField
+	+ name: CharField
+	+ square: FloatField
+	--
+	+ room_type: ForeignKey(RoomType)
+}
+
+class Flat ##[bold]grey{
+    Квартрира
+	..
+	+ id: AutoField
+	+ number: CharField
+	--
+	+ floor: ForeignKey(Floor)
+	+ flat_plan: ForeignKey(FlatsPlan)
+	+ status: ForeignKey(SaleStatus)
+}
+
+FlatsPlan    -[#grey,bold]l-o  RoomType 
+FloorPlan    -[#grey,bold]l-o  FlatsPlan
+SectionPlan  -[#grey,bold]l-o  FloorPlan
+
+RoomType    o-[#grey,bold]-    Room
+FlatsPlan   o-[#grey,bold]-    Flat
+FloorPlan   o-[#grey,bold]-    Floor
+SectionPlan o-[#grey,bold]-    Section
+
+Room        o-[#grey,bold]r-   Flat
+Flat        o-[#grey,bold]r-   Floor
+Floor       o-[#grey,bold]r-   Section
+Section     o-[#grey,bold]d-   House   
+
+Flat         -[#grey,bold]d-o  SaleStatus
+House        -[#grey,bold]d-o  EnergySave
+House        -[#grey,bold]d-o  Seismic
+House        -[#grey,bold]d-o  BuildingPermit
+House        -[#grey,bold]r-o  HouseType
+House       o-[#grey,bold]l-   Microdistrict
+
+@enduml

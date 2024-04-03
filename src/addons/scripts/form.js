@@ -16,31 +16,48 @@ document.addEventListener('DOMContentLoaded', function(){
         form.addEventListener('submit', event => {
             // event.preventDefault() 
         }) 
-        let dataFields = form.querySelector('.select-data')
-        const btnAddSelect = form.querySelector('button.add-select')
-        const btnDelSelect = form.querySelector('.del-select')
-        const itemSelect = dataFields.querySelector('div.select-item')
-        btnAddSelect.addEventListener('click', function(){
-            const newSelect = itemSelect.cloneNode(true);
-            if (newSelect.querySelector('input')) {
-                newSelect.querySelector('input').value = ''
-            }
-            dataFields.insertBefore(newSelect, itemSelect.nextSibling);
-        })
-        btnDelSelect.addEventListener('click', event => {
-            const selects = dataFields.querySelectorAll('div.select-item');
-            for (let i = 1; i < selects.length; i++) {
-                dataFields.removeChild(selects[i]);
-            }
-        }); 
+        let dataFields = form.querySelector('.select_data')
+        const btnAddSelect = form.querySelector('button.add_select')
+        const btnDelSelect = form.querySelector('.del_select')
+        
+        if (btnDelSelect) {
+            btnDelSelect.addEventListener('click', event => {
+                const selects = dataFields.querySelectorAll('div.select_item');
+                for (let i = 1; i < selects.length; i++) {
+                    dataFields.removeChild(selects[i]);
+                }
+                dataFields.classList.remove('scrolled');
+            }); 
+        }
+        if (btnAddSelect) {
+            const itemSelect = dataFields.querySelector('div.select_item')
+            btnAddSelect.addEventListener('click', function(){
+                if (dataFields.getBoundingClientRect().height > 350){
+                    dataFields.classList.add('scrolled');
+                }
+                const newSelect = itemSelect.cloneNode(true);
+                if (newSelect.querySelector('input')) {
+                    newSelect.querySelector('input').value = ''
+                }
+                dataFields.insertBefore(newSelect, itemSelect.nextSibling);
+            })
+        }
+
+
     }
 
 
     function controlPopup(popup){       
         popup.addEventListener('click', event => {
             const actionDiv = popup.querySelector('.popup .back');
-            if(event.target.closest('.popup .open-btn')) actionDiv.classList.remove('close');
-            if(event.target.closest('.popup .close-btn')) actionDiv.classList.add('close');
+            if(event.target.closest('.popup .open_btn')) {
+                actionDiv.classList.remove('close');
+                popup.querySelector('.popup .close_btn').classList.remove('close');
+            }
+            if(event.target.closest('.popup .close_btn')) {
+                event.target.classList.add('close');
+                actionDiv.classList.add('close');
+            }
         })
     }
 })

@@ -1,17 +1,21 @@
 from django.shortcuts import render
 from app.users.models import CustomUser
+from app.users.forms import CustomUserRegisterForm
 
 
 
 def main(request):
-    print(CustomUser)
-    print(CustomUser.dbase)
+    
+
+    form = CustomUserRegisterForm()
+
+
     return render(
         request, 
         'index.html', 
         {
             'title': 'Главная страница',
-            # 'user': user
+            'form': form,
         }
     )
 

@@ -18,15 +18,14 @@
         {% endblock header %}
 
         <div class="content">
-            {% block aside %}
-                {% include 'base/aside.html' %}
-            {% endblock aside %}
-
-            <main>
-            {% block main %}
-                {% include 'base/main.html' %}
-            {% endblock main %}
-            </main>
+            <div class="wrapper">
+                {% block aside %}
+                    {% include 'base/aside.html' %}
+                {% endblock aside %}
+                {% block main %}
+                    {% include 'base/main.html' %}
+                {% endblock main %}
+            </div>
         </div>
         
         {% block footer %}
