@@ -219,7 +219,72 @@
                                     {% endfor %}
                                 </select>
                             </div>
+                            <div>
+                                <select name="material_wall" required>
+                                    <option value="">Материал стен</option>
+                                    {% for material in materials %}
+                                    <option value="{{ material.id }}">{{ material.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <select name="material_floor" required>
+                                    <option value="">Материал этажных перекрытий</option>
+                                    {% for material in materials %}
+                                    <option value="{{ material.id }}">{{ material.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+            <button class="close_btn btn_round close">X</button>
+        </div>
+    </article>
+    
+    <article>
+        <h2>Земельные участки</h2>
+        <div class="popup">
+            <button class="open_btn">Добавить</button>
+            <div class="back close">
+                <div class="wrapper_form">
+                    <form action="" method="post">
+                        <div class="form_title">Добавить земельный участок</div>
+                        {% csrf_token %}
+                        <input name="form" hidden value="new_land_plot">
+                        <input name="number" type="text" placeholder="Кадастровый номер">
+                        <input name="square" type="text" placeholder="Площадь">
+                        <input name="usage" type="text" placeholder="Вид разрешенного использования">
+                        <div>
+                            <select name="owner_type" required>
+                                <option value="">Право владения</option>
+                                <option value="аренда">аренда</option>
+                                <option value="собственность">собственность</option>
+                            </select>
+                        </div>
+                        <input name="owner_number" type="text" placeholder="Номер документа подтверждающего право">
+                        <input name="owner_date" type="date" placeholder="Дата подтверждающего документа">
+                        <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа">
+                        <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа">
+                        <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН">
+                        Адрес
+                        <select name="region" required>
+                            <option value="">Выбрать регион</option>
+                        </select>
+                        <select name="district" required>
+                            <option value="">Выбрать район</option>
+                        </select>
+                        <select name="sity" required>
+                            <option value="">Выбрать город</option>
+                        </select>
+                        <input name="street" type="text" placeholder="Улица">
+                        <input name="home" type="text" placeholder="Дом">
+                        <input name="flat" type="text" placeholder="Квартира">
+
+
+
                         <input type="submit" value="Save">
                     </form>
                 </div>
@@ -237,10 +302,17 @@
                         <div class="form_title">Добавить разрешение на строительство</div>
                         {% csrf_token %}
                         <input name="form" hidden value="new_building_permit">
-                        <input name="form" hidden value="new_building_permit">
                         <input name="number" type="text" placeholder="Номер разрешения">
                         <input name="dt_issue" type="date">
                         <input name="dt_expiry" type="date">
+                        <div>
+                            <select name="land_plot" required>
+                                <option value="">Земельный участок</option>
+                                {% for land_plot in land_plots %}
+                                <option value="{{ land_plot.id }}">{{ land_plot.number }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         <input type="submit" value="Save">
                     </form>
                 </div>

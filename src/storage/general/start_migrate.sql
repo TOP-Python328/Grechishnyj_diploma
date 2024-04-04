@@ -52,11 +52,25 @@ insert into room_types (name, living, koef_price) values ('прихожая', 0,
 insert into room_types (name, living, koef_price) values ('лоджия', 0, 0.5); 
 insert into room_types (name, living, koef_price) values ('балкон', 0, 0.5);
 
+create table land_plots (
+    id integer primary key,
+    number varchar(64) not null unique,
+    square float not null,
+    usage varchar(128) not null,
+    owner_type varchar(64) not null,
+    owner_number varchar(64) not null unique,
+    owner_date date not null,
+    owner_reg_number varchar(64) not null unique,
+    owner_reg_date date not null,
+    document_egrn date not null);
+
 create table building_permits (
     id integer primary key,
     number varchar(32) not null unique,
     dt_issue date not null,
-    dt_expiry date not null);
+    dt_expiry date not null,
+    land_plot_id integer not null,
+    foreign key (land_plot_id) references land_plots(id));
 
 create table house_types (
     id integer primary key,
@@ -77,12 +91,15 @@ create table houses (
     energy_save_id varchar(4) not null,
     seismic_id varchar(4) not null,
     type_id integer not null,
+    material_wall_id integer not null,
+    material_floor_id integer not null, 
     foreign key (building_permit_id) references building_permits(id),
     foreign key (microdistrict_id) references microdistricts(id),
     foreign key (energy_save_id) references energy_saves(name),
     foreign key (seismic_id) references seismics(name),
-    foreign key (type_id) references house_types(id));
-
+    foreign key (type_id) references house_types(id),
+    foreign key (material_wall_id) references materials(id),
+    foreign key (material_floor_id) references materials(id));
 
 create table flats_plan ( 
     id integer primary key, 
@@ -137,3 +154,14 @@ create table rooms (
 
 
 
+create table addresses (
+    id integer primary key,
+    contry_name varchar(32) not null,
+    country_full_name varchar(64) not null,
+    region varchar(64) not null,
+    district varchar(64) not null,
+    sity varchar(64) not null,
+    street varchar(64) not null,
+    home varchar(16) not null,
+    flat varchar(4) not null,
+);

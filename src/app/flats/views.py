@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 
+from app.assist.models import Address
+
 from app.flats.models import ( 
     SaleStatus, Microdistrict, House, Flat, RoomType, Section, Floor, FlatsPlan, FloorPlan, SectionPlan, 
-    BuildingPermit, EnergySave, Seismic, HouseType, Room)
+    BuildingPermit, EnergySave, Seismic, HouseType, Room, LandPlot, Material)
 
 from django.db.models import Count, Avg, Sum
 
@@ -57,6 +59,8 @@ def run_flat_constructor(request):
     """Конструктор недвижимости.""" 
     database = request.user.dbase 
     koef_prices = ['1.0', '0.5', '0.3']
+    land_plots = LandPlot.objects.using(database).order_by('number')
+    materials = Material.objects.using(database).order_by('name')
     room_types = RoomType.objects.using(database).order_by('name') 
     flats = FlatsPlan.objects.using(database).values('name').annotate(total=Count('name')).order_by() 
     building_permits = BuildingPermit.objects.using(database).order_by('number') 
@@ -78,6 +82,32 @@ def run_flat_constructor(request):
                 living = post_living,
                 koef_price = post_koef_price
             )
+        elif request.POST['form'] == 'new_land_plot':
+            post_number = str(request.POST['number'])
+            post_square = float(request.POST['square'])
+            post_usage = str(request.POST['usage'])
+            post_owner_type = str(request.POST['owner_type'])
+            post_owner_number = str(request.POST['owner_number'])
+            post_owner_date = request.POST['owner_date']
+            post_owner_reg_number = str(request.POST['owner_reg_number'])
+            post_owner_reg_date = request.POST['owner_reg_date']
+            post_document_egrn = request.POST['document_egrn']
+            land_plot = LandPlot.objects.using(database).create(
+                number=post_number,
+                square=post_square,
+                usage=post_usage,
+                owner_type=post_owner_type,
+                owner_number=post_owner_number,
+                owner_date=post_owner_date,
+                owner_reg_number=post_owner_reg_number,
+                owner_reg_date=post_owner_reg_date,
+                document_egrn=post_document_egrn
+            )
+            print(request.POST)
+
+
+
+
         elif request.POST['form'] == 'new_flat':
             post_rooms = request.POST.getlist('room')
             post_square = request.POST.getlist('square')
@@ -109,7 +139,8 @@ def run_flat_constructor(request):
             BuildingPermit.objects.using(database).create(
                     number=request.POST['number'],
                     dt_issue=request.POST['dt_issue'],
-                    dt_expiry=request.POST['dt_expiry']
+                    dt_expiry=request.POST['dt_expiry'],
+                    land_plot=LandPlot.objects.using(database).get(id=request.POST['land_plot'])
                 )
 
         elif request.POST['form'] == 'new_microdistrict':
@@ -125,6 +156,8 @@ def run_flat_constructor(request):
                     seismic_id=Seismic.objects.using(database).get(name=request.POST['seismic']).name,
                     type_id=HouseType.objects.using(database).get(name=request.POST['house_type']).id,
                     number=request.POST['house_number'],
+                    material_wall=Material.objects.using(database).get(id=request.POST['material_wall']),
+                    material_floor=Material.objects.using(database).get(id=request.POST['material_floor'])
                 )
             sections_plans = request.POST.getlist('section')
             for i in range(1, len(sections_plans) + 1):
@@ -177,6 +210,8 @@ def run_flat_constructor(request):
         'flats/constructor.html',
         {
             'title': 'Квартирные планы',
+            'land_plots': land_plots,
+            'materials': materials,
             'room_types': room_types,
             'koef_prices': koef_prices,
             'flats': flats,
@@ -188,6 +223,6 @@ def run_flat_constructor(request):
             'energy_saves': energy_saves,
             'seismics': seismics,
             'house_types': house_types,
-            'scripts': [ 'scripts/popup.js', 'scripts/form.js', ]
+            'scripts': [ 'scripts/popup.js', 'scripts/form.js', 'scripts/address.js']
         }
     )

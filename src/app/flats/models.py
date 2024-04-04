@@ -18,6 +18,28 @@ class SaleStatus(models.Model):
         db_table = 'sale_statuses'
     name = models.CharField(max_length=16, primary_key=True)
 
+class Material(models.Model):
+    """Материалы."""
+    class Meta:
+        db_table = 'materials'
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32, unique=True)
+
+class LandPlot(models.Model):
+    """Земельный участок."""
+    class Meta:
+        db_table = 'land_plots'
+    id = models.AutoField(primary_key=True)
+    number = models.CharField(max_length=64, unique=True)
+    square = models.FloatField()
+    usage = models.CharField(max_length=128)
+    owner_type = models.CharField(max_length=64)
+    owner_number = models.CharField(max_length=64, unique=True)
+    owner_date = models.DateField()
+    owner_reg_number = models.CharField(max_length=64, unique=True)
+    owner_reg_date = models.DateField()
+    document_egrn = models.DateField()
+
 class BuildingPermit(models.Model):
     """Разрешение на строительство."""
     class Meta:
@@ -26,6 +48,7 @@ class BuildingPermit(models.Model):
     number = models.CharField(max_length=32, unique=True)
     dt_issue = models.DateField()
     dt_expiry = models.DateField()
+    land_plot = models.ForeignKey(LandPlot, on_delete=models.CASCADE)
 
 class HouseType(models.Model):
     """Тип многоэтажного дома."""
@@ -52,6 +75,8 @@ class House(models.Model):
     energy_save = models.ForeignKey(EnergySave, on_delete=models.CASCADE)
     seismic = models.ForeignKey(Seismic, on_delete=models.CASCADE)
     type = models.ForeignKey(HouseType, on_delete=models.CASCADE)
+    material_wall = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='wall_houses')
+    material_floor = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='floor_houses')
 
 class SectionPlan(models.Model):
     """Типовые секции (подъезды)."""
