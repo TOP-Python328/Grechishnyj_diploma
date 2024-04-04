@@ -93,13 +93,15 @@ create table houses (
     type_id integer not null,
     material_wall_id integer not null,
     material_floor_id integer not null, 
+    address_id integer not null, 
     foreign key (building_permit_id) references building_permits(id),
     foreign key (microdistrict_id) references microdistricts(id),
     foreign key (energy_save_id) references energy_saves(name),
     foreign key (seismic_id) references seismics(name),
     foreign key (type_id) references house_types(id),
     foreign key (material_wall_id) references materials(id),
-    foreign key (material_floor_id) references materials(id));
+    foreign key (material_floor_id) references materials(id),
+    foreign key (address_id) references addresses(id));
 
 create table flats_plan ( 
     id integer primary key, 
@@ -160,8 +162,8 @@ create table addresses (
     country_full_name varchar(64) not null,
     region varchar(64) not null,
     district varchar(64) not null,
+    locality varchar(12) not null,
     sity varchar(64) not null,
-    street varchar(64) not null,
-    home varchar(16) not null,
-    flat varchar(4) not null,
-);
+    street varchar(64),
+    home varchar(16),
+    flat varchar(4));

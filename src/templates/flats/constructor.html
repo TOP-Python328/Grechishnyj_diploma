@@ -235,6 +235,26 @@
                                     {% endfor %}
                                 </select>
                             </div>
+                            Адрес
+                                <select name="region" required>
+                                    <option value="">Выбрать регион</option>
+                                </select>
+                                <select name="district" required>
+                                    <option value="">Выбрать район</option>
+                                </select>
+                                <select name="locality" required>
+                                    <option value="">Населенный пункт</option>
+                                    <option value="деревня">Деревня</option>
+                                    <option value="поселок">Поселок</option>
+                                    <option value="село">Село</option>
+                                    <option value="город">Город</option>
+                                </select>
+                                <select name="sity" required>
+                                    <option value="">Выбрать город</option>
+                                </select>
+                                <input name="street" type="text" placeholder="Улица">
+                                <input name="home" type="text" placeholder="Дом">
+                                <input name="flat" type="text" placeholder="Квартира">
                         </div>
                         <input type="submit" value="Save">
                     </form>
@@ -269,22 +289,6 @@
                         <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа">
                         <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа">
                         <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН">
-                        Адрес
-                        <select name="region" required>
-                            <option value="">Выбрать регион</option>
-                        </select>
-                        <select name="district" required>
-                            <option value="">Выбрать район</option>
-                        </select>
-                        <select name="sity" required>
-                            <option value="">Выбрать город</option>
-                        </select>
-                        <input name="street" type="text" placeholder="Улица">
-                        <input name="home" type="text" placeholder="Дом">
-                        <input name="flat" type="text" placeholder="Квартира">
-
-
-
                         <input type="submit" value="Save">
                     </form>
                 </div>

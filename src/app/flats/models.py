@@ -1,4 +1,5 @@
 from django.db import models
+from app.assist.models import Address
 
 class EnergySave(models.Model):
     """Эноргосбережение."""
@@ -77,6 +78,7 @@ class House(models.Model):
     type = models.ForeignKey(HouseType, on_delete=models.CASCADE)
     material_wall = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='wall_houses')
     material_floor = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='floor_houses')
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
 class SectionPlan(models.Model):
     """Типовые секции (подъезды)."""

@@ -10,8 +10,8 @@ async function main(){
     const selectSity = document.querySelector('select[name="sity"]')
     const selects = [selectRegion, selectDistrict, selectSity]
     const regions = Object.keys(dataQuery).filter(region => region !== '').sort()
-
     regions.forEach(region => createOption(selectRegion, region))
+
     selects.forEach(select => select.addEventListener('change', event => {
         if (event.target == selectRegion) {
             selectDistrict.options.length = 1
@@ -26,3 +26,11 @@ async function main(){
     }))
 }
 main()
+
+
+function createOption(parent, value){
+    const option = document.createElement('option')
+    option.value = value
+    option.innerText = value
+    parent.append(option)
+}

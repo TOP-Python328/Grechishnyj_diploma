@@ -157,7 +157,18 @@ def run_flat_constructor(request):
                     type_id=HouseType.objects.using(database).get(name=request.POST['house_type']).id,
                     number=request.POST['house_number'],
                     material_wall=Material.objects.using(database).get(id=request.POST['material_wall']),
-                    material_floor=Material.objects.using(database).get(id=request.POST['material_floor'])
+                    material_floor=Material.objects.using(database).get(id=request.POST['material_floor']),
+                    address=Address.objects.using(database).create(
+                        country_name='Россия',
+                        country_full_name='Российская Федерация',
+                        region=request.POST['region'],
+                        district=request.POST['district'],
+                        locality=request.POST['locality'],
+                        sity=request.POST['sity'],
+                        street=request.POST['street'] or '',
+                        home=request.POST['home'] or '',
+                        flat=request.POST['flat'] or ''
+                    )
                 )
             sections_plans = request.POST.getlist('section')
             for i in range(1, len(sections_plans) + 1):
