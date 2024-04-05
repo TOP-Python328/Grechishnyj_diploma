@@ -1,11 +1,22 @@
 :root {
 
-    --max-w: 1400px;
+    --max-w: 600px;
 
-    --box-color-01: rgb(39, 37, 51);
-    --box-color-02: rgb(47, 44, 61);
-    --font-color: rgb(211, 208, 224);
-    --shadow-color: rgb(13, 16, 22);
-    --half-color: rgba(47, 44, 61, 0.7);
-    --color: rgb(66,173,74);
+    --def-line-height: 36px;
+    --def-font-family: "Noto Sans";
+    --def-font-size: 10px;
+    --def-radius-box: 10px;
+
+    --form-offset: 15px;
+    --main-offset: 20px;
+
+    --color-base: #e8f2f6;
+    --color-accent-1: #2085b7;
+    --color-accent-2: #04439d;
+    --color-font-1: #74747c;
+    --color-font-2: #bcced6;
+    --color-font-3: #323335;
+    --color-font-accent: #f57d2c;
+
+
 }

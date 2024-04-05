@@ -1,6 +1,6 @@
 *{
     scrollbar-width: thin;
-    scrollbar-color: rgb(180, 180, 180) rgb(223, 223, 223);
+    scrollbar-color: rgba(180, 180, 180, 0) rgba(223, 223, 223, 0);
 }
 
 *::-webkit-scrollbar {

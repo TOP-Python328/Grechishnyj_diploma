@@ -1,3 +1,6 @@
+@import url("./root.css");
+
+
 .wrapper_form{
     display: flex;
     justify-content: center;
@@ -5,47 +8,74 @@
     min-height: 100vh;
     flex-basis: 100%;
 }
-
-
 form {
-    margin-top: 100px;
+    font-size: calc(var(--def-font-size) * 1.5);
+    flex-basis: 75%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    flex-basis: 30%;
-    padding: 30px 50px;
-    box-shadow: 0px 0px 10px 0px rgb(37, 37, 37);
-    border-radius: 15px;
+    flex-wrap: wrap;
     background: #e7e5e5;
+    margin-top: 100px;
+    padding: calc(var(--form-offset) * 2);
 }
-
-form div{
+form div.row{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    padding: calc(var(--form-offset) / 2) 0;
 }
-
+form div.column.col-1{
+    width: calc(100% / 12 * 12 - var(--form-offset) / 2);
+    margin: 0 calc(var(--form-offset) / 2);
+}
+form div.column.col-2{
+    width: calc(100% / 12 * 6 - var(--form-offset) / 2);
+    margin: 0 calc(var(--form-offset) / 2);
+}
+form div.column.col-3{
+    width: calc(100% / 12 * 4 - var(--form-offset) / 2);
+    margin: 0 calc(var(--form-offset) / 2);
+}
+form fieldset{
+    background: #ffffff;
+    border: 1px solid blue;
+    border-radius: var(--def-radius-box);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--form-offset) / 2);
+    padding: calc(var(--def-font-size) * 1);
+    overflow: hidden;
+}
+form fieldset legend{
+    font-size: calc(var(--def-font-size) * 1.3);
+    font-weight: 800;
+    color: blue;
+}
 form div.form_title{
     display: block;
-    font-size: 18px;
+    font-size: calc(var(--def-font-size) * 1.8);
     font-weight: bold;
     text-align: center;
 }
 
-input, select  { 
-    outline: none !important; 
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
+input, select, textarea  { 
+    border: 1px solid var(--color-inputs-quiet);
     box-sizing: border-box;
     border-radius: 5px;
     width: 100%;
+    font-size: calc(var(--def-font-size) * 1.5);
+    padding: 0 calc(var(--def-line-height) / 4);
 }
 
-/* div.checkbox{
-    height: 24px;
-} */
+input, select{
+    height: var(--def-line-height);
+}
+option{
+    font-size: calc(var(--def-font-size) * 1.5);
+}
+option:checked,
+option:hover {
+  background-color: lime;
+}
+
 input[type="checkbox"]{
     width: 24px;
     height: 24px;
@@ -70,38 +100,42 @@ button:hover, input[type="submit"]:hover, a.button:hover {
     background-color: rgb(90, 90, 90);
 }
 
-form div.select_box{
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-form div.select_box .select_title{
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 0;
-}
-form div.select_box .select_data{
-    flex-direction: column;
-    justify-content: space-between;
-    background: #b8cffa;
-    padding: 20px;
-    max-height: 350px;
-    overflow-y: scroll;
-}
-form div.select_box .select_title .control_box{
-    gap: 10px;
-    width: auto;
-}
 
+form .select_box .select_title{
+    display: flex;
+    gap: calc(var(--form-offset) / 2);
+    justify-content: space-between;
+}
+form .select_title input{
+    flex-grow: 1;
+}
+form .select_title .control_box{
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--form-offset) / 2);
+}
+div.select_box .select_data_wrapper{
+    overflow: hidden;
+    padding-top: calc(var(--form-offset) / 2);
+}
+div.select_box .select_data{
+    /* background: #b8cffa; */
+    max-height: 200px;
+    margin-right: calc(var(--form-offset) / 1.5 * -1);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--form-offset) / 2);
+}
 .select_item{
-    padding: 0;
+    width: 100%;
+    display: flex;
 }
 .select_item select{
-    line-height: 20px;
+    min-width: 75%;
 }
 .select_item input{
-    line-height: 20px;
-    width: 25%;
+    flex-grow: 1;
 }
 .select_item select.left{
     border-top-right-radius: 0;
@@ -118,14 +152,27 @@ form div.select_box .select_title .control_box{
     overflow-y: scroll;
 }
 
-
+span.btn_round,
 button.btn_round{
-    width: 32px;
+    background: rgb(184, 183, 183);
+    border-radius: 100%;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+    width: var(--def-line-height);
+    height: var(--def-line-height);
+    font-size: calc(var(--def-font-size) * 1.5);
+    font-weight: 600;
+    align-items: center; 
     min-width: 0;
     padding: 0;
-    height: 32px;
-    border-radius: 100%;
 }
+.btn_round:hover{
+    background: #000;
+}
+
+
 
 @media (min-width: 1200px) and (max-width: 1366px) {
     form { flex-basis: 45%; }
@@ -145,3 +192,10 @@ button.btn_round{
 @media screen and (max-width: 701px) {
     form { flex-basis: 100%; }
 }
+
+
+
+
+
+
+

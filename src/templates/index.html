@@ -13,24 +13,24 @@
 <body>
 
     {% if user.is_authenticated %}
-        {% block header %}
-            {% include 'base/header.html' %}
-        {% endblock header %}
+
+        {% block aside %}
+            {% include 'base/aside.html' %}
+        {% endblock aside %}
 
         <div class="content">
-            <div class="wrapper">
-                {% block aside %}
-                    {% include 'base/aside.html' %}
-                {% endblock aside %}
-                {% block main %}
-                    {% include 'base/main.html' %}
-                {% endblock main %}
-            </div>
+            {% block header %}
+                {% include 'base/header.html' %}
+            {% endblock header %}    
+            {% block main %}
+                {% include 'base/main.html' %}
+            {% endblock main %}
+            {% block footer %}
+                {% include 'base/footer.html' %}
+            {% endblock footer %}
         </div>
         
-        {% block footer %}
-            {% include 'base/footer.html' %}
-        {% endblock footer %}
+        
 
         {% block mainscripts %}
             {% include 'base/scripts.html' %}

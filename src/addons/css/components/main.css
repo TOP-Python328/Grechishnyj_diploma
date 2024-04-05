@@ -1,8 +1,7 @@
 @import url("./root.css");
 
-article{
-    width: calc(var(--max-w) / 12 * 2);
+/* article{
     background: white;
-    border-radius: 15px;
-    padding: 20px;
-}
+    border-radius: 0px;
+    flex-basis: calc(100% / 2 - calc(var(--main-offset)) * 2);
+} */

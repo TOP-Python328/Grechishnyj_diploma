@@ -1,0 +1,121 @@
+<!-- lsdkjgblskd -->
+<article>
+    <h2>Микрорайоны</h2>
+    <div class="popup">
+        <button class="open_btn">Добавить</button>
+        <div class="back close">
+            <div class="wrapper_form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    
+                    <input name="form" hidden value="new_microdistrict">
+                    <div class="row">
+                        <div class="column col-1 form_title">Добавить микрорайон</div>
+                    </div>
+                    <div class="row">
+                        <div class="column col-3">
+                            <fieldset>
+                                <legend>Сведения о микрорайоне</legend>
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                                <select name="land_plot" required>
+                                    <option value="">Земельный участок</option>
+                                    {% for land_plot in land_plots %}
+                                    <option value="{{ land_plot.id }}">{{ land_plot.number }}</option>
+                                    {% endfor %}
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="column col-3">
+                            <fieldset>
+                                <legend>Комнаты</legend>
+                                <div class="select_box">
+                                    <div class="select_title">
+                                        <input name="flat_name" placeholder="Обозначение типа квартиры" value=""> 
+                                        <div class="control_box">
+                                            <span class="btn_round">1</span>
+                                            <button type="button" class="add_select btn_round"><i class="fa fa-plus"></i></button>
+                                            <button type="button" class="del_select btn_round"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="select_data_wrapper">
+                                        <div class="select_data">
+                                            
+                                            <div class="select_item">
+                                                <select name="room" class="left" required>
+                                                    <option value="">Выбрать комнату</option>
+                                                    {% for room_type in room_types %}
+                                                    <option value="{{ room_type.id }}">{{ room_type.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <input name="square" class="right" value="" placeholder="0.0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                           
+                        </div>
+                        <div class="column col-3">
+                            <fieldset>
+                                <legend>Сведения о микрорайоне</legend>
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                            </fieldset>
+                            <fieldset>
+                                <legend>Сведения об адресе</legend>
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column col-2">
+                            <fieldset>
+                                <legend>Жилая / не жилая</legend>
+                                <input type="checkbox" name="living">
+                            </fieldset>
+                            <fieldset>
+                                <legend>Сведения об адресе</legend>
+                                <input name="name" type="text" placeholder="Название микрорайона">
+                            </fieldset>
+                            <fieldset>
+                                <legend>Legend</legend>
+                                <select name="land_plot" required>
+                                    <option value="">Земельный участок</option>
+                                    {% for land_plot in land_plots %}
+                                    <option value="{{ land_plot.id }}">{{ land_plot.number }}</option>
+                                    {% endfor %}
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                                <select name="land_plot" required>
+                                    <option value="">Земельный участок</option>
+                                    {% for land_plot in land_plots %}
+                                    <option value="{{ land_plot.id }}">{{ land_plot.number }}</option>
+                                    {% endfor %}
+                                </select>
+                            </fieldset>
+                        </div>
+
+                        <div class="column col-2">
+                            <fieldset>
+                                
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column col-1">
+                            <fieldset>
+                                <input type="submit" value="Save">
+                            </fieldset>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <button class="close_btn btn_round close"><i class="fa fa-times"></i></button>
+    </div>
+</article>
+

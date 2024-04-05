@@ -220,7 +220,7 @@ def run_flat_constructor(request):
         request,
         'flats/constructor.html',
         {
-            'title': 'Квартирные планы',
+            'title': 'Конструктор недвижимости',
             'land_plots': land_plots,
             'materials': materials,
             'room_types': room_types,

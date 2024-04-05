@@ -2,10 +2,8 @@
 
 {% block main %}
 <main>
-
-    <h2>Rooms {{ user }}</h2>
     <article>
-        <h2>Типы комнат</h2>
+        <h2 class="comforter-brush-regular">Типы комнат</h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -235,26 +233,26 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                            Адрес
-                                <select name="region" required>
-                                    <option value="">Выбрать регион</option>
-                                </select>
-                                <select name="district" required>
-                                    <option value="">Выбрать район</option>
-                                </select>
-                                <select name="locality" required>
-                                    <option value="">Населенный пункт</option>
-                                    <option value="деревня">Деревня</option>
-                                    <option value="поселок">Поселок</option>
-                                    <option value="село">Село</option>
-                                    <option value="город">Город</option>
-                                </select>
-                                <select name="sity" required>
-                                    <option value="">Выбрать город</option>
-                                </select>
-                                <input name="street" type="text" placeholder="Улица">
-                                <input name="home" type="text" placeholder="Дом">
-                                <input name="flat" type="text" placeholder="Квартира">
+                    
+                            <select name="region" required>
+                                <option value="">Выбрать регион</option>
+                            </select>
+                            <select name="district" required>
+                                <option value="">Выбрать район</option>
+                            </select>
+                            <select name="locality" required>
+                                <option value="">Населенный пункт</option>
+                                <option value="деревня">Деревня</option>
+                                <option value="поселок">Поселок</option>
+                                <option value="село">Село</option>
+                                <option value="город">Город</option>
+                            </select>
+                            <select name="sity" required>
+                                <option value="">Выбрать город</option>
+                            </select>
+                            <input name="street" type="text" placeholder="Улица">
+                            <input name="home" type="text" placeholder="Дом">
+                            <input name="flat" type="text" placeholder="Квартира">
                         </div>
                         <input type="submit" value="Save">
                     </form>
@@ -345,99 +343,6 @@
 
 
 
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>№</td>
-                            <td>Наименование</td>
-                            <td>Жилая / не жилая</td>
-                            <td>Ценовой коэффициент</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for room_type in room_types %}
-                        <tr>
-                            <td><a href="#">{{ room_type.id }}</a></td>
-                            <td><a href="#">{{ room_type.name }}</a></td>
-                            {% if room_type.living %}
-                                <td>жилая</td>
-                            {% else %}
-                                <td>не жилая</td>
-                            {% endif %}
-                            <td><a href="#">{{ room_type.koef_price }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>№ п/п</td>
-                            <td>Тип квартиры</td>
-                            <td>Общая площадь</td>
-                            <td>Количесвто помещений</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for flat_plan in flats_plans %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td><a href="#">{{ flat_plan.name }}</a></td>
-                            <td><a href="#">{{ flat_plan.square_rooms }}</a></td>
-                            <td><a href="#">{{ flat_plan.count_rooms }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>№ п/п</td>
-                            <td>Планировка этажа</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for floor_plan in floors_plans %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td><a href="#">{{ floor_plan.name }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>№ п/п</td>
-                            <td>Типовые секции</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for section_plan in sections_plans %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td><a href="#">{{ section_plan.name }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
 </main>
 {% endblock main %}

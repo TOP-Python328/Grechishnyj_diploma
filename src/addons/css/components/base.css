@@ -1,59 +1,72 @@
 @import url("./root.css");
 
-html {
-    height: 100%;
+*{
+    line-height: var(--def-line-height);
+    font-size: var(--def-font-size);
+    font-family: var(--def-font-family), sans-serif;
+}
+body {
+    background: rgb(165, 202, 223);
+    height: 100vh;
+    display: flex;
+    padding: 0px;
+    /* overflow: hidden; */
 }
 
-body {
-    background: rgb(238, 238, 238);
-    min-height: 100vh;
+.comforter-brush-regular {
+    font-family: "Comforter Brush", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size:60px
+  }
+
+/* header{
+    border-bottom: 1px solid rgb(194, 193, 193);
+} */
+
+.content{
+    flex-grow: 1;
+    background: var(--color-base);
     display: flex;
     flex-direction: column;
 }
 
-header{
-    background: rgb(252, 252, 252);
-    height: 70px;
-}
-
-.content{
-    flex-grow: 1;
-    background: rgb(144, 138, 161);
-
-}
-
 aside{
-    background: rgb(214, 214, 214);
-    width: calc(var(--max-w) / 12 * 2);
+    background: linear-gradient(0deg, var(--color-accent-2) 0%, var(--color-accent-1) 100%);
+    min-width: calc(100vw / 12 * 2);
 }
 
-main{
-    background: rgb(105, 105, 105);
-    width: calc(var(--max-w) / 12 * 10);
+/* main{
+    overflow-y: scroll;
+    flex-grow: 1;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-}
-
-main h2{
-    background: white;
     width: 100%;
-}
-
-footer{
-    background: rgb(255, 255, 255);
-    height: 70px;
-}
-
-header .wrapper, 
-.content .wrapper, 
-footer .wrapper{
-    display: flex;
-    width: var(--max-w);
+    border: 1px solid rgb(179, 177, 177);
+    gap: var(--main-offset);
+    padding: var(--main-offset);
+} */
+main {
+    overflow-y: scroll;
+    flex-grow: 1;
     margin: 0 auto;
-    box-sizing: border-box;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border: 1px solid rgb(194, 193, 193);
+    gap: var(--main-offset);
+    padding: var(--main-offset);
 }
+article {
+    background: white;
+    border-radius: 0px;
+    width: calc(100% / 12 * 3 - var(--main-offset) * 3 / 4);
+    box-shadow: 0 0 5px 0 var(--color-font-2);
+}
+
+
+/* footer{ */
+    /* bottom: calc(var(--def-line-height) * -1); */
+    /* border-top: 1px solid rgb(194, 193, 193); */
+/* } */

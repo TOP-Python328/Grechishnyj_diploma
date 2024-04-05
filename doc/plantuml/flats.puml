@@ -76,6 +76,7 @@ class House ##[bold]grey{
 	+ energy_save: ForeignKey(EnergySave)
 	+ seismic: ForeignKey(Seismic)
 	+ type: ForeignKey(HouseType)
+	+ address: ForeignKey(Address)
 }
 
 class SectionPlan ##[bold]grey{
@@ -156,26 +157,42 @@ class Flat ##[bold]grey{
 	+ status: ForeignKey(SaleStatus)
 }
 
-FlatsPlan      -[#grey,bold]l-o  RoomType 
-FloorPlan      -[#grey,bold]l-o  FlatsPlan
-SectionPlan    -[#grey,bold]l-o  FloorPlan
+class Address ##[bold]grey{
+    Адрес
+	..
+    + id: AutoField
+    + contry_name: CharField
+    + country_full_name: CharField
+    + region: CharField
+    + district: CharField
+	+ locality: CharField
+    + sity: CharField
+    + street: CharField
+    + home: CharField
+    + flat: CharField
+}
 
-RoomType      o-[#grey,bold]-    Room
-FlatsPlan     o-[#grey,bold]-    Flat
-FloorPlan     o-[#grey,bold]-    Floor
-SectionPlan   o-[#grey,bold]-    Section
+FlatsPlan      -[#grey,bold]u-o  RoomType 
+FloorPlan      -[#grey,bold]u-o  FlatsPlan
+SectionPlan    -[#grey,bold]u-o  FloorPlan
+
+RoomType      o-[#grey,bold]r-    Room
+FlatsPlan     o-[#grey,bold]r-    Flat
+FloorPlan     o-[#grey,bold]r-    Floor
+SectionPlan   o-[#grey,bold]r-    Section
 
 Room          o-[#grey,bold]r-   Flat
 Flat          o-[#grey,bold]r-   Floor
 Floor         o-[#grey,bold]r-   Section
-Section       o-[#grey,bold]d-   House   
+Section       o-[#grey,bold]r-   House   
 
-Flat           -[#grey,bold]d-o  SaleStatus
-BuildingPermit -[#grey,bold]l-o  LandPlot
-House          -[#grey,bold]l-o  BuildingPermit
+Flat           -[#grey,bold]r-o  SaleStatus
+BuildingPermit -[#grey,bold]d-o  LandPlot
+House          -[#grey,bold]r-o  BuildingPermit
 House          -[#grey,bold]d-o  EnergySave
 House          -[#grey,bold]d-o  Seismic
 House          -[#grey,bold]d-o  HouseType
 House         o-[#grey,bold]u-   Microdistrict
+House          -[#grey,bold]u-o   Address
 
 @enduml
