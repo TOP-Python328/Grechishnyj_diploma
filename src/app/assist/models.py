@@ -5,7 +5,7 @@ class Address(models.Model):
     class Meta:
         db_table = 'addresses'
     id = models.AutoField(primary_key=True)
-    contry_name = models.CharField(max_length=32)
+    country_name = models.CharField(max_length=32)
     country_full_name = models.CharField(max_length=64)
     region = models.CharField(max_length=64)
     district = models.CharField(max_length=64)

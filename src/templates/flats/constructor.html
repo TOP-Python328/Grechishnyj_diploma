@@ -3,38 +3,41 @@
 {% block main %}
 <main>
     <article>
-        <h2 class="comforter-brush-regular">Типы комнат</h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Добавить тип комнаты</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_room_type">
-                        <input name="room_name" type="text" placeholder="наименование комнаты">
-                        <div>
-                            <select name="koef_price" required>
-                                <option value="">Установите ценовой коэффициент</option>
-                                {% for koef in koef_prices %}
-                                <option value="{{ koef }}">{{ koef }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div>
-                            <label>Жилая / не жилая</label>
-                            <input type="checkbox" name="living">
-                        </div>
-                        
-                        <input type="submit" value="Save">
-                    </form>
+        <h2>Комнаты</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            <div class="form_title">Добавить тип комнаты</div>
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_room_type">
+                            <input name="room_name" type="text" placeholder="наименование комнаты">
+                            <div>
+                                <select name="koef_price" required>
+                                    <option value="">Установите ценовой коэффициент</option>
+                                    {% for koef in koef_prices %}
+                                    <option value="{{ koef }}">{{ koef }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <label>Жилая / не жилая</label>
+                                <input type="checkbox" name="living">
+                            </div>
+                            
+                            <input type="submit" value="Save">
+                        </form>
+                    </div>
                 </div>
+                <button class="close_btn btn_round close">X</button>
             </div>
-            <button class="close_btn btn_round close">X</button>
         </div>
     </article>
     <article>
-        <h2>Планировки квартир</h2>
+        <h2><span class="comforter-brush-regular">Flats</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -73,7 +76,7 @@
         </div>
     </article>
     <article>
-        <h2>Планы этажей</h2>
+        <h2><span class="comforter-brush-regular">Floors</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -111,7 +114,7 @@
         </div>
     </article>
     <article>
-        <h2>Типы секций</h2>
+        <h2><span class="comforter-brush-regular">Sections</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -149,7 +152,7 @@
         </div>
     </article>
     <article>
-        <h2>Жилые дома</h2>
+        <h2><span class="comforter-brush-regular">Houses</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -162,6 +165,7 @@
                             <div class="select_title">
                                 <div>Добавить типовую секцию</div>
                                 <div class="control_box">
+                                    <span class="btn_round">1</span>
                                     <button type="button" class="add_select btn_round">+</button>
                                     <button type="button" class="del_select btn_round">-</button>
                                 </div>
@@ -263,7 +267,7 @@
     </article>
     
     <article>
-        <h2>Земельные участки</h2>
+        <h2><span class="comforter-brush-regular">Lands</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -295,7 +299,7 @@
         </div>
     </article>
     <article>
-        <h2>Разрешения на строительство</h2>
+        <h2><span class="comforter-brush-regular">Permits</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
@@ -323,21 +327,34 @@
         </div>
     </article>
     <article>
-        <h2>Микрорайоны</h2>
+        <h2><span class="comforter-brush-regular">Districts</span></h2>
         <div class="popup">
             <button class="open_btn">Добавить</button>
             <div class="back close">
                 <div class="wrapper_form">
                     <form action="" method="post">
-                        <div class="form_title">Добавить микрорайон</div>
                         {% csrf_token %}
                         <input name="form" hidden value="new_microdistrict">
-                        <input name="name" type="text" placeholder="Название микрорайона">
-                        <input type="submit" value="Save">
+                        <div class="row">
+                            <div class="column col-1 form_title">Добавить микрорайон</div>
+                        </div>
+                        <div class="row">
+                            <div class="column col-1">
+                                <fieldset>
+                                    <legend>Название микрорайона</legend>
+                                    <input name="name" type="text" placeholder="Название микрорайона">
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column col-1">
+                                <input type="submit" value="Save">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
+            <button class="close_btn btn_round close"><i class="fa fa-times"></i></button>
         </div>
     </article>
 

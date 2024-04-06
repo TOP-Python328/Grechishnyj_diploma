@@ -158,7 +158,7 @@ create table rooms (
 
 create table addresses (
     id integer primary key,
-    contry_name varchar(32) not null,
+    country_name varchar(32) not null,
     country_full_name varchar(64) not null,
     region varchar(64) not null,
     district varchar(64) not null,
