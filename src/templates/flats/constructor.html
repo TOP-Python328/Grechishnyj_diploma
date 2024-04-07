@@ -11,351 +11,458 @@
                 <div class="back close">
                     <div class="wrapper_form">
                         <form action="" method="post">
-                            <div class="form_title">Добавить тип комнаты</div>
                             {% csrf_token %}
                             <input name="form" hidden value="new_room_type">
-                            <input name="room_name" type="text" placeholder="наименование комнаты">
-                            <div>
-                                <select name="koef_price" required>
-                                    <option value="">Установите ценовой коэффициент</option>
-                                    {% for koef in koef_prices %}
-                                    <option value="{{ koef }}">{{ koef }}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить тип комнаты</div>
                             </div>
-                            <div>
-                                <label>Жилая / не жилая</label>
-                                <input type="checkbox" name="living">
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новая комната</legend>
+                                        <input name="room_name" type="text" placeholder="Наименование комнаты">
+                                        <!-- <div class="checkbox">
+                                            <label>Жилая / не жилая</label>
+                                            <input type="checkbox" name="living">
+                                        </div> -->
+                                        <div class="radio">
+                                            <input type="radio" name="living" value="1" checked />
+                                            <label>Жилая</label>
+                                        </div>
+                                        <div class="radio">
+                                            <input type="radio" name="living" value="" />
+                                            <label>Не жилая</label>
+                                        </div>
+                                        <select name="koef_price" required>
+                                            <option value="">Установите ценовой коэффициент</option>
+                                            {% for koef in koef_prices %}
+                                            <option value="{{ koef }}">{{ koef }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </fieldset>
+                                </div>
                             </div>
-                            
-                            <input type="submit" value="Save">
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
+                            </div>
                         </form>
                     </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
-                <button class="close_btn btn_round close">X</button>
             </div>
         </div>
     </article>
     <article>
-        <h2><span class="comforter-brush-regular">Flats</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Создание планировки квартиры</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_flat">
-                        <div class="select_box">
-                            <div class="select_title">
-                                <div>Добавить комнату</div>
-                                <div class="control_box">
-                                    <button type="button" class="add_select btn_round">+</button>
-                                    <button type="button" class="del_select btn_round">-</button>
+        <h2>Квартиры</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_flat">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить планировку квартиры</div>
+                            </div>
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новая планировка</legend>
+                                        <div class="select_box">
+                                            <div class="select_title">
+                                                <input name="flat_name" placeholder="Обозначение типа квартиры" value=""> 
+                                                <div class="control_box">
+                                                    <span class="btn_round">1</span>
+                                                    <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
+                                                    <button class="del_select btn_round" type="button"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="select_data_wrapper">
+                                                <div class="select_data">
+                                                    <div class="select_item">
+                                                        <select name="room" class="left" required>
+                                                            <option value="">Выбрать комнату</option>
+                                                            {% for room_type in room_types %}
+                                                            <option value="{{ room_type.id }}">{{ room_type.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <input name="square" class="right" value="" placeholder="0.0">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="select_data">
-                                <input name="flat_name" placeholder="Обозначение типа квартиры" value=""> 
-                                <div class="select_item">
-                                    <select name="room" class="left" required>
-                                        <option value="">Выбрать комнату</option>
-                                        {% for room_type in room_types %}
-                                        <option value="{{ room_type.id }}">{{ room_type.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <input name="square" class="right" value="" placeholder="0.0">
-                                </div>
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
                             </div>
-                        </div>
-                        <input type="submit" value="Save">
-                    </form>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
         </div>
     </article>
     <article>
-        <h2><span class="comforter-brush-regular">Floors</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Создание плана этажа</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_floor">
-                        <div class="select_box">
-                            <div class="select_title">
-                                <div>Добавить квартиру</div>
-                                <div class="control_box">
-                                    <button type="button" class="add_select btn_round">+</button>
-                                    <button type="button" class="del_select btn_round">-</button>
+        <h2>Этажи</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_floor">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить планировку квартиры</div>
+                            </div>
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новый план этажа</legend>
+                                        <div class="select_box">
+                                            <div class="select_title">
+                                                <input name="floor_name" placeholder="Обозначение плана этажа" value=""> 
+                                                <div class="control_box">
+                                                    <span class="btn_round">1</span>
+                                                    <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
+                                                    <button class="del_select btn_round" type="button"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="select_data_wrapper">
+                                                <div class="select_data">
+                                                    <div class="select_item">
+                                                        <select name="flat" required>
+                                                            <option value="">Выбрать тип квартиры</option>
+                                                            {% for flat in flats %}
+                                                            <option value="{{ flat.name }}">{{ flat.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="select_data">
-                                <input name="floor_name" placeholder="Обозначение плана этажа" value=""> 
-                                <div class="select_item">
-                                    <select name="flat" required>
-                                        <option value="">Выбрать тип квартиры</option>
-                                        {% for flat in flats %}
-                                        <option value="{{ flat.name }}">{{ flat.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
                             </div>
-                        </div>
-                        <input type="submit" value="Save">
-                    </form>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
-        </div>
+        </div>      
     </article>
     <article>
-        <h2><span class="comforter-brush-regular">Sections</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Создание типовой секции</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_section">
-                        <div class="select_box">
-                            <div class="select_title">
-                                <div>Добавить план этажа</div>
-                                <div class="control_box">
-                                    <button type="button" class="add_select btn_round">+</button>
-                                    <button type="button" class="del_select btn_round">-</button>
+        <h2>Секции</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_section">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить типовую секцию</div>
+                            </div>
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новый тип секции</legend>
+                                        <div class="select_box">
+                                            <div class="select_title">
+                                                <input name="section_name" placeholder="Обозначение типовой секции" value=""> 
+                                                <div class="control_box">
+                                                    <span class="btn_round">1</span>
+                                                    <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
+                                                    <button class="del_select btn_round" type="button"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="select_data_wrapper">
+                                                <div class="select_data">
+                                                    <div class="select_item">
+                                                        <select name="floor" required>
+                                                            <option value="">Выбрать план этажа</option>
+                                                            {% for floor_plan in floors_plans %}
+                                                            <option value="{{ floor_plan.name }}">{{ floor_plan.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="select_data">
-                                <input name="section_name" placeholder="Обозначение типовой секции" value=""> 
-                                <div class="select_item">
-                                    <select name="floor" required>
-                                        <option value="">Выбрать планировку этажа</option>
-                                        {% for floor_plan in floors_plans %}
-                                        <option value="{{ floor_plan.name }}">{{ floor_plan.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
                             </div>
-                        </div>
-                        <input type="submit" value="Save">
-                    </form>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
         </div>
     </article>
+
+
     <article>
-        <h2><span class="comforter-brush-regular">Houses</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Создание жилого дома</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_house">
-                        <div class="select_box">
-                            <div class="select_title">
-                                <div>Добавить типовую секцию</div>
-                                <div class="control_box">
-                                    <span class="btn_round">1</span>
-                                    <button type="button" class="add_select btn_round">+</button>
-                                    <button type="button" class="del_select btn_round">-</button>
-                                </div>
+        <h2>Дома</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_house">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить жилой дом</div>
                             </div>
-                            <div class="select_data">
-                                <input name="house_number" placeholder="Номер дома" value=""> 
-                                <div class="select_item">
-                                    <select name="section" required>
-                                        <option value="">Выбрать типовую секцию</option>
-                                        {% for section_plan in sections_plans %}
-                                        <option value="{{ section_plan.name }}">{{ section_plan.name }}</option>
+                            <div class="row">
+                                <fieldset class="column col-3">
+                                    <legend>Характеристики</legend>
+                                    <select name="building_permit" required>
+                                        <option value="">Разрешение на строительство</option>
+                                        {% for building_permit in building_permits %}
+                                        <option value="{{ building_permit.number }}">{{ building_permit.number }}</option>
                                         {% endfor %}
                                     </select>
-                                </div>
+                                    <select name="microdistrict" required>
+                                        <option value="">Микрорайон</option>
+                                        {% for microdistrict in microdistricts %}
+                                        <option value="{{ microdistrict.name }}">{{ microdistrict.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="energy_save" required>
+                                        <option value="">Энергоэффективность</option>
+                                        {% for energy_save in energy_saves %}
+                                        <option value="{{ energy_save.name }}">{{ energy_save.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="seismic" required>
+                                        <option value="">Сейсмостойкость</option>
+                                        {% for seismic in seismics %}
+                                        <option value="{{ seismic.name }}">{{ seismic.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="house_type" required>
+                                        <option value="">Тип жилого дома</option>
+                                        {% for house_type in house_types %}
+                                        <option value="{{ house_type.name }}">{{ house_type.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="material_wall" required>
+                                        <option value="">Материал стен</option>
+                                        {% for material in materials %}
+                                        <option value="{{ material.id }}">{{ material.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="material_floor" required>
+                                        <option value="">Материал перекрытий</option>
+                                        {% for material in materials %}
+                                        <option value="{{ material.id }}">{{ material.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </fieldset>
+                                <fieldset class="column col-3">
+                                    <legend>Адрес</legend>
+                                    <select name="region" required>
+                                        <option value="">Регион</option>
+                                    </select>
+                                    <select name="district" required>
+                                        <option value="">Район</option>
+                                    </select>
+                                    
+                                    <select name="sity" required>
+                                        <option value="">Населенный пункт</option>
+                                    </select>
+                                    <select name="locality" required>
+                                        <option value="город">Город</option>
+                                        <option value="деревня">Деревня</option>
+                                        <option value="поселок">Поселок</option>
+                                        <option value="село">Село</option> 
+                                    </select>
+                                    <input name="street" type="text" placeholder="Улица">
+                                    <input name="home" type="text" placeholder="Дом">
+                                </fieldset>
+                                <fieldset class="column col-3">
+                                    <legend>Секции</legend>
+                                    <div class="select_box">
+                                        <div class="select_title">
+                                            <input name="house_number" placeholder="Номер дома по ГП" value=""> 
+                                            <div class="control_box">
+                                                <span class="btn_round">1</span>
+                                                <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
+                                                <button class="del_select btn_round" type="button"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="select_data_wrapper">
+                                            <div class="select_data">
+                                                <div class="select_item">
+                                                    <select name="section" required>
+                                                        <option value="">Выбрать типовую секцию</option>
+                                                        {% for section_plan in sections_plans %}
+                                                        <option value="{{ section_plan.name }}">{{ section_plan.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>  
                             </div>
-                            <div>
-                                <select name="building_permit" required>
-                                    <option value="">Выберете разрешение на строительство</option>
-                                    {% for building_permit in building_permits %}
-                                    <option value="{{ building_permit.number }}">{{ building_permit.number }}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="row">
+                                <div class="column col-3"></div>
+                                <input class="column col-3" type="reset" value="Очистить">
+                                <input class="column col-3" type="submit" value="Сохранить">
                             </div>
-                            <div>
-                                <select name="microdistrict" required>
-                                    <option value="">Выберете микрорайон</option>
-                                    {% for microdistrict in microdistricts %}
-                                    <option value="{{ microdistrict.name }}">{{ microdistrict.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div>
-                                <select name="energy_save" required>
-                                    <option value="">Класс энергосбережения</option>
-                                    {% for energy_save in energy_saves %}
-                                    <option value="{{ energy_save.name }}">{{ energy_save.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div>
-                                <select name="seismic" required>
-                                    <option value="">Сейсмостойкость</option>
-                                    {% for seismic in seismics %}
-                                    <option value="{{ seismic.name }}">{{ seismic.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div>
-                                <select name="house_type" required>
-                                    <option value="">Тип жилого дома</option>
-                                    {% for house_type in house_types %}
-                                    <option value="{{ house_type.name }}">{{ house_type.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div>
-                                <select name="material_wall" required>
-                                    <option value="">Материал стен</option>
-                                    {% for material in materials %}
-                                    <option value="{{ material.id }}">{{ material.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div>
-                                <select name="material_floor" required>
-                                    <option value="">Материал этажных перекрытий</option>
-                                    {% for material in materials %}
-                                    <option value="{{ material.id }}">{{ material.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                    
-                            <select name="region" required>
-                                <option value="">Выбрать регион</option>
-                            </select>
-                            <select name="district" required>
-                                <option value="">Выбрать район</option>
-                            </select>
-                            <select name="locality" required>
-                                <option value="">Населенный пункт</option>
-                                <option value="деревня">Деревня</option>
-                                <option value="поселок">Поселок</option>
-                                <option value="село">Село</option>
-                                <option value="город">Город</option>
-                            </select>
-                            <select name="sity" required>
-                                <option value="">Выбрать город</option>
-                            </select>
-                            <input name="street" type="text" placeholder="Улица">
-                            <input name="home" type="text" placeholder="Дом">
-                            <input name="flat" type="text" placeholder="Квартира">
-                        </div>
-                        <input type="submit" value="Save">
-                    </form>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
         </div>
     </article>
     
     <article>
-        <h2><span class="comforter-brush-regular">Lands</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Добавить земельный участок</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_land_plot">
-                        <input name="number" type="text" placeholder="Кадастровый номер">
-                        <input name="square" type="text" placeholder="Площадь">
-                        <input name="usage" type="text" placeholder="Вид разрешенного использования">
-                        <div>
-                            <select name="owner_type" required>
-                                <option value="">Право владения</option>
-                                <option value="аренда">аренда</option>
-                                <option value="собственность">собственность</option>
-                            </select>
-                        </div>
-                        <input name="owner_number" type="text" placeholder="Номер документа подтверждающего право">
-                        <input name="owner_date" type="date" placeholder="Дата подтверждающего документа">
-                        <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа">
-                        <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа">
-                        <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН">
-                        <input type="submit" value="Save">
-                    </form>
+        <h2>Земельные участки</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_land_plot">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить земельный участок</div>
+                            </div>
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новый земельный участок</legend>
+                                        <input name="form" hidden value="new_land_plot">
+                                        <input name="number" type="text" placeholder="Кадастровый номер">
+                                        <input name="square" type="text" placeholder="Площадь">
+                                        <input name="usage" type="text" placeholder="Вид разрешенного использования">
+                                        <select name="owner_type" required>
+                                            <option value="">Право владения</option>
+                                            <option value="аренда">Aренда</option>
+                                            <option value="собственность">Cобственность</option>
+                                        </select>
+                                        <input name="owner_number" type="text" placeholder="Номер документа подтверждающего право">
+                                        <input name="owner_date" type="date" placeholder="Дата подтверждающего документа">
+                                        <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа">
+                                        <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа">
+                                        <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН">      
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
         </div>
     </article>
     <article>
-        <h2><span class="comforter-brush-regular">Permits</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        <div class="form_title">Добавить разрешение на строительство</div>
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_building_permit">
-                        <input name="number" type="text" placeholder="Номер разрешения">
-                        <input name="dt_issue" type="date">
-                        <input name="dt_expiry" type="date">
-                        <div>
-                            <select name="land_plot" required>
-                                <option value="">Земельный участок</option>
-                                {% for land_plot in land_plots %}
-                                <option value="{{ land_plot.id }}">{{ land_plot.number }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <input type="submit" value="Save">
-                    </form>
+        <h2>Разрешения</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_building_permit">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить разрешение на строительство</div>
+                            </div>
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новое разрешение на строительство</legend>
+                                        <input name="number" type="text" placeholder="Номер разрешения">
+                                        <input name="dt_issue" type="date">
+                                        <input name="dt_expiry" type="date">
+                                        <select name="land_plot" required>
+                                            <option value="">Земельный участок</option>
+                                            {% for land_plot in land_plots %}
+                                            <option value="{{ land_plot.id }}">{{ land_plot.number }}</option>
+                                            {% endfor %}
+                                        </select> 
+                                    </fieldset>  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close">X</button>
         </div>
     </article>
+
+
     <article>
-        <h2><span class="comforter-brush-regular">Districts</span></h2>
-        <div class="popup">
-            <button class="open_btn">Добавить</button>
-            <div class="back close">
-                <div class="wrapper_form">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <input name="form" hidden value="new_microdistrict">
-                        <div class="row">
-                            <div class="column col-1 form_title">Добавить микрорайон</div>
-                        </div>
-                        <div class="row">
-                            <div class="column col-1">
-                                <fieldset>
-                                    <legend>Название микрорайона</legend>
-                                    <input name="name" type="text" placeholder="Название микрорайона">
-                                </fieldset>
+        <h2>Микрорайоны</h2>
+        <div class="icon"><i class="icon fa fa-home"></i></div>
+        <div class="controls">
+
+            <div class="popup">
+                <button class="open_btn">Добавить</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="new_microdistrict">
+                            <div class="row">
+                                <div class="column col-1 form_title">Добавить новый микрорайон</div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="column col-1">
-                                <input type="submit" value="Save">
+                            <div class="row">
+                                <div class="column col-1">
+                                    <fieldset>
+                                        <legend>Новый микрорайон</legend>
+                                        <input name="name" type="text" placeholder="Название микрорайона">
+                                    </fieldset>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="row">
+                                <input class="column col-2" type="reset" value="Очистить">
+                                <input class="column col-2" type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-            <button class="close_btn btn_round close"><i class="fa fa-times"></i></button>
+
         </div>
+        
     </article>
 
 

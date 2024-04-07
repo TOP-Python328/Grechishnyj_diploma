@@ -58,9 +58,9 @@ create table land_plots (
     square float not null,
     usage varchar(128) not null,
     owner_type varchar(64) not null,
-    owner_number varchar(64) not null unique,
+    owner_number varchar(64) not null,
     owner_date date not null,
-    owner_reg_number varchar(64) not null unique,
+    owner_reg_number varchar(64) not null,
     owner_reg_date date not null,
     document_egrn date not null);
 

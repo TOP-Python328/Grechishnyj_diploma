@@ -75,13 +75,14 @@ def run_flat_constructor(request):
     if request.method == 'POST':
         if request.POST['form'] == 'new_room_type':
             post_room_name = str(request.POST['room_name'])
-            post_living = bool(request.POST.getlist('living'))
+            post_living = True if request.POST.get('living') == '1' else False
             post_koef_price = float(request.POST['koef_price'])
             RoomType.objects.using(database).create(
                 name = post_room_name,
                 living = post_living,
                 koef_price = post_koef_price
             )
+            # print(request.POST)
         elif request.POST['form'] == 'new_land_plot':
             post_number = str(request.POST['number'])
             post_square = float(request.POST['square'])
@@ -103,7 +104,7 @@ def run_flat_constructor(request):
                 owner_reg_date=post_owner_reg_date,
                 document_egrn=post_document_egrn
             )
-            print(request.POST)
+            # print(request.POST)
 
 
 
@@ -167,7 +168,6 @@ def run_flat_constructor(request):
                         sity=request.POST['sity'],
                         street=request.POST['street'] or '',
                         home=request.POST['home'] or '',
-                        flat=request.POST['flat'] or ''
                     )
                 )
             sections_plans = request.POST.getlist('section')
@@ -192,7 +192,7 @@ def run_flat_constructor(request):
                     )
                     floor.save(using=database)
                     flats_plans = FloorPlan.objects.using(database).filter(name=floor_plan)
-                    print(f'{flats_plans=}')
+                    # print(f'{flats_plans=}')
                     for k in range(1, len(flats_plans) + 1):
                         flat_plan = flats_plans[k-1].flat_plan_name
                         # print(f'\t\t\tflats_plans № {flats_plans[k-1].flat_plan_name}')

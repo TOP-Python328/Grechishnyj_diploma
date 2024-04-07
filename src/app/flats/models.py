@@ -35,9 +35,9 @@ class LandPlot(models.Model):
     square = models.FloatField()
     usage = models.CharField(max_length=128)
     owner_type = models.CharField(max_length=64)
-    owner_number = models.CharField(max_length=64, unique=True)
+    owner_number = models.CharField(max_length=64)
     owner_date = models.DateField()
-    owner_reg_number = models.CharField(max_length=64, unique=True)
+    owner_reg_number = models.CharField(max_length=64)
     owner_reg_date = models.DateField()
     document_egrn = models.DateField()
 

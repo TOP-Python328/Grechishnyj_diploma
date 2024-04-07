@@ -5,7 +5,7 @@
     --def-line-height: 36px;
     --def-font-family: "Noto Sans";
     --def-font-size: 10px;
-    --def-radius-box: 10px;
+    --def-radius-box: 3px;
 
     --form-offset: 15px;
     --main-offset: 20px;
@@ -17,6 +17,7 @@
     --color-font-2: #bcced6;
     --color-font-3: #323335;
     --color-font-accent: #f57d2c;
+    --color-input-quiet: #bcced6;
 
 
 }
