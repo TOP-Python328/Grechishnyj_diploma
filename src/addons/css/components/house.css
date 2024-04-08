@@ -1,31 +1,73 @@
+@import url("./root.css");
+
 div.house {
-    padding: 4px;
-    border: 1px solid grey;
+    background: white;
+    padding: 50px;
+    border-radius: 3px;
     display: flex;
     justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
 }
 div.house .section {
     padding: 4px;
     margin: 8px;
     text-align: center;
-    background: rgb(238, 237, 237);
     display: flex;
     flex-direction: column-reverse;
+}
+div.house .section span{
+    color: var(--color-font-3);
+    font-size: calc(var(--def-font-size) * 1.3);
+    font-weight: 600;
+    background: var(--color-font-2);
+    margin: 2px;
+    border-radius: 3px;
 }
 div.house .section .floor{
     display: flex;
     justify-content: space-between;
 }
-div.house .section .floor .flat{
-    line-height: 24px;
+
+
+div.house .section .floor span {
+    width: var(--def-line-height);
     margin: 2px;
-    padding: 2px;
-    border-radius: 8px;
-    border: 1px solid grey;
-    min-width: 32px;
+    border-radius: 3px;
     text-align: center;
+    font-weight: 600;
+    font-size: calc(var(--def-font-size) * 1.1);
 }
-div.house .section .floor .flat a{
-    line-height: 24px;
-    font-size: 12px;
+div.house .section .floor span {
+    background: none;
+    color: var(--color-font-accent);
 }
+
+
+div.house .section .floor .popup span{
+    display: block;
+    background: var(--color-base);
+    width: var(--def-line-height);
+    margin: 2px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 600;
+    font-size: calc(var(--def-font-size) * 1.1);
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+div.house .section .floor .popup span.free{
+    color: var(--color-font-3);
+}
+div.house .section .floor .popup span.sold{
+
+    color: var(--color-font-2);
+}
+div.house .section .floor .popup span.free:hover{
+    background: var(--color-font-accent);
+    color: white;
+}
+
+
+
+

@@ -14,9 +14,9 @@ def register(request):
     """Регистрация."""
     if request.method == 'GET':
         form = CustomUserRegisterForm()
-        print(form.__dict__)
     elif request.method == 'POST':
         form = CustomUserRegisterForm(request.POST)
+        print(f'{request.POST=}')
         if form.is_valid():
             # сохранение пользователя в базу данных
             user = form.save(commit=False)

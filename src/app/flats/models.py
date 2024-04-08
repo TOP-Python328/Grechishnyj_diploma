@@ -1,4 +1,5 @@
 from django.db import models
+from functools import cached_property
 from app.assist.models import Address
 
 class EnergySave(models.Model):
@@ -80,6 +81,10 @@ class House(models.Model):
     material_floor = models.ForeignKey(Material, on_delete=models.CASCADE, related_name='floor_houses')
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
+    @cached_property
+    def url(self) -> str:
+        return f'{self.id}'
+
 class SectionPlan(models.Model):
     """Типовые секции (подъезды)."""
     class Meta:
@@ -114,6 +119,10 @@ class Floor(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     floor_plan = models.ForeignKey(FloorPlan, on_delete=models.CASCADE)
 
+    @property
+    def get_number_as_int(self):
+        return int(self.number)
+
 class RoomType(models.Model): 
     """Тип комнаты.""" 
     class Meta: 
@@ -141,6 +150,11 @@ class Flat(models.Model):
     floor = models.ForeignKey(Floor, on_delete=models.CASCADE) 
     flat_plan = models.ForeignKey(FlatsPlan, on_delete=models.CASCADE) 
     status = models.ForeignKey(SaleStatus, on_delete=models.CASCADE)
+
+    @property
+    def square(self):
+        square = sum(room.square for room in self.room_set.all())
+        return square
 
 class Room(models.Model):
     """Комната."""

@@ -1,9 +1,12 @@
 table{
+    background: white;
     border-collapse: collapse;
     font-size: 13px;
     color: rgb(93, 93, 93);
     border: 1px solid rgb(229, 207, 255);
 }
+
+
 
 /* table tr:nth-child(even){background: rgb(247, 241, 255);} */
 /* table tr:nth-child(odd){background: rgb(255, 255, 255);} */

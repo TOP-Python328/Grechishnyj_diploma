@@ -1,6 +1,10 @@
 :root {
 
-    --max-w: 600px;
+    --offset: 15px; /* межколоночный отступ вместо gap*/
+    --column: 5; /* первоначальное количеcтво катрочек при максимальной ширине экрана */
+
+
+
 
     --def-line-height: 36px;
     --def-font-family: "Noto Sans";
@@ -8,7 +12,7 @@
     --def-radius-box: 3px;
 
     --form-offset: 15px;
-    --main-offset: 20px;
+
 
     --color-base: #e8f2f6;
     --color-accent-1: #2085b7;
@@ -20,4 +24,27 @@
     --color-input-quiet: #bcced6;
 
 
+}
+
+@media screen and (max-width: 1400px){
+    :root {
+        --column: 4;
+    }
+}
+@media screen and (max-width: 1200px){
+    :root {
+        --column: 3;
+    }
+}
+@media screen and (max-width: 900px){
+    :root {
+        --column: 2;
+        --def-font-size: 8px
+    }
+}
+@media screen and (max-width: 500px){
+    :root {
+        --column: 1;
+        --def-font-size: 7px
+    }
 }

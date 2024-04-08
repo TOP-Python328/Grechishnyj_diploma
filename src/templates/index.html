@@ -21,10 +21,16 @@
         <div class="content">
             {% block header %}
                 {% include 'base/header.html' %}
-            {% endblock header %}    
+            {% endblock header %}
+            
+
+
+
+            <main>    
             {% block main %}
                 {% include 'base/main.html' %}
             {% endblock main %}
+            </main>
             {% block footer %}
                 {% include 'base/footer.html' %}
             {% endblock footer %}

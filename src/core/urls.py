@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('flats', flats.run_flats, name='run_flats'),
     path('houses', flats.run_houses, name='run_houses'),
+    path('house/<str:uid>', flats.run_house, name='run_house'),
     path('flatplans', flats.run_flat_constructor, name='run_flat_constructor'),
     # path('houses', flats.add_building_permits, name='add_building_permits'),
     path('microdistricts', flats.run_microdistricts, name='run_microdistricts'),

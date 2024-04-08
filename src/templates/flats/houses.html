@@ -2,41 +2,25 @@
 
 {% block main %}
 
-    <div>
-        <h1>Жилые дома</h1>
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>№ п/п</td>
-                            <td>Дом</td>
-                            <td>Разрешение на строительство</td>
-                            <td>Начало стр-ва</td>
-                            <td>Звершение стр-ва</td>
-                            <td>Микрорайон</td>
-                            <td>Энерго</td>
-                            <td>Сейсмо</td>
-                            <td>Тип</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for house in houses %}
-                        <tr>
-                            <td><a href="#">{{ house.id }}</a></td>
-                            <td><a href="#">{{ house.number }}</a></td>
-                            <td><a href="#">{{ house.building_permit.number }}</a></td>
-                            <td><a href="#">{{ house.building_permit.dt_issue }}</a></td>
-                            <td><a href="#">{{ house.building_permit.dt_expiry }}</a></td>
-                            <td><a href="#">{{ house.microdistrict.name }}</a></td>
-                            <td><a href="#">{{ house.energy_save.name }}</a></td>
-                            <td><a href="#">{{ house.seismic.name }}</a></td>
-                            <td><a href="#">{{ house.type.name }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    
+
+
+
+        {% for microdistrict in microdistricts %}
+        
+        <h2>Микрорайон {{ microdistrict.name }}</h2>
+        <div class="wrapper card">
+            {% for house in microdistrict.house_set.all %}
+            <div>
+                <h2>Дом № {{ house.number }}</h2>
+                <div class="icon"><i class="icon fa fa-home"></i></div>
+                <div class="controls"><a class="button" href="{% url 'run_house' house.url %}">Посмотреть</a></div>
             </div>
-        </div>     
-    </div>
+            {% endfor %}
+        </div>
+
+        {% endfor %}
+
+      
+    
 {% endblock main %}

@@ -56,11 +56,11 @@ main {
     flex-wrap: wrap;
     width: 100%;
     border: 1px solid rgb(194, 193, 193);
-    gap: var(--main-offset);
-    padding: var(--main-offset);
+    gap: var(--offset);
+    padding: var(--offset);
     align-content: flex-start;
 }
-article {
+/* article {
     background: white;
     border-radius: var(--def-radius-box);
     width: calc(100% / 12 * 3 - var(--main-offset) * 3 / 4);
@@ -69,41 +69,54 @@ article {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
+} */
 
-article h2{
-    padding: var(--main-offset);
+.card h2{
+    padding: var(--offset);
     font-size: calc(var(--def-font-size) * 1.8);
     color: var(--color-font-1);
 }
-article div.icon{
+.card div.icon{
     background: var(--color-font-2);
     width: 100px;
     height: 100px;
     color: var(--color-base);
     border-radius: 50%;
-    margin: var(--main-offset) 0;
+    margin: var(--offset);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-article div.icon .fa{
+.card div.icon .fa{
     font-size: calc(var(--def-font-size) * 3);
 }
-
-
-
-article div.controls{
-    padding: var(--main-offset) 0;
+.card div.controls{
+    padding: var(--offset) 0;
 }
 
-.comforter-brush-regular {
-    color: var(--color-font-accent); 
-    font-family: "Comforter Brush";
-    font-weight: 400;
-    font-style: bold;
-    font-size: 60px;
-    text-shadow: 3px 3px #558ABB;
-  }
+
+
+.wrapper{
+    width: calc(100% + var(--offset) * 2);
+    margin: 0 calc(var(--offset) * (-1));
+    display: flex;
+    flex-wrap: wrap;
+}
+.card >div{
+    margin: var(--offset);
+    width: calc(100% / var(--column) - var(--offset) * 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--def-radius-box);
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 5px 0 var(--color-font-2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: calc(var(--offset) * 2) 0;
+}
+
+
 
 

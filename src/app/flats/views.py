@@ -12,12 +12,14 @@ from django.db.models import Count, Avg, Sum
 
 def run_microdistricts(request): 
     microdistricts = Microdistrict.objects.using(request.user.dbase)
+    flats = Flat.objects.using(request.user.dbase)
     return render(
         request,
         'flats/microdistricts.html',
         {
             'title': 'Микрорайоны',
             'microdistricts': microdistricts,
+            
             'scripts': [                 
                 'scripts/popup.js', 
                 'scripts/form.js',
@@ -27,13 +29,36 @@ def run_microdistricts(request):
 
 def run_houses(request): 
     dbase=request.user.dbase 
-    houses = House.objects.using(dbase) 
+    # house = House.objects.get(id=int(uid))
+    
+    # # houses = House.objects.using(dbase) 
+    microdistricts = Microdistrict.objects.using(request.user.dbase)
+
     return render(
         request,
         'flats/houses.html',
         {
             'title': 'Жилые дома',
-            'houses': houses,
+            'microdistricts': microdistricts,
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+            ]
+        }
+    )
+
+def run_house(request, uid: str):
+    dbase=request.user.dbase 
+    house=House.objects.using(dbase).get(id=int(uid))
+    rooms=Room.objects.using(dbase).filter(flat__floor__section__house=house)
+    print(rooms)
+    return render(
+        request,
+        'flats/house.html',
+        {
+            'title': f'Многоквартирный жилой дом {house.number}',
+            'house': house,
+            'rooms': rooms,
             'scripts': [                 
                 'scripts/popup.js', 
                 'scripts/form.js',
