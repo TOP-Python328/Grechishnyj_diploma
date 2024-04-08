@@ -1,0 +1,77 @@
+@startuml
+
+title 
+	DataBaseAdapter. Загрузка и обновление баз данных.
+	
+end title
+
+participant DATABASES [
+    =DATABASES
+    ----
+    Список БД
+]
+participant DataBaseAdapter[
+    =DataBaseAdapter
+    ----
+    Адаптер БД
+]
+database    HostDB
+participant Сonfig [
+    =Сonfig
+    ----
+    Файл имён БД
+]
+participant AnonymousUser [
+    =AnonymousUser
+    ----
+    Анономный пользователь
+]
+participant CustomUser [
+    =CustomUser
+    ----
+    Зарегистрированный пользователь
+]
+database    UserDB
+
+activate DATABASES
+DATABASES -> DataBaseAdapter: Вызов адаптера
+
+activate DataBaseAdapter
+DataBaseAdapter -> Сonfig: Чтение файла с БД
+
+activate Сonfig
+Сonfig -> DataBaseAdapter: Из файла считаны БД
+deactivate Сonfig
+
+DataBaseAdapter -> DATABASES: Загрузка спика БД
+deactivate DataBaseAdapter
+
+activate AnonymousUser
+AnonymousUser -> HostDB: Запрос регистрации
+
+activate HostDB
+HostDB -> CustomUser: Подтверждение регистрации
+deactivate AnonymousUser
+deactivate HostDB
+
+activate CustomUser
+CustomUser -> UserDB: Миграции для создания БД
+
+activate UserDB
+UserDB -> CustomUser: БД сформирована
+deactivate UserDB
+
+DataBaseAdapter -> CustomUser: Получение имени БД пользователя
+deactivate CustomUser
+
+activate DataBaseAdapter
+DataBaseAdapter -> Сonfig: Дозапись новой БД в файл
+
+activate Сonfig
+Сonfig -> DataBaseAdapter: Завершение записи
+deactivate Сonfig
+
+DataBaseAdapter -> DATABASES: Обновление списка БД
+deactivate DataBaseAdapter
+
+@enduml 
