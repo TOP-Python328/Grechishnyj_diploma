@@ -40,7 +40,11 @@ def register(request):
         {
             'form': form,
             'is_existing_user': False,
-            'scripts': []
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+                'scripts/validate.js',
+            ]
         }
     )
 
@@ -63,7 +67,11 @@ def login(request):
         {
             'form': form,
             'is_existing_user': True,
-            'scripts': [],
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+                'scripts/validate.js',
+            ]
         }
     )
 

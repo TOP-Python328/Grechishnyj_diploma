@@ -12,7 +12,7 @@
         <div class="wrapper card">
             {% for house in microdistrict.house_set.all %}
             <div>
-                <h2>Дом № {{ house.number }}</h2>
+                <h3>Дом № {{ house.number }}</h3>
                 <div class="icon"><i class="icon fa fa-home"></i></div>
                 <div class="controls"><a class="button" href="{% url 'run_house' house.url %}">Посмотреть</a></div>
             </div>

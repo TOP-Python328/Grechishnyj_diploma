@@ -3,7 +3,7 @@
 {% block main %}
 
     
-    <h2>Микрорайон {{ house.microdistrict.name }} Дом № {{ house.number }}</h2>
+<h2>Микрорайон {{ house.microdistrict.name }} Дом № {{ house.number }}</h2>
 <div class="house">
     {% for section in house.section_set.all %}
     <div class="section">
@@ -30,40 +30,63 @@
                                     <div class="column col-1 form_title">Квартира № {{ flat.number }}</div>
 
                                     <div class="row">
-                                        <div class="column col-1">
-                                        
-                                        <div class="select_item">
-                                            <input name="" class="left" value="тип планировки" readonly>
-                                            <input name="flat_plan" class="right" value="{{ flat.flat_plan.name }}" readonly>
+                                        <div class="column col-2">
+                                            <div class="subtitle">Общие сведения</div>
+                                            <div class="select_item">
+                                                <input name="" class="left" value="микрорайон" readonly>
+                                                <input name="" class="right" value="{{ flat.floor.section.house.microdistrict.name }}" readonly>
+                                            </div>
+                                            <div class="select_item">
+                                                <input name="" class="left" value="дом" readonly>
+                                                <input name="" class="right" value="{{ flat.floor.section.house.number }}" readonly>
+                                            </div>
+                                            <div class="select_item">
+                                                <input name="" class="left" value="секция" readonly>
+                                                <input name="" class="right" value="{{ flat.floor.section.number }}" readonly>
+                                            </div>
+                                            <div class="select_item">
+                                                <input name="" class="left" value="этаж" readonly>
+                                                <input name="" class="right" value="{{ flat.floor.number }}" readonly>
+                                            </div>
+                                            
+                                            <div class="select_item">
+                                                <input name="" class="left" value="планировка" readonly>
+                                                <input name="" class="right" value="{{ flat.flat_plan.name }}" readonly>
+                                            </div>
+
+                                            <div class="select_item">
+                                                <input name="" class="left" value="площадь" readonly>
+                                                <input name="total_square" class="right" value="{{ flat.square }}" readonly>
+                                            </div>
+                                            <div class="select_item">
+                                                <input name="" class="left" value="статус" readonly>
+                                                {% if flat.status.name == "free" %}
+                                                    <input name="" class="right" value="свободно" readonly>
+                                                {% elif flat.status.name == "sold" %}
+                                                    <input name="" class="right" value="продано" readonly>
+                                                {% endif %}
+                                                
+                                            </div>
                                         </div>
 
-                                        <div class="select_item">
-                                            <input name="" class="left" value="общая площадь" readonly>
-                                            <input name="total_square" class="right" value="{{ flat.square }}" readonly>
-                                        </div>
-                                    
-                                        {% for room in flat.room_set.all %}
+                                        <div class="column col-2">
+                                            <div class="subtitle">Состав комнат</div>
+                                            {% for room in flat.room_set.all %}
                                             
                                             <div class="select_item">
                                                 <input name="room_type" class="left" value="{{ room.room_type.name }}" readonly>
                                                 <input name="square" class="right" value="{{ room.square }}" readonly>
                                             </div>
                                             
-                                        {% endfor %}
-
-
-                                    
-                                        
-
-
-                                    
-                                            
+                                            {% endfor %}
+ 
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <input class="column col-2" type="reset" value="Очистить">
-                                        <input class="column col-2" type="submit" value="Сохранить">
+                                        <input class="column col-2" type="reset" value="Редактировать">
+                                        <input class="column col-2" type="reset" value="Договор">
+                                        
                                     </div>
                                                     
 

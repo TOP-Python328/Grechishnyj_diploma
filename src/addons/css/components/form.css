@@ -9,17 +9,25 @@
     flex-basis: 100%;
 }
 form, .auth_form {
-    background: var(--color-base);
+    background: white;
     border-radius: var(--def-radius-box);
     box-shadow: 0 0 5px 0 black;
     font-size: calc(var(--def-font-size) * 1.5);
-    flex-basis: 30%;
+    flex-basis: 500px;
     display: flex;
     flex-wrap: wrap;
     margin-top: 100px;
     padding: calc(var(--form-offset) * 2);
 }
-form div.row{
+.auth_form{
+    flex-direction: column;
+    gap: calc(var(--form-offset) / 2);
+    box-shadow: none;
+    margin: auto;
+    justify-content: center;
+}
+
+form .row{
     width: 100%;
     display: flex;
     padding: calc(var(--form-offset) / 2) 0;
@@ -38,15 +46,20 @@ form .column.col-3{
 }
 form fieldset{
     background: #ffffff;
-    border: 1px solid var(--color-font-1);
+    /* border: 1px solid var(--color-font-1); */
+    border: none;
     border-radius: var(--def-radius-box);
     display: flex;
     flex-direction: column;
     gap: calc(var(--form-offset) / 2);
-    padding: calc(var(--def-font-size) * 1);
+    /* padding: calc(var(--def-font-size) * 1); */
     padding-bottom: calc(var(--def-font-size) * 3);
     overflow: hidden;
 }
+fieldset.row{
+    flex-direction: row;
+}
+
 form fieldset legend{
     font-size: calc(var(--def-font-size) * 1.3);
     font-weight: 800;
@@ -62,6 +75,7 @@ form div.form_title{
 
 button, input, select, textarea{
     border-radius: var(--def-radius-box);
+    background-color: white;
 }
 
 input, select, textarea  { 
@@ -209,15 +223,7 @@ button.btn_round{
     background: #000;
 }
 
-.auth_form{
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--form-offset) / 2);
-    box-shadow: none;
-    margin: auto;
-    justify-content: center;
-    border-radius: 0;
-}
+
 .auth_form a{
     font-size: calc(var(--def-font-size) * 1.5);
     color: var(--color-accent-2);
@@ -228,32 +234,51 @@ button.btn_round{
 input:read-only {
     border: none;
 }
-
-
-
-
-
-
-@media (min-width: 1200px) and (max-width: 1366px) {
-    form { flex-basis: 45%; }
+div .subtitle{
+    font-size: calc(var(--def-font-size) * 1.4);
+    color: var(--color-font-accent);
 }
-@media (min-width: 1100px) and (max-width: 1201px) {
+
+
+.done-valid{
+    border: 1px solid green;
+    background-color: rgb(208, 253, 208);
+    color: green;
+}
+
+.not-done-valid{
+    border: 1px solid red;
+    background-color: rgb(255, 226, 226);
+    color: red;
+
+}
+
+
+
+
+
+
+@media screen and (max-width: 1500px) {
+    form { 
+        flex-basis: 50%; 
+        font-size: calc(var(--def-font-size) * 1.2);
+    }
+}
+@media screen and (max-width: 1201px) {
     form { flex-basis: 50%; }
 }
-@media (min-width: 1000px) and (max-width: 1101px) {
+@media screen and (max-width: 1101px) {
     form { flex-basis: 60%; }
 }
-@media (min-width: 900px) and (max-width: 1001px) {
+@media screen and (max-width: 1001px) {
     form { flex-basis: 70%; }
 }
-@media (min-width: 700px) and (max-width: 901px) {
+@media screen and (max-width: 901px) {
     form { flex-basis: 80%; }
 }
 @media screen and (max-width: 701px) {
     form { flex-basis: 100%; }
 }
-
-
 
 
 

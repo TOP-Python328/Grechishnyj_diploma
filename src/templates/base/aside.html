@@ -1,25 +1,7 @@
 
 <aside>
-    <div class="user-info">
-        {% if user.is_authenticated %}
-
-            <div class="title">
-                <div class="user-photo"><i class="icon fa fa-user-circle fa-4x"></i></div>
-                <div class="user-name">{{ user.username }}</div>
-            </div>
-            
-            <div class="actions">
-                <div class="action-title">Действия</div>
-                <ul class="action-body hide">
-                    <li>Мой аккаунт</li>
-                    <li>Моя компания</li>
-                    <li><a href="{% url 'user_logout' %}">Выйти</a></li>
-                </ul>
-                
-            </div>
-            <hr>
-
-        {% endif %}
+    <div class="logotype">
+        <!-- <i class="icon fa fa-home fa-3x"></i> -->
     </div>
 
         

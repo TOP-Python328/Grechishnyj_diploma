@@ -15,7 +15,8 @@ body {
     background: rgb(165, 202, 223);
     height: 100vh;
     display: flex;
-    padding: 0px;
+
+    /* padding: 0px 10%; */
     /* overflow: hidden; */
 }
 
@@ -34,7 +35,9 @@ body {
 
 aside{
     background: linear-gradient(0deg, var(--color-accent-2) 0%, var(--color-accent-2) 100%);
-    min-width: calc(100vw / 12 * 2);
+    /* width: calc(100vw / 12 * 1.5); */
+    width: 200px;
+    flex-shrink: 100;
 }
 
 /* main{
@@ -55,10 +58,18 @@ main {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    border: 1px solid rgb(194, 193, 193);
+    /* border: 1px solid rgb(194, 193, 193); */
     gap: var(--offset);
     padding: var(--offset);
     align-content: flex-start;
+    padding-left: calc(var(--offset) + var(--offset) / 2);
+}
+h2 {
+    width: 100%;
+    padding: 0 var(--offset);
+    background: white;
+    font-size: calc(var(--def-font-size) * 1.7);
+    border-radius: var(--def-radius-box);
 }
 /* article {
     background: white;
@@ -71,7 +82,30 @@ main {
     align-items: center;
 } */
 
-.card h2{
+
+
+
+.wrapper{
+    width: calc(100% + var(--offset) * 2);
+    margin: 0 calc(var(--offset) * (-1));
+    display: flex;
+    flex-wrap: wrap;
+}
+.card >div{
+    margin: var(--offset);
+    width: calc(100% / var(--column) - var(--offset) * 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--def-radius-box);
+    background: rgb(255, 255, 255);
+    box-shadow: 0 3px 5px 0 var(--color-font-2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: calc(var(--offset) * 2) 0;
+}
+.card h3{
     padding: var(--offset);
     font-size: calc(var(--def-font-size) * 1.8);
     color: var(--color-font-1);
@@ -94,28 +128,10 @@ main {
     padding: var(--offset) 0;
 }
 
-
-
-.wrapper{
-    width: calc(100% + var(--offset) * 2);
-    margin: 0 calc(var(--offset) * (-1));
-    display: flex;
-    flex-wrap: wrap;
+@media screen and (max-width: 1366px) {
+    body { padding: 0; }
 }
-.card >div{
-    margin: var(--offset);
-    width: calc(100% / var(--column) - var(--offset) * 2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: var(--def-radius-box);
-    background: rgb(255, 255, 255);
-    box-shadow: 0 0 5px 0 var(--color-font-2);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    padding: calc(var(--offset) * 2) 0;
-}
+
 
 
 

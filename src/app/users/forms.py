@@ -23,42 +23,38 @@ class CustomUserRegisterForm(UserCreationForm):
         self.fields['username'].widget.attrs.update({ 
             'class': 'form-input', 
             'required':'', 
+            'autocomplete': 'off',
             'name':'username', 
             'id':'username', 
             'type':'text', 
-            'placeholder':'username', 
-            'maxlength': '20', 
-            'minlength': '1', 
+            'placeholder':'username'
             }) 
         self.fields['password1'].widget.attrs.update({ 
             'class': 'form-input', 
-            'required':'', 
+            'required':'',
+            'autocomplete': 'off', 
             'name':'password1', 
             'id':'password1', 
             'type':'password', 
-            'placeholder':'password', 
-            'maxlength':'20',  
-            'minlength':'1' 
+            'placeholder':'password'
             }) 
         self.fields['password2'].widget.attrs.update({ 
             'class': 'form-input', 
             'required':'', 
+            'autocomplete': 'off',
             'name':'password2', 
             'id':'password2', 
             'type':'password', 
-            'placeholder':'password', 
-            'maxlength':'20',  
-            'minlength':'1' 
+            'placeholder':'password'
             }) 
         self.fields['email'].widget.attrs.update({ 
             'class': 'form-input', 
             'required':'', 
+            'autocomplete': 'off',
             'name':'email', 
             'id':'email', 
             'type':'email', 
-            'placeholder':'email', 
-            'maxlength':'100',  
-            'minlength':'1' 
+            'placeholder':'email'
             }) 
         
         
@@ -76,22 +72,20 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.fields['username'].widget.attrs.update({ 
             'class': 'form-input', 
             'required':'', 
+            'autocomplete': 'off',
             'name':'username', 
             'id':'username', 
             'type':'text', 
-            'placeholder':'username', 
-            'maxlength': '20', 
-            'minlength': '1', 
+            'placeholder':'username'
             }) 
         self.fields['password'].widget.attrs.update({ 
             'class': 'form-input', 
-            'required':'', 
+            'required':'',
+            'autocomplete': 'off', 
             'name':'password', 
             'id':'password', 
             'type':'password', 
-            'placeholder':'password', 
-            'maxlength':'20',  
-            'minlength':'1' 
+            'placeholder':'password'
             }) 
 
  

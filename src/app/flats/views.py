@@ -39,6 +39,7 @@ def run_houses(request):
         'flats/houses.html',
         {
             'title': 'Жилые дома',
+            'h1': 'Многоквартирные жилые дома',
             'microdistricts': microdistricts,
             'scripts': [                 
                 'scripts/popup.js', 
@@ -109,7 +110,7 @@ def run_flat_constructor(request):
             )
             # print(request.POST)
         elif request.POST['form'] == 'new_land_plot':
-            post_number = str(request.POST['number'])
+            post_number = str(request.POST['kadastr_number'])
             post_square = float(request.POST['square'])
             post_usage = str(request.POST['usage'])
             post_owner_type = str(request.POST['owner_type'])
@@ -171,7 +172,7 @@ def run_flat_constructor(request):
 
         elif request.POST['form'] == 'new_microdistrict':
             Microdistrict.objects.using(database).create(
-                    name=request.POST['name'],
+                    name=request.POST['microdistrict_name'],
                 )
         elif request.POST['form'] == 'new_house':
             flat_number = 1
@@ -246,6 +247,7 @@ def run_flat_constructor(request):
         'flats/constructor.html',
         {
             'title': 'Конструктор недвижимости',
+            'h1': 'Конструктор недвижимости',
             'land_plots': land_plots,
             'materials': materials,
             'room_types': room_types,
@@ -259,6 +261,11 @@ def run_flat_constructor(request):
             'energy_saves': energy_saves,
             'seismics': seismics,
             'house_types': house_types,
-            'scripts': [ 'scripts/popup.js', 'scripts/form.js', 'scripts/address.js']
+            'scripts': [                 
+                'scripts/popup.js', 
+                'scripts/form.js',
+                'scripts/validate.js',
+                'scripts/address.js',
+            ]
         }
     )

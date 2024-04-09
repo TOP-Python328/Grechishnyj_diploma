@@ -1,0 +1,98 @@
+@import url("./root.css");
+
+header {
+    
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: calc(var(--def-line-height) * 3);
+    padding: 0 calc(var(--offset) + var(--offset) / 2);
+}
+
+header h1{
+    font-size: calc(var(--def-font-size) * 2.2);
+    line-height: calc(var(--def-line-height) * 2);
+    font-weight: 600;
+    color: var(--color-font-3);
+}
+header .user-info{
+    height: calc(var(--def-line-height) * 2);
+}
+header .user-info a{
+    height: auto;
+}
+header .title{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .user-name{
+    font-size: calc(var(--def-font-size) * 1.5);
+    color: var(--color-font-1);
+    font-weight: 600;
+    margin-right: var(--offset);
+}
+header .user-photo{
+    /* height: calc(var(--def-line-height) * 2);
+    width: calc(var(--def-line-height) * 2); */
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+header .user-photo .fa{
+    color: red;
+}
+header nav{
+    width: 100%;
+}
+header nav ul.nav-bar{
+    display: flex;
+    cursor: pointer;
+}
+header nav ul.nav-bar .nav-title{
+    /* flex-grow: 1; */
+    text-align: center;
+    z-index: 500;
+    width: calc(100% / 6);
+}
+header .nav-title span{
+    display: block;
+    font-size: calc(var(--def-font-size) * 1.3);
+    font-weight: 600;
+    line-height: calc(var(--def-line-height) - 3px);
+    border-top-right-radius: var(--def-radius-box);
+    border-top-left-radius: var(--def-radius-box);
+    border-bottom: 3px inset white;
+}
+header .nav-title:hover >span{
+    background: rgb(250, 250, 250);
+    border-bottom: 3px inset var(--color-font-accent);
+    color: var(--color-accent-2);
+}
+header .submenu{
+    background: white;
+    box-shadow: 0 3px 5px 0 var(--color-font-2);
+    border-bottom-right-radius: var(--def-radius-box);
+    border-bottom-left-radius: var(--def-radius-box);
+}
+/* header .submenu li{
+    font-size: calc(var(--def-font-size) * 1.3);
+    padding: 0 var(--offset);
+    text-align: center;
+} */
+header .submenu li a{
+    display: block;
+    font-size: calc(var(--def-font-size) * 1.3);
+    color: var(--color-font-3);
+    padding: 0 var(--offset);
+    text-align: center;
+}
+header .submenu li a:hover{
+    background: rgb(250, 250, 250);
+    color: var(--color-font-accent);
+}
+.hide{
+    display: none;
+}

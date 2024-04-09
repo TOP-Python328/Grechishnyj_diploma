@@ -3,7 +3,7 @@
 {% block main %}
 <div class="wrapper card">
     <div>
-        <h2>Комнаты</h2>
+        <h3>Комнаты</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -20,7 +20,7 @@
                                 <div class="column col-1">
                                     <fieldset>
                                         <legend>Новая комната</legend>
-                                        <input name="room_name" type="text" placeholder="Наименование комнаты">
+                                        <input name="room_name" type="text" placeholder="Наименование комнаты" autocomplete="off">
                                         <!-- <div class="checkbox">
                                             <label>Жилая / не жилая</label>
                                             <input type="checkbox" name="living">
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div>
-        <h2>Квартиры</h2>
+        <h3>Квартиры</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -73,7 +73,7 @@
                                         <legend>Новая планировка</legend>
                                         <div class="select_box">
                                             <div class="select_title">
-                                                <input name="flat_name" placeholder="Обозначение типа квартиры" value=""> 
+                                                <input name="flat_name" type="text" placeholder="Обозначение типа квартиры" value="" autocomplete="off"> 
                                                 <div class="control_box">
                                                     <span class="btn_round">1</span>
                                                     <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
@@ -89,7 +89,7 @@
                                                             <option value="{{ room_type.id }}">{{ room_type.name }}</option>
                                                             {% endfor %}
                                                         </select>
-                                                        <input name="square" class="right" value="" placeholder="0.0">
+                                                        <input name="square" class="right"  type="text" value="" placeholder="0.0" autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,7 +109,7 @@
         </div>
     </div>
     <div>
-        <h2>Этажи</h2>
+        <h3>Этажи</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -128,7 +128,7 @@
                                         <legend>Новый план этажа</legend>
                                         <div class="select_box">
                                             <div class="select_title">
-                                                <input name="floor_name" placeholder="Обозначение плана этажа" value=""> 
+                                                <input name="floor_name" placeholder="Обозначение плана этажа"  type="text" value="" autocomplete="off"> 
                                                 <div class="control_box">
                                                     <span class="btn_round">1</span>
                                                     <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
@@ -163,7 +163,7 @@
         </div>      
     </div>
     <div>
-        <h2>Секции</h2>
+        <h3>Секции</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -182,7 +182,7 @@
                                         <legend>Новый тип секции</legend>
                                         <div class="select_box">
                                             <div class="select_title">
-                                                <input name="section_name" placeholder="Обозначение типовой секции" value=""> 
+                                                <input name="section_name"  type="text" placeholder="Обозначение типовой секции" value="" autocomplete="off"> 
                                                 <div class="control_box">
                                                     <span class="btn_round">1</span>
                                                     <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
@@ -217,7 +217,7 @@
         </div>
     </div>
     <div>
-        <h2>Дома</h2>
+        <h3>Дома</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
 
@@ -232,7 +232,7 @@
                                 <div class="column col-1 form_title">Добавить жилой дом</div>
                             </div>
                             <div class="row">
-                                <fieldset class="column col-3">
+                                <fieldset class="column col-2">
                                     <legend>Характеристики</legend>
                                     <select name="building_permit" required>
                                         <option value="">Разрешение на строительство</option>
@@ -277,32 +277,11 @@
                                         {% endfor %}
                                     </select>
                                 </fieldset>
-                                <fieldset class="column col-3">
-                                    <legend>Адрес</legend>
-                                    <select name="region" required>
-                                        <option value="">Регион</option>
-                                    </select>
-                                    <select name="district" required>
-                                        <option value="">Район</option>
-                                    </select>
-                                    
-                                    <select name="sity" required>
-                                        <option value="">Населенный пункт</option>
-                                    </select>
-                                    <select name="locality" required>
-                                        <option value="город">Город</option>
-                                        <option value="деревня">Деревня</option>
-                                        <option value="поселок">Поселок</option>
-                                        <option value="село">Село</option> 
-                                    </select>
-                                    <input name="street" type="text" placeholder="Улица">
-                                    <input name="home" type="text" placeholder="Дом">
-                                </fieldset>
-                                <fieldset class="column col-3">
+                                <fieldset class="column col-2">
                                     <legend>Секции</legend>
                                     <div class="select_box">
                                         <div class="select_title">
-                                            <input name="house_number" placeholder="Номер дома по ГП" value=""> 
+                                            <input name="house_number"  type="text" placeholder="Номер дома по ГП" value="" autocomplete="off"> 
                                             <div class="control_box">
                                                 <span class="btn_round">1</span>
                                                 <button class="add_select btn_round" type="button"><i class="fa fa-plus"></i></button>
@@ -324,6 +303,53 @@
                                     </div>
                                 </fieldset>  
                             </div>
+
+
+
+                                <fieldset class="row">
+                                    <legend>Адрес</legend>
+                                    <div class="column col-3">
+                                        <select name="region" required>
+                                            <option value="">Регион</option>
+                                        </select>
+                                        <select name="district" required>
+                                            <option value="">Район</option>
+                                        </select>
+
+
+
+                                    </div>
+                                    <div class="column col-3">
+                                        <select name="sity" required>
+                                            <option value="">Населенный пункт</option>
+                                        </select>
+                                        <select name="locality" required>
+                                            <option value="город">Город</option>
+                                            <option value="деревня">Деревня</option>
+                                            <option value="поселок">Поселок</option>
+                                            <option value="село">Село</option> 
+                                        </select>
+
+
+                                        
+                                    </div>
+                                    <div class="column col-3">
+                                        <input name="street" type="text" placeholder="Улица" autocomplete="off">
+                                        <input name="home" type="text" placeholder="Дом" autocomplete="off">
+
+
+                                        
+                                    </div>
+                                    
+                                
+                                    
+                                
+                                    
+                                </fieldset>
+
+
+
+                                
                             <div class="row">
                                 <div class="column col-3"></div>
                                 <input class="column col-3" type="reset" value="Очистить">
@@ -337,7 +363,7 @@
         </div>
     </div>
     <div>
-        <h2>Земельные участки</h2>
+        <h3>Земельные участки</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -355,19 +381,19 @@
                                     <fieldset>
                                         <legend>Новый земельный участок</legend>
                                         <input name="form" hidden value="new_land_plot">
-                                        <input name="number" type="text" placeholder="Кадастровый номер">
-                                        <input name="square" type="text" placeholder="Площадь">
-                                        <input name="usage" type="text" placeholder="Вид разрешенного использования">
+                                        <input name="kadastr_number" type="text" placeholder="Кадастровый номер" autocomplete="off">
+                                        <input name="square" type="text" placeholder="Площадь" autocomplete="off">
+                                        <input name="usage" type="text" placeholder="Вид разрешенного использования" autocomplete="off">
                                         <select name="owner_type" required>
                                             <option value="">Право владения</option>
                                             <option value="аренда">Aренда</option>
                                             <option value="собственность">Cобственность</option>
                                         </select>
-                                        <input name="owner_number" type="text" placeholder="Номер документа подтверждающего право">
-                                        <input name="owner_date" type="date" placeholder="Дата подтверждающего документа">
-                                        <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа">
-                                        <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа">
-                                        <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН">      
+                                        <input name="owner_number" type="text" placeholder="Номер документа подтверждающего право" autocomplete="off">
+                                        <input name="owner_date" type="date" placeholder="Дата подтверждающего документа" autocomplete="off">
+                                        <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа" autocomplete="off">
+                                        <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа" autocomplete="off">
+                                        <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН" autocomplete="off">      
                                     </fieldset>
                                 </div>
                             </div>
@@ -383,7 +409,7 @@
         </div>
     </div>
     <div>
-        <h2>Разрешения</h2>
+        <h3>Разрешения</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -400,9 +426,9 @@
                                 <div class="column col-1">
                                     <fieldset>
                                         <legend>Новое разрешение на строительство</legend>
-                                        <input name="number" type="text" placeholder="Номер разрешения">
-                                        <input name="dt_issue" type="date">
-                                        <input name="dt_expiry" type="date">
+                                        <input name="number" type="text" placeholder="Номер разрешения" autocomplete="off">
+                                        <input name="dt_issue" type="date" autocomplete="off">
+                                        <input name="dt_expiry" type="date" autocomplete="off">
                                         <select name="land_plot" required>
                                             <option value="">Земельный участок</option>
                                             {% for land_plot in land_plots %}
@@ -424,7 +450,7 @@
         </div>
     </div>
     <div>
-        <h2>Микрорайоны</h2>
+        <h3>Микрорайоны</h3>
         <div class="icon"><i class="icon fa fa-home"></i></div>
         <div class="controls">
             <div class="popup">
@@ -441,7 +467,7 @@
                                 <div class="column col-1">
                                     <fieldset>
                                         <legend>Новый микрорайон</legend>
-                                        <input name="name" type="text" placeholder="Название микрорайона">
+                                        <input name="microdistrict_name" type="text" placeholder="Название микрорайона" autocomplete="off">
                                     </fieldset>
                                 </div>
                             </div>

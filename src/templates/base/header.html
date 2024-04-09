@@ -1,6 +1,72 @@
 <header>
 
-        HEADER
-        
-
+  <h1>{{ h1 }}</h1>
+  <div class="user-info">
+  {% if user.is_authenticated %}
+    <div class="title">
+      <div class="user-name">{{ user.username }}</div>
+      <div class="user-photo"><i class="icon fa fa-user-circle fa-4x"></i></div>
+    </div>
+  {% endif %}
+  </div>
+  <nav>
+    <ul class="nav-bar">
+      <li class="nav-title">
+        <span>Главная</span>
+        <ul class="submenu hide">
+          <li>Point</li>
+          <li>Point</li>
+          <li>Point</li>
+        </ul>
+      </li>
+      <li class="nav-title">
+        <span>Моя компания</span>
+        <ul class="submenu hide">
+          <li>Point</li>
+          <li>Point</li>
+          <li>Point</li>
+        </ul>
+      </li>
+      <li class="nav-title">
+        <span>Недвижимость</span>
+        <ul class="submenu hide">
+          <li><a href="{% url 'run_houses' %}">Жилые дома</a></li>
+          <li><a href="{% url 'run_flat_constructor' %}">Конструктор</a></li>
+        </ul>
+      </li>
+      <li class="nav-title">
+        <span>Продажи</span>
+        <ul class="submenu hide">
+          <li>Point</li>
+          <li>Point</li>
+          <li>Point</li>
+        </ul>
+      </li>
+      <li class="nav-title">
+        <span>Списки</span>
+        <ul class="submenu hide">
+          <li>Point</li>
+          <li>Point</li>
+          <li>Point</li>
+        </ul>
+      </li>
+      <li class="nav-title">
+        <span>Профиль</span>
+        <ul class="submenu hide">
+          <li><a href="{% url 'user_logout' %}">Выйти</a></li>
+          <li>Point</li>
+          <li>Point</li>
+        </ul> 
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- <div class="actions">
+    <div class="action-title">Действия</div>
+    <ul class="action-body hide">
+      <li>Мой аккаунт</li>
+      <li>Моя компания</li>
+      <li><a href="{% url 'user_logout' %}">Выйти</a></li>
+    </ul>
+  </div> -->
 </header>

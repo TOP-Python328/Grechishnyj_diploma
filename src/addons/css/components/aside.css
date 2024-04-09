@@ -6,6 +6,11 @@ aside{
 aside div{
     font-size: calc(var(--def-font-size) * 1.4);
 }
+aside div.logotype {
+    height: calc(var(--def-line-height) * 3);
+    background: var(--color-font-1);
+}
+
 aside a{
     display: block;
     width: 100%;
@@ -25,47 +30,7 @@ aside ul li:hover{
     border-left: 5px solid var(--color-font-accent);
 }
 
-aside .user-info{
-    height: calc(var(--def-line-height) * 3);
-}
-aside .user-info a{
-    height: auto;
-}
 
-aside .title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 21px;
-    padding-right: 16px;
-}
-aside .user-photo{
-    height: calc(var(--def-line-height) * 2);
-    width: calc(var(--def-line-height) * 2);
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-aside .user-photo .fa{
-    color: white;
-}
-aside .actions{
-    position: relative;
-}
-aside .action-title{
-    padding-left: 21px;
-    padding-right: 16px;
-}
-aside .actions ul{
-    left: 0;
-    width: 100%;
-    background: var(--color-accent-1);
-    position: absolute;
-    z-index: 1000;
-}
-aside .actions ul.hide{
-    display: none;
-}
 
 
 
