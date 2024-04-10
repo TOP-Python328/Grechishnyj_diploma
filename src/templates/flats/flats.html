@@ -1,41 +1,48 @@
 {% extends 'index.html' %}
 
 {% block main %}
-    <div>
-        <h1>Квартиры</h1>
-        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>№</td>
-                            <td>Микрорайон</td>
-                            <td>Дом</td>
-                            <td>Срок ввода</td>
-                            <td>Материал</td>
-                            <td>Секция</td>
-                            <td>Этаж</td>
-                            <td>Номер</td>
-                            <td>Статус</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for flat in flats %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td><a href="#">{{ flat.floor.section.house.microdistrict.name }}</a></td>
-                            <td><a href="#">{{ flat.floor.section.house.number }}</a></td>
-                            <td><a href="#">{{ flat.floor.section.house.building_permit.dt_expiry }}</a></td>
-                            <td><a href="#">{{ flat.floor.section.house.type.name }}</a></td>
-                            <td><a href="#">{{ flat.floor.section.number }}</a></td>
-                            <td><a href="#">{{ flat.floor.number }}</a></td>
-                            <td><a href="#">{{ flat.number }}</a></td>
-                            <td><a href="#">{{ flat.status.name }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>     
+<h2>Квартиры</h2>
+<div class="wrapper">
+  <div class="table-wrapper">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <td>№</td>
+            <td>Микрорайон</td>
+            <td>Дом</td>
+            <td>Срок ввода</td>
+            <td>Материал</td>
+            <td>Секция</td>
+            <td>Этаж</td>
+            <td>Номер</td>
+            <td>Статус</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for flat in flats %}
+          <tr>
+            <td><a href="#">{{ forloop.counter }}</a></td>
+            <td><a href="#">{{ flat.floor.section.house.microdistrict.name }}</a></td>
+            <td><a href="#">{{ flat.floor.section.house.number }}</a></td>
+            <td><a href="#">{{ flat.floor.section.house.building_permit.dt_expiry }}</a></td>
+            <td><a href="#">{{ flat.floor.section.house.type.name }}</a></td>
+            <td><a href="#">{{ flat.floor.section.number }}</a></td>
+            <td><a href="#">{{ flat.floor.number }}</a></td>
+            <td><a href="#">{{ flat.number }}</a></td>
+            <td>
+              {% if flat.status.name == "free" %}
+                <a href="#">свободно</a>
+              {% elif flat.status.name == "sold" %}
+                <a href="#">продано</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+    <div class="table-indicators">data</div>
+  </div> 
+</div>
 {% endblock main %}

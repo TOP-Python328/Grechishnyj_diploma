@@ -8,6 +8,7 @@ class CustomUser(AbstractUser):
     """Пользователь."""
 
     dbase = models.CharField(max_length=16, unique=True)
+    email = models.EmailField(blank=True, max_length=254, verbose_name='email address', unique=True)
     
     def run_base_migrate(self):
         connection = connect(f'storage/dbases/{self.dbase}.sqlite3')

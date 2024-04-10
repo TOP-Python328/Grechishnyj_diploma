@@ -13,23 +13,31 @@
 
 {% block main %}
 
-    <div class="wrapper_form">
-        <form class="auth_form" action="" method="post">
-            {% csrf_token %}
-            {% if is_existing_user %}
-                <div class="form_title">Вход в систему</div>
-            {% else %}
-                <div class="form_title">Регистрация</div>  
-            {% endif %}
-            {{ form }}
-            {% if is_existing_user %}
-                <a href="{% url 'user_register' %}">Создать аккаунт</a>
-            {% else %}
-                <a href="{% url 'user_login' %}">Уже есть аккаунт</a>  
-            {% endif %}
-            <input type="submit" value="Продолжить"> 
-        </form>
+    <div class="authenticated">
+        <div class="wrapper_auth">
+            <form class="auth_form" action="" method="post">
+                {% csrf_token %}
+                {% if is_existing_user %}
+                    <div class="form_title">Вход в систему</div>
+                {% else %}
+                    <div class="form_title">Регистрация</div>  
+                {% endif %}
+                {{ form }}
+                {% if is_existing_user %}
+                    <a href="{% url 'user_register' %}">Создать аккаунт</a>
+                {% else %}
+                    <a href="{% url 'user_login' %}">Уже есть аккаунт</a>  
+                {% endif %}
+                <input type="submit" value="Продолжить"> 
+            </form>
+    
+            <div class="welcome">
+                <h1>Welcome</h1>
+            </div>
 
+        </div>
+
+        
     </div>
 
 {% endblock main %}

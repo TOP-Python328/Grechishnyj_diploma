@@ -38,7 +38,7 @@ create table room_types (
     id integer primary key, 
     name varchar(32) not null unique, 
     living boolean not null check (living in (0, 1)), 
-    koef_price float not null); 
+    koef_price float not null default(1.0)); 
 insert into room_types (name, living, koef_price) values ('гостинная', 1, 1.0); 
 insert into room_types (name, living, koef_price) values ('спальня', 1, 1.0); 
 insert into room_types (name, living, koef_price) values ('детская', 1, 1.0); 
@@ -55,7 +55,7 @@ insert into room_types (name, living, koef_price) values ('балкон', 0, 0.5
 create table land_plots (
     id integer primary key,
     number varchar(64) not null unique,
-    square float not null,
+    square float not null default(0.0),
     usage varchar(128) not null,
     owner_type varchar(64) not null,
     owner_number varchar(64) not null,
@@ -106,7 +106,7 @@ create table houses (
 create table flats_plan ( 
     id integer primary key, 
     name varchar(32) not null, 
-    square float not null, 
+    square float not null default(0.0), 
     room_type_id integer not null, 
     foreign key (room_type_id) references room_types(id));
 
@@ -148,7 +148,7 @@ create table sections (
 
 create table rooms (
     id integer primary key,
-    square float not null,
+    square float not null default(0.0),
     flat_id integer not null,
     room_type_id integer not null,
     foreign key (flat_id) references flats(id),

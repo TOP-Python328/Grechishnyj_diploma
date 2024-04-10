@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'app.index',
     'app.users',
     'app.flats',
+    'app.sales',
     'app.assist',
 ]
 

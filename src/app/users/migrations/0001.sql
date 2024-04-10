@@ -1,7 +1,7 @@
 --
 -- Create model CustomUser
 --
-CREATE TABLE `users_customuser` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `password` varchar(128) NOT NULL, `last_login` datetime(6) NULL, `is_superuser` bool NOT NULL, `username` varchar(150) NOT NULL UNIQUE, `first_name` varchar(150) NOT NULL, `last_name` varchar(150) NOT NULL, `email` varchar(254) NOT NULL, `is_staff` bool NOT NULL, `is_active` bool NOT NULL, `date_joined` datetime(6) NOT NULL, `dbase` varchar(16) NOT NULL UNIQUE);
+CREATE TABLE `users_customuser` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `password` varchar(128) NOT NULL, `last_login` datetime(6) NULL, `is_superuser` bool NOT NULL, `username` varchar(150) NOT NULL UNIQUE, `first_name` varchar(150) NOT NULL, `last_name` varchar(150) NOT NULL, `email` varchar(254) NOT NULL UNIQUE, `is_staff` bool NOT NULL, `is_active` bool NOT NULL, `date_joined` datetime(6) NOT NULL, `dbase` varchar(16) NOT NULL UNIQUE);
 CREATE TABLE `users_customuser_groups` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `customuser_id` integer NOT NULL, `group_id` integer NOT NULL);
 CREATE TABLE `users_customuser_user_permissions` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `customuser_id` integer NOT NULL, `permission_id` integer NOT NULL);
 ALTER TABLE `users_customuser_groups` ADD CONSTRAINT `users_customuser_groups_customuser_id_group_id_76b619e3_uniq` UNIQUE (`customuser_id`, `group_id`);

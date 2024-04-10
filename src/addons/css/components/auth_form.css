@@ -1,0 +1,69 @@
+@import url("./root.css");
+
+.authenticated{
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* background: rgb(245, 245, 245);
+    background-image: url('../../img/backgrounds/bg-1.webp');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
+.wrapper_auth{
+    border-radius: calc(var(--def-radius-box) * 4);
+    box-shadow: 5px 5px 20px -5px var(--color-font-1);
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    overflow: hidden;
+    margin: auto;
+    width: 40%;
+    height: 60%;
+}
+.welcome{
+
+    background: linear-gradient(0deg, var(--color-accent-2) 0%, var(--color-accent-1) 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.welcome h1{
+    font-size: calc(var(--def-font-size) * 3);
+}
+
+.authenticated form.auth_form {
+
+    background: white;
+    border-radius: var(--def-radius-box);
+    font-size: calc(var(--def-font-size) * 1.5);
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    padding: calc(var(--form-offset) * 2);
+}
+
+.auth_form{
+    flex-direction: column;
+    gap: calc(var(--form-offset) / 2);
+    box-shadow: none;
+    justify-content: center;
+}
+.auth_form a{
+    font-size: calc(var(--def-font-size) * 1.5);
+    color: var(--color-accent-2);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+}

@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', function(){
             error: "Поле 'flat_name' должно содержать не менее 3 и не более 16 символов (A-Z, a-z, 0-9, _ и -)"
         },
         floor_name: {
-            regex: /^[A-Za-zА-Яa-яё0-9 _.-]{2,16}$/,
+            regex: /^[A-Za-zА-Яаяё0-9 _.-]{3,16}$/,
             error: "Поле 'floor_name' должно содержать не менее 3 и не более 16 символов (A-Z, a-z, 0-9, _ и -)"
         },
         section_name: {
-            regex: /^[A-Za-zА-Яa-яё0-9 _.-]{2,16}$/,
+            regex: /^[A-Za-zА-Яa-яё0-9 _.-]{3,16}$/,
             error: "Поле 'section_name' должно содержать не менее 3 и не более 16 символов (A-Z, a-z, 0-9, _ и -)"
         },
         // street: {

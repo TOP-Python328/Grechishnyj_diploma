@@ -1,63 +1,17 @@
-table{
-    background: white;
-    border-collapse: collapse;
-    font-size: 13px;
-    color: rgb(93, 93, 93);
-    border: 1px solid rgb(229, 207, 255);
-}
-
-
-
-/* table tr:nth-child(even){background: rgb(247, 241, 255);} */
-/* table tr:nth-child(odd){background: rgb(255, 255, 255);} */
-tr{
-    border-bottom: 1px solid rgb(229, 207, 255); 
-}
-tr:first-child{
-    border-top: 1px solid rgb(229, 207, 255);
-}
-tr:last-child{
-    border-bottom: none; 
-}
-th{
-    background: rgb(239, 225, 255);
-    font-weight: bold;
-    text-align: center;
-    padding: 0 20px;
-    cursor: pointer;
-    white-space: nowrap;
-}
-th:nth-child(2) {
-    text-align: left;
-}
-td{
-    text-align: center;
-    padding: 0 20px;
-    line-height: 30px;
-    white-space: nowrap;
-}
-td:nth-child(2){
-    text-align: left;
-}
-tr:nth-child(n):hover{
-    background: rgb(235, 235, 235);
-}
-
+@import url("./root.css");
 
 .table-wrapper {
     position:relative;
+    width: 100%;
+    margin: 0 var(--offset); 
+    padding: var(--offset) calc(var(--offset) * 2); 
+    background:white;
+    border-radius: var(--def-radius-box);
+    overflow: hidden;
 }
-.table-scroll {
-    max-height:50vh;
-    overflow:auto;  
-    margin-top:20px;
-}
+
 .table-wrapper table {
     width:100%;
-}
-.table-wrapper table * {
-    background:rgb(255, 255, 255);
-    color:black;
 }
 .table-wrapper table thead th .text {
     position:absolute;   
@@ -65,5 +19,74 @@ tr:nth-child(n):hover{
     z-index:2;
     height:20px;
     width:35%;
-    border:1px solid red;
 }
+.table-scroll {
+    max-height:50vh;
+    overflow:auto;  
+    margin-right: calc(var(--form-offset) / 1.5* -1);
+}
+table{
+    border-collapse: collapse;
+    font-size: 13px;
+    border-radius: 10px; 
+    cursor: pointer;
+}
+thead{
+    box-shadow: 0 0 2px 0 var(--color-font-3);
+    font-weight: 500;
+    position: sticky;
+    background:rgb(255, 255, 255);
+    color:var(--color-font-3);
+    top: 0px;
+    z-index: 2; 
+}
+/* tr{
+    border-bottom: 1px solid var(--color-font-2); 
+} */
+tr:last-child{
+    border-bottom: none; 
+}
+th{
+    font-weight: bold;
+    text-align: center;
+    padding: 0 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 600;
+}
+th:nth-child(2) {
+    text-align: left;
+}
+td{
+    text-align: center;
+    white-space: nowrap;
+    font-size: calc(var(--def-font-size) * 1.3);
+}
+td a{
+    font-size: calc(var(--def-font-size) * 1.3);
+    display: block;
+    padding: 0 var(--offset);
+    color: var(--color-font-3);
+}
+td:nth-child(2){
+    text-align: left;
+}
+.table-wrapper table tr:nth-child(even){
+    background: rgb(247, 247, 247);
+}
+.table-wrapper table tbody tr:nth-child(n):hover a{
+    color: var(--color-accent-2);
+    background: var(--color-font-2);
+} 
+.table-indicators{
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    margin-top: var(--offset);
+    border-top: 2px solid var(--color-font-2);
+    
+    
+}
+
+/* table tr:nth-child(even){background: red;} 
+table tr:nth-child(odd){background: rgb(255, 255, 255);} */

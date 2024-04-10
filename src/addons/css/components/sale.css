@@ -1,0 +1,10 @@
+@import url("./root.css");
+
+.sale-template >*{
+    font-size: calc(var(--def-font-size) * 1.5);
+}
+.sale-template span{
+    background: yellow;
+    font-size: calc(var(--def-font-size) * 1.5);
+    padding: 0 10px;
+}

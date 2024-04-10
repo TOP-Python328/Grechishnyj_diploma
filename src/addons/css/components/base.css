@@ -1,5 +1,8 @@
 @import url("./root.css");
 
+
+
+
 *{
     line-height: var(--def-line-height);
     font-size: var(--def-font-size);
@@ -12,9 +15,10 @@
 	user-select: none;
 }
 body {
-    background: rgb(165, 202, 223);
+    display: grid;
+    grid-template-columns: 200px 1fr; 
     height: 100vh;
-    display: flex;
+    width: 100vw;
 
     /* padding: 0px 10%; */
     /* overflow: hidden; */
@@ -27,17 +31,19 @@ body {
 } */
 
 .content{
+
+
     flex-grow: 1;
     background: var(--color-base);
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 aside{
     background: linear-gradient(0deg, var(--color-accent-2) 0%, var(--color-accent-2) 100%);
     /* width: calc(100vw / 12 * 1.5); */
     width: 200px;
-    flex-shrink: 100;
 }
 
 /* main{
@@ -63,6 +69,9 @@ main {
     padding: var(--offset);
     align-content: flex-start;
     padding-left: calc(var(--offset) + var(--offset) / 2);
+}
+footer{
+    background: wheat;
 }
 h2 {
     width: 100%;
@@ -127,6 +136,9 @@ h2 {
 .card div.controls{
     padding: var(--offset) 0;
 }
+
+
+
 
 @media screen and (max-width: 1366px) {
     body { padding: 0; }

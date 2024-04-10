@@ -77,7 +77,10 @@ def run_flats(request):
         {
             'title': 'Квартиры',
             'flats': flats,
-            'scripts': [ 'scripts/popup.js', 'scripts/form.js', ]
+            'scripts': [ 
+                'scripts/popup.js', 
+                'scripts/form.js', 
+            ]
         }
     )
 
@@ -108,7 +111,6 @@ def run_flat_constructor(request):
                 living = post_living,
                 koef_price = post_koef_price
             )
-            # print(request.POST)
         elif request.POST['form'] == 'new_land_plot':
             post_number = str(request.POST['kadastr_number'])
             post_square = float(request.POST['square'])
@@ -130,11 +132,6 @@ def run_flat_constructor(request):
                 owner_reg_date=post_owner_reg_date,
                 document_egrn=post_document_egrn
             )
-            # print(request.POST)
-
-
-
-
         elif request.POST['form'] == 'new_flat':
             post_rooms = request.POST.getlist('room')
             post_square = request.POST.getlist('square')
