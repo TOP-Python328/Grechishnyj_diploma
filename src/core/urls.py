@@ -5,6 +5,7 @@ from app.index import views as index
 from app.users import views as users
 from app.flats import views as flats
 from app.sales import views as sales
+from app.firms import views as firms
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -23,7 +24,8 @@ urlpatterns = [
 
     path('sales', sales.run_sales, name='run_sales'),
     path('sale/<str:uid_flat>', sales.run_sale, name='run_sale'),
-    # path('microdistrict/<str:microdistrict_name>', flats.get_all_houses_by_district, name='app_flats_houses'),
+    
+    path('mycompany', firms.run_my_company, name='run_my_company')
 
 
 

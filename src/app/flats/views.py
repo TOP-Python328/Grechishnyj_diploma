@@ -188,7 +188,7 @@ def run_flat_constructor(request):
                         region=request.POST['region'],
                         district=request.POST['district'],
                         locality=request.POST['locality'],
-                        sity=request.POST['sity'],
+                        city=request.POST['city'],
                         street=request.POST['street'] or '',
                         home=request.POST['home'] or '',
                     )

@@ -1,0 +1,36 @@
+@import url("./root.css");
+
+
+
+.account{
+    width: calc(100% / 12 * 12 - var(--offset) / 2);
+    margin: 0 calc(var(--offset));
+    padding: calc(var(--offset));
+    border-radius: var(--def-radius-box);
+    background: white;
+}
+.account-point{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(218, 216, 216);
+}
+.account-point-title, 
+.account-point-data {
+    font-size: calc(var(--def-font-size) * 1.5);
+}
+.accept{
+    background: rgb(180, 252, 183);
+    display: block;
+    padding: 0 10px;
+    min-width: 100px;
+    font-size: calc(var(--def-font-size) * 1.5);
+}
+.danger{
+    background: rgb(255, 167, 251);
+    display: block;
+    padding: 0 10px;
+    min-width: 100px;
+    font-size: calc(var(--def-font-size) * 1.5);
+}
+
+

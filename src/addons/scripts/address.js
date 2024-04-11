@@ -7,8 +7,8 @@ async function main(){
     const dataQuery = await response.json()
     const selectRegion = document.querySelector('select[name="region"]')
     const selectDistrict = document.querySelector('select[name="district"]')
-    const selectSity = document.querySelector('select[name="sity"]')
-    const selects = [selectRegion, selectDistrict, selectSity]
+    const selectCity = document.querySelector('select[name="city"]')
+    const selects = [selectRegion, selectDistrict, selectCity]
     const regions = Object.keys(dataQuery).filter(region => region !== '').sort()
     regions.forEach(region => createOption(selectRegion, region))
 
@@ -19,9 +19,9 @@ async function main(){
             districts.forEach(district => createOption(selectDistrict, district))
         }
         if (event.target == selectDistrict) {
-            selectSity.options.length = 1
+            selectCity.options.length = 1
             const sities = Object.values(dataQuery[selectRegion.value][selectDistrict.value]).filter(sity => sity !== '').sort()
-            sities.forEach(sity => createOption(selectSity, sity))
+            sities.forEach(city => createOption(selectCity, city))
         }
     }))
 }

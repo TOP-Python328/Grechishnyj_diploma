@@ -2,136 +2,300 @@
 
 {% block main %}
 <h2>Новый договор</h2>
-<div class="sale-template">
-    <div>Номер квартиры {{ flat.number }}</div>
-    <div>Тип квартиры   {{ flat.flat_plan.name }}</div>
-    <div>Номер этажа    {{ flat.floor.number }}</div>
-    <div>Номер подъезда {{ flat.floor.section.number }}</div>
-    
-    <div>Тип дома       {{ flat.floor.section.house.type.name }}</div>
-    <div>Микрорайон     {{ flat.floor.section.house.microdistrict.name }}</div>
-    <div>Номер разрешения {{ flat.floor.section.house.building_permit.number }}</div>
-    <div>Дата разрешения  {{ flat.floor.section.house.building_permit.dt_issue }}</div>
-    <div>Дата завершения  {{ flat.floor.section.house.building_permit.dt_expire }}</div>
-    <div>Номер земельного участка  {{ flat.floor.section.house.building_permit.land_plot.number }}</div>
-    <hr>
-    {% for room in flat.room_set.all %}
-        <div>Комната {{ room.room_type.name }} площадь {{ room.square }}</div>
-    {% endfor %}
-    <div>Общая площадь {{ flat.square }}</div>
-    <hr>
-
-    
-    
-
-
-
-    <td>
-      {% if flat.status.name == "free" %}
-        <a href="#">свободно</a>
-      {% elif flat.status.name == "sold" %}
-        <a href="#">продано</a>
-      {% endif %}
-    </td>
-
-
-    <hr>
-<div>
-
-
-    
-ДОГОВОР участия в долевом строительстве № __________
-Г. ______________ 
-"       " ___________ 201__ г.
-
-
-____________________________________,(указать наименование застройщика) (сокращенное наименование – ____________),  в лице  __________________________________________, действующего на основании Устава (Доверенности, агентского договора и т.д.) от _________________г., ___________________________________,  именуемое в дальнейшем «Застройщик», с одной стороны, и   
-    гражданин Российской Федерации __________, пол ________, дата рождения ___, место рождения ____, паспорт ________ выдан_____, код подразделения ________, проживающий (зарегистрированный) по адресу: _______________, именуемый в дальнейшем «Участник  долевого строительства», с другой стороны, вместе именуемые «Стороны», руководствуясь Гражданским Кодексом Российской Федерации, Федеральным законом РФ № 214-ФЗ от 30.12.2004 г. «Об участии в долевом строительстве многоквартирных домов и иных объектов недвижимости и о внесении изменений в некоторые законодательные акты Российской Федерации» (далее по тексту – Закон 214-ФЗ), заключили настоящий договор участия в долевом строительстве (далее – «Договор») о нижеследующем:
-
-либо:
-гражданин Российской Федерации __________, пол ________, дата рождения ___, место рождения ____, паспорт ________ выдан_____, код подразделения ________, проживающий (зарегистрированный) по адресу: _______________, именуемый в дальнейшем «Участник долевого строительства», с другой стороны, 
-гражданин Российской Федерации __________, пол ________, дата рождения ___, место рождения ____, паспорт ________ выдан_____, код подразделения ________, проживающий (зарегистрированный) по адресу: _______________, именуемый в дальнейшем «Участник долевого строительства – 1»; 
-гражданин Российской Федерации __________, пол ________, дата рождения ___, место рождения ____, паспорт ________ выдан_____, код подразделения ________, проживающий (зарегистрированный) по адресу: _______________, именуемый в дальнейшем «Участник долевого строительства -2», именуемые в дальнейшем совместно «Участник долевого строительства», с другой стороны, вместе именуемые Стороны, руководствуясь Гражданским Кодексом Российской Федерации, Федеральным законом РФ № 214-ФЗ от 30.12.2004 г. «Об участии в долевом строительстве многоквартирных домов и иных объектов недвижимости и о внесении изменений в некоторые законодательные акты Российской Федерации» (далее по тексту – Закон 214-ФЗ), заключили настоящий Договор участия в долевом строительстве (далее – Договор) о нижеследующем:
-
-
-
-
-
+<div class="wrapper">
+    <div class="account">
+        <div class="account-point">
+            <div class="account-point-title">ДОГОВОР участия в долевом строительстве №</div>
+            <div class="account-point-data"><span class="danger">---</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">город</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.address.city }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">дата договора</div>
+            <div class="account-point-data"><input style="width: 200px;" name="dt_sale" type="date" placeholder="Дата договора" value=""></div>
+        </div>
 <hr>
-1. Общие положения
-1.1. В настоящем Договоре используются следующие основные понятия (определения):
-1.1.1. Застройщик — хозяйственное общество, имеющее на праве собственности или на праве аренды земельный участок и привлекающее денежные средства участников долевого строительства для строительства (создания) на этом земельном участке Объекта на основании полученного разрешения на строительство. 
-1.1.2. Участник долевого строительства — физическое лицо, которое в соответствии с условиями Договора направляет денежные средства на создание Объекта с целью возникновения у него права собственности на Объект долевого строительства.
-1.1.3. Объект – строящийся Застройщиком <span>Жилой дом № {{ flat.floor.section.house.number }}</span>, имеющий следующие характеристики:
+        <div class="account-point">
+            <div class="account-point-title">Застройщик</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.orgform.full_name }}</span> </div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Застройщик полное наименование</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.orgform.full_name }}</span> </div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Застройщик сокращенное наименование</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.short_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор фамилия</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director.last_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор имя</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director.first_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор отчество</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director.patr_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Действующего на основании документ</div>
+            <div class="account-point-data"><span class="danger">Устава (Доверенности)</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Действующего на основании дата</div>
+            <div class="account-point-data"><span class="danger">Дата</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Действующего на основании номер</div>
+            <div class="account-point-data"><span class="danger">Номер</span></div>
+        </div> 
+        <div class="account-point">
+            <div class="account-point-title">Гражданин фамилия</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Фамилия" value=""></div>
+        </div> 
+        <div class="account-point">
+            <div class="account-point-title">Гражданин имя</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Имя" value=""></div>
+        </div> 
+        <div class="account-point">
+            <div class="account-point-title">Гражданин отчество</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="отчество" value=""></div>
+        </div> 
+        <div class="account-point">
+            <div class="account-point-title">Гражданин пол</div>
+            <div class="account-point-data"><span class="danger">Пол</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Гражданин дата рождения</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="date" placeholder="Серия" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Паспорт номер</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Серия" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Паспорт серия</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Номер" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Паспорт место рождения</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Место" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Паспорт выдан когда</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="date" placeholder="Выдан" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Паспорт выдан кем</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Кем" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Паспорт выдан код подразделения</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Код" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Регистрация страна</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Страна" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Регистрация регион</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Регион" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Регистрация район</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Район" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Регистрация город</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Город" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Регистрация улица</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Улица" value=""></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Регистрация квартира</div>
+            <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Квартира" value=""></div>
+        </div>
+<hr>
+        <div class="account-point">
+            <div class="account-point-title" style="font-weight: bold;">Общие положения</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом вид</div>
+            <div class="account-point-data"><span class="danger">Вид</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом назначение</div>
+            <div class="account-point-data"><span class="danger">Назначение</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом этажность</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.number_of_floors }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом общая площадь</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.square }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом материал стен</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.material_wall.name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом материал перекрытий</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.material_floor.name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом энергоэффективность</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.energy_save.name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом сейсмостойкости</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.seismic.name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес страна</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.country_full_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес регион</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.region }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес район</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.district }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес населенный пункт</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.locality }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес название пункта</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.city }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес улица</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.street }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес номер</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Жилой дом адрес номер по ГП</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок адрес страна</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.country_full_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок адрес регион</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.region }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок адрес населенный пункт</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.locality }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок адрес название пункта</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.city }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок адрес улица</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.street }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок площадь</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.square }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок кадастровый номер</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок категория</div>
+            <div class="account-point-data"><span class="danger">Категория</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок вид разрешенного использования</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.usage }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок право</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_type }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок право договор номер</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок право договор дата</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_date }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок право договор номер регистрации</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_reg_number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок право договор дата регистрации</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_reg_date }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Земельный участок право договор дата выписки</div>
+            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.building_permit.land_plot.document_egrn }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Квартира площадь</div>
+            <div class="account-point-data"><span class="accept">{{ flat.square }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Разрешение на строительство номер</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Застройщик сайт</div>
+            <div class="account-point-data"><span class="danger">Сайт</span></div>
+        </div>
+    
+    1.4. Банк – _______________________ (место нахождения: _____________, ОГРН _______________, ИНН ________________, 
+    К/счет _______________________ в _______________, БИК ____________, (лицензии Банка России на осуществление банковских операций №________ 
+    от __________________ года), являющийся кредитной организацией по законодательству Российской Федерации.
+    
+<hr>
+    <div class="account-point">
+        <div class="account-point-title" style="font-weight: bold;">Предмет Договора</div>
+    </div> 
+    <div class="account-point">
+        <div class="account-point-title">Номер квартиры</div>
+        <div class="account-point-data"><span class="accept">{{ flat.number }}</span></div>
+    </div>   
+    <div class="account-point">
+        <div class="account-point-title">Количество жилых комнат</div>
+        <div class="account-point-data"><span class="accept">{{ flat.living_rooms }}</span></div>
+    </div> 
+   
+    
 
-Вид строящегося (создаваемого) объекта недвижимости	 
-Назначение объекта 	
-Этажность <span>{{ flat.floor.section.house.number_of_floors }}</span>	
-Общая площадь <span>{{ flat.floor.section.house.square }}</span>
-Материал наружных стен <span>{{ flat.floor.section.house.material_wall }}</span>
-Материал поэтажных перекрытий <span>{{ flat.floor.section.house.material_floor }}</span>
-Класс энергоэффективности <span>{{ flat.floor.section.house.energy_save }}</span>	
-Сейсмостойкость	Указать класс сейсмостойкости <span>{{ flat.floor.section.house.seismic }}</span> либо:
-классификация не требуется, поскольку населенный пункт, в котором осуществляется строительство Объекта, 
-расположен в пределах зон, характеризующихся сейсмической интенсивностью менее 6 баллов и не внесен в список населенных пунктов Российской Федерации, 
-расположенных в сейсмических районах (СП 14.13330.2011 «Строительство в сейсмических районах. Актуализированная редакция СНиП II-7-81*» 
-утвержденный Приказом Минрегиона РФ от 27.12.2010 г. № 779). 
-
-    
-и   расположенный  по адресу: 
-<span>{{ flat.floor.section.house.address.country_full_name }}</span>
-<span>{{ flat.floor.section.house.address.region }}</span>
-<span>{{ flat.floor.section.house.address.locality }}</span>
-<span>{{ flat.floor.section.house.address.sity }}</span>
-<span>{{ flat.floor.section.house.address.street }}</span>
-.
-
-
-Указанные характеристики являются проектными (планируемыми). 
-    
-1.1.4. Земельный участок - земельный участок, расположенный по адресу:
-<span>{{ flat.floor.section.house.address.country_full_name }}</span>
-<span>{{ flat.floor.section.house.address.region }}</span>
-<span>{{ flat.floor.section.house.address.locality }}</span>
-<span>{{ flat.floor.section.house.address.sity }}</span>
-<span>{{ flat.floor.section.house.address.street }}</span>,
-имеющий общую площадь <span>{{ flat.floor.section.house.building_permit.land_plot.square }}</span> кв.м., 
-кадастровый номер: <span>{{ flat.floor.section.house.building_permit.land_plot.number }}</span>, 
-категория земель: земли населенных пунктов; 
-вид разрешенного использования земельного участка: <span>{{ flat.floor.section.house.building_permit.land_plot.usage }}</span>,
-принадлежащего  застройщику на праве собственности, что подтверждается Выпиской из ЕГРН ________________________.
-    
-    либо: в отношении которого, между  Застройщиком и ___________________________ заключен Договор аренды земельного участка ______________________________, зарегистрированный Управлением Федеральной службы государственной регистрации, кадастра и картографии по _______________ области ____________ года сделана запись регистрации № ________________________________.
-    
-    1.1.5. Объект долевого строительства — жилое помещение (квартира) с относящимися к ней  лоджиями и/или балконами  (далее по тексту – летние помещения)   в соответствии с п.2.2. Договора и  Приложением №1 к Договору, подлежащие передаче Участнику долевого строительства после получения разрешения на ввод в эксплуатацию Объекта и входящие в состав указанного Объекта, строящегося (создаваемые) с привлечением  денежных средств Участника долевого строительства.
-    
-     либо: нежилое помещение (номер, апартамент), предназначенное для временного проживания, расположенное в _________________ (Гостиничном, офисном, многофункциолнального) комплексе, имеющее проектные характеристики, указанные в п.2.2 Договора и Приложениеи № 1. подлежащее передаче Участнику долевого строительства после получения разрешения на ввод в эксплуатацию __________ (Гостиничного, офисного, многофункционального) комплекса.
-    
-    
-    1.1.6. Федеральный закон № 214-ФЗ — Федеральный закон от 30.12.2004 г. № 214-ФЗ «Об участии в долевом строительстве многоквартирных домов и иных объектов недвижимости и о внесении изменений в некоторые законодательные акты РФ».
-    
-    1.1.7.  	Площадь Объекта долевого строительства (приведенная площадь) — площадь жилого помещения (квартиры), включающая в себя площадь всех помещений, в том числе площадь летних помещений (лоджий) с применением понижающих коэффициентов, определенная в соответствии с действующим законодательством.
-    
-    
-    1.2. Строительство Объекта ведется на основании Разрешения на строительство № ____________________
-    1.3. Проектная декларация, включающая в себя информацию о Застройщике и о проекте строительства Объекта, размещена  на  официальном  сайте Застройщика ___________________в сети Интернет, оригинал проектной декларации находится у Застройщика.
-    
-    1.4. Банк – _______________________ (место нахождения: _____________, ОГРН _______________, ИНН ________________, К/счет _______________________ в _______________, БИК ____________, (лицензии Банка России на осуществление банковских операций №________ от __________________ года), являющийся кредитной организацией по законодательству Российской Федерации.
-    
-             
-    
-    2. Предмет Договора
-    
-    2.1.  По  настоящему   Договору  Застройщик обязуется в срок,  указанный в Проектной декларации, своими силами и (или) с привлечением других лиц построить (создать) Объект, названный в разделе 1 Договора, и после получения разрешения на ввод в эксплуатацию этого Объекта передать Участнику долевого строительства соответствующий Объект долевого строительства, а Участник долевого строительства обязуется уплатить обусловленную Договором цену и принять Объект долевого строительства  при наличии разрешения на ввод в эксплуатацию Объекта.
     
          2.2. Объект долевого строительства имеет следующие проектные характеристики (выбрать необходимое): 
     
-    1.	Проектный номер (на время строительства) 
+
     */ Количество жилых комнат <span>{{ flat.living_rooms }}</span>	
     2.	Количество комнат	
     3. 	Площадь комнат	
     4.	Этаж	
     5 	Секция	
+
+    СОСТАВ КОМНАТ 
     6.	Назначение Объекта долевого строительство	Жилое помещение
     Если предметом ДДУ являются апартаменты, включается:
     - Объект долевого строительства не является объектом производственного назначения и не будет использован в качестве объекта производственного назначения. Объект долевого строительства будет предназначен исключительно для использования в личных, семейных, домашних и иных целях, не связанных с осуществлением предпринимательской деятельности.
@@ -382,8 +546,6 @@ ____________________________________,(указать наименование з
     
     
     
-
-
-</div>
+    </div>
 </div>
 {% endblock main %}

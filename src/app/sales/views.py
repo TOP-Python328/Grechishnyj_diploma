@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from app.flats.models import Flat
+from app.firms.models import BusinessCard
 
 def run_sales(request): 
     """Табличное предстваление сделок."""
@@ -21,8 +22,12 @@ def run_sales(request):
 
 def run_sale(request, uid_flat): 
     """Продажа квартиры."""
+    dbase = request.user.dbase
+    username = request.user.username
+
     if request.method == 'GET':
-        flat = Flat.objects.using(request.user.dbase).get(id=int(uid_flat))
+        flat = Flat.objects.using(dbase).get(id=int(uid_flat))
+        my_company = BusinessCard.objects.using(dbase).get(username=username)
     
     return render(
         request,
@@ -30,6 +35,7 @@ def run_sale(request, uid_flat):
         {
             'title': 'Новый договор',
             'flat': flat,
+            'my_company': my_company,
             'scripts': [ 
                 'scripts/popup.js', 
                 'scripts/form.js', 
