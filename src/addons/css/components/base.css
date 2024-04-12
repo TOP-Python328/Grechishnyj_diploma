@@ -19,9 +19,10 @@ body {
     grid-template-columns: 200px 1fr; 
     height: 100vh;
     width: 100vw;
-
-    /* padding: 0px 10%; */
-    /* overflow: hidden; */
+    background: rgb(61, 61, 61);
+    padding: 50px;
+    border-radius: 25px;
+    overflow: hidden;
 }
 
 

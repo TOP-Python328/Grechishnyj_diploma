@@ -12,6 +12,7 @@ insert into energy_saves (name) values ('G');
 
 create table seismics (
     name varchar(4) primary key);
+insert into seismics (name) values ('Классификация не требуется');
 insert into seismics (name) values ('C5');
 insert into seismics (name) values ('C6');
 insert into seismics (name) values ('C7');
@@ -57,6 +58,7 @@ create table land_plots (
     number varchar(64) not null unique,
     square float not null default(0.0),
     usage varchar(128) not null,
+    category varchar(128) not null,
     owner_type varchar(64) not null,
     owner_number varchar(64) not null,
     owner_date date not null,
@@ -81,7 +83,8 @@ insert into house_types (name) values ('панельный');
 
 create table microdistricts (
     id integer primary key,
-    name varchar(32) not null unique);
+    name varchar(32) not null unique,
+    full_name text(1000));
 
 create table houses (
     id integer primary key,
@@ -192,14 +195,19 @@ create table orgforms (
 insert into orgforms (full_name, short_name) values ('Общество с ограниченной ответственностью', 'ООО');
 insert into orgforms (full_name, short_name) values ('Публичное акционерное общество', 'ПАО');
 
-create table bisiness_cards (
+create table buisiness_cards (
     id integer primary key,
     full_name varchar(256),
     short_name varchar(64) not null,
     inn varchar(16) not null,
     kpp varchar(16) not null,
     ogrn varchar(16) not null,
-    username varchar(32),
+    business varchar(32) not null,
+    site varchar(64),
+    email varchar(64),
+    director_power_type varchar(32),
+    director_power_number varchar(32),
+    director_power_date date,
     director_id integer,
     address_id integer,
     orgform_id integer not null,
@@ -218,8 +226,10 @@ create table banks (
     branch varchar(128) not null,
     ks varchar(32) not null,
     rs varchar(32) not null,
-    bisiness_card_id integer not null,
-    foreign key (bisiness_card_id) references bisiness_cards(id));
+    city varchar(64),
+    address varchar(128),
+    buisiness_card_id integer not null,
+    foreign key (buisiness_card_id) references buisiness_cards(id));
 
 create table clients_banks (
     id integer primary key,

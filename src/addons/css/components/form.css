@@ -67,12 +67,12 @@ form div.form_title{
     text-align: center;
 }
 
-button, input, select, textarea{
+button, input, select, textarea, a.button{
     border-radius: var(--def-radius-box);
     background-color: white;
 }
 
-input, select, textarea  { 
+input, select, textarea{ 
     border: 1px solid var(--color-input-quiet);
     width: 100%;
     font-size: calc(var(--def-font-size) * 1.5);
@@ -121,7 +121,12 @@ div.radio input[type="radio"]{
     border: 1px solid var(--color-input-quiet);
     border-radius: 5px;
 }
-
+textarea{
+    outline: none;
+}
+textarea:focus {
+    border: 1px solid rgb(100, 100, 100);
+}
 input:focus {
     border: 1px solid rgb(100, 100, 100);
 }

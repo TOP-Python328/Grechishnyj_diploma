@@ -16,7 +16,7 @@
       {% endif %}
       </span>
       {% for flat in floor.flat_set.all %}
-        <div class="popup">
+        <div class="popup flat-item">
           <span class="open_btn {{ flat.status.name }}">{{ flat.number }}</span>
           <div class="back close">
             <div class="wrapper_form">

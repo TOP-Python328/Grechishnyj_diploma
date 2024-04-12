@@ -31,7 +31,7 @@ div.house .section .floor{
 
 
 div.house .section .floor span {
-    width: var(--def-line-height);
+    min-width: var(--def-line-height);
     margin: 2px;
     border-radius: 3px;
     text-align: center;
@@ -47,7 +47,6 @@ div.house .section .floor span {
 div.house .section .floor .popup span{
     display: block;
     background: var(--color-base);
-    width: var(--def-line-height);
     margin: 2px;
     border-radius: 3px;
     text-align: center;
@@ -56,6 +55,7 @@ div.house .section .floor .popup span{
     cursor: pointer;
     transition: all 0.1s ease;
 }
+
 div.house .section .floor .popup span.free{
     color: var(--color-font-3);
 }
@@ -67,6 +67,12 @@ div.house .section .floor .popup span.free:hover{
     background: var(--color-font-accent);
     color: white;
 }
+div.house .section .floor .popup.flat-item{
+    flex-grow: 1;
+}
+/* div.house .section .floor .popup .open_btn{
+    width: 100%;
+} */
 
 
 

@@ -35,6 +35,7 @@ class LandPlot(models.Model):
     number = models.CharField(max_length=64, unique=True)
     square = models.FloatField(null=True, default=0.0)
     usage = models.CharField(max_length=128)
+    category = models.CharField(max_length=128)
     owner_type = models.CharField(max_length=64)
     owner_number = models.CharField(max_length=64)
     owner_date = models.DateField()
@@ -65,6 +66,7 @@ class Microdistrict(models.Model):
         db_table = 'microdistricts'
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32, unique=True)
+    full_name = models.TextField(max_length=1000, null=True)
 
 class House(models.Model):
     """Многоквартирый дом."""
@@ -185,8 +187,20 @@ class Flat(models.Model):
         """Общая площадь."""
         living = 0
         for room in self.room_set.all():
-                living += 1 if room.room_type.living else 0
+            living += 1 if room.room_type.living else 0
         return living
+
+    @property
+    def sale_number(self):
+        return (f'M{self.floor.section.house.microdistrict.name[:3].upper()}'
+                f'H{int(self.floor.section.house.number):03}'
+                f'S{int(self.floor.section.number):03}'
+                f'F{int(self.floor.number):03}'
+                f'-{int(self.number):03}')
+
+    @property
+    def count_rooms(self):
+        return len(self.room_set.all())
     
 
 class Room(models.Model):

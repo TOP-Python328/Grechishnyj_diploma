@@ -31,16 +31,21 @@ class OrgForm(models.Model):
     full_name = models.CharField(max_length=256)
     short_name = models.CharField(max_length=16)
 
-class BusinessCard(models.Model):
+class BuisinessCard(models.Model):
     """Бизнес-карта."""
     class Meta:
-        db_table = 'bisiness_cards'
+        db_table = 'buisiness_cards'
     full_name = models.CharField(max_length=256, blank=True, null=True)
     short_name = models.CharField(max_length=64)
     inn = models.CharField(max_length=16)
     kpp = models.CharField(max_length=16)
     ogrn = models.CharField(max_length=16)
-    username = models.CharField(max_length=32)
+    business = models.CharField(max_length=32)
+    site = models.CharField(max_length=64, null=True)
+    email = models.CharField(max_length=64, null=True)
+    director_power_type = models.CharField(max_length=32, null=True)
+    director_power_number = models.CharField(max_length=32, null=True)
+    director_power_date = models.DateField(null=True)
     director = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     orgform = models.ForeignKey(OrgForm, on_delete=models.CASCADE)
@@ -60,7 +65,9 @@ class Bank(models.Model):
     branch = models.CharField(max_length=128)
     ks = models.CharField(max_length=32)
     rs = models.CharField(max_length=32)
-    business_card = models.ForeignKey(BusinessCard, on_delete=models.CASCADE)
+    city = models.CharField(max_length=(64), null=True)
+    address = models.CharField(max_length=(128), null=True)
+    buisiness_card = models.ForeignKey(BuisinessCard, on_delete=models.CASCADE)
 
 class ClientBank(models.Model):
     """Банковские счета клиентов."""

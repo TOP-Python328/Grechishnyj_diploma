@@ -29,6 +29,14 @@
             <div class="account-point-data">{{ my_bisiness_card.ogrn }}</div>
         </div>
         <div class="account-point">
+            <div class="account-point-title">Сайт</div>
+            <div class="account-point-data">{{ my_bisiness_card.site }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Email</div>
+            <div class="account-point-data">{{ my_bisiness_card.email }}</div>
+        </div>
+        <div class="account-point">
             <div class="account-point-title">Директор фамилия</div>
             <div class="account-point-data">{{ my_bisiness_card.director.last_name }}</div>
         </div>
@@ -39,6 +47,30 @@
         <div class="account-point">
             <div class="account-point-title">Директор имя</div>
             <div class="account-point-data">{{ my_bisiness_card.director.patr_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор действует на основании</div>
+            {% if my_bisiness_card.director_power_type %}
+            <div class="account-point-data">{{ my_bisiness_card.director_power_type }}</div>
+            {% else %}
+            <div class="account-point-data"> - </div>
+            {% endif %}
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор номер документа оснований</div>
+            {% if my_bisiness_card.director_power_number %}
+            <div class="account-point-data">{{ my_bisiness_card.director_power_number }}</div>
+            {% else %}
+            <div class="account-point-data"> - </div>
+            {% endif %}
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор дата документа оснований</div>
+            {% if my_bisiness_card.director_power_date %}
+            <div class="account-point-data">{{ my_bisiness_card.director_power_date }}</div>
+            {% else %}
+            <div class="account-point-data"> - </div>
+            {% endif %}
         </div>
         <div class="account-point">
             <div class="account-point-title">Банковские реквизиты</div>
@@ -91,6 +123,8 @@
                                     <input name="inn"  type="text" placeholder="ИНН" value="" autocomplete="off">
                                     <input name="kpp"  type="text" placeholder="КПП" value="" autocomplete="off">
                                     <input name="ogrn"  type="text" placeholder="ОГРН" value="" autocomplete="off">
+                                    <input name="site"  type="text" placeholder="Сайт" value="" autocomplete="off">
+                                    <input name="email"  type="text" placeholder="Email" value="" autocomplete="off">
                                 </fieldset> 
                             </div>
                             <div class="row">
@@ -169,6 +203,9 @@
                                         <label>Женский</label>
                                     </div>
                                     <input name="birthday" type="date" autocomplete="off">
+                                    <input name="director_power_type" type="text" placeholder="Действует на основании" autocomplete="off">
+                                    <input name="director_power_number" type="text" placeholder="Номер документа" autocomplete="off">
+                                    <input name="director_power_date" type="date" placeholder="Дата документа" autocomplete="off">
                                 </fieldset> 
                             </div>
                             <div class="row">

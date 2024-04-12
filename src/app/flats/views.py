@@ -115,6 +115,7 @@ def run_flat_constructor(request):
             post_number = str(request.POST['kadastr_number'])
             post_square = float(request.POST['square'])
             post_usage = str(request.POST['usage'])
+            post_category = str(request.POST['category'])
             post_owner_type = str(request.POST['owner_type'])
             post_owner_number = str(request.POST['owner_number'])
             post_owner_date = request.POST['owner_date']
@@ -125,6 +126,7 @@ def run_flat_constructor(request):
                 number=post_number,
                 square=post_square,
                 usage=post_usage,
+                category=post_category,
                 owner_type=post_owner_type,
                 owner_number=post_owner_number,
                 owner_date=post_owner_date,
@@ -170,6 +172,7 @@ def run_flat_constructor(request):
         elif request.POST['form'] == 'new_microdistrict':
             Microdistrict.objects.using(database).create(
                     name=request.POST['microdistrict_name'],
+                    full_name=request.POST['microdistrict_full_name']
                 )
         elif request.POST['form'] == 'new_house':
             flat_number = 1
@@ -190,7 +193,6 @@ def run_flat_constructor(request):
                         locality=request.POST['locality'],
                         city=request.POST['city'],
                         street=request.POST['street'] or '',
-                        home=request.POST['home'] or '',
                     )
                 )
             sections_plans = request.POST.getlist('section')

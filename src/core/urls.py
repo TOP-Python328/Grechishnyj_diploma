@@ -25,7 +25,10 @@ urlpatterns = [
     path('sales', sales.run_sales, name='run_sales'),
     path('sale/<str:uid_flat>', sales.run_sale, name='run_sale'),
     
-    path('mycompany', firms.run_my_company, name='run_my_company')
+    path('mycompany', firms.run_my_company, name='run_my_company'),
+    path('firms', firms.run_firms, name='run_firms')
+
+    
 
 
 
