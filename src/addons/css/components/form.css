@@ -130,8 +130,7 @@ textarea:focus {
 input:focus {
     border: 1px solid rgb(100, 100, 100);
 }
-
-button.btn_simple, input[type="submit"], input[type="reset"], a.button, button.btn_round{
+button.btn_simple, input[type="submit"], input[type="reset"], a.button, button.btn_round, input[type="button"]{
     display: block;
     background-color: var( --color-accent-1);
     box-shadow: 0 0 5px 0 var(--color-font-2);
@@ -145,7 +144,7 @@ button.btn_simple, input[type="submit"], input[type="reset"], a.button, button.b
     transition: all .1s ease;
 }
 
-button:hover, input[type="submit"]:hover, input[type="reset"]:hover, a.button:hover {
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover, a.button:hover, input[type="button"]:hover {
     background-color: var(--color-font-accent);
     /* box-shadow: 0 0 1px 0 black; */
 }
@@ -230,9 +229,9 @@ button.btn_round{
     text-align: center;
     margin-top: 50px;
 }
-input:read-only {
+/* input:read-only {
     border: none;
-}
+} */
 div .subtitle{
     font-size: calc(var(--def-font-size) * 1.4);
     color: var(--color-font-accent);

@@ -1,5 +1,5 @@
 
-const bikUrl = './addons/api/banks.py';
+const bikUrl = '/addons/api/banks.py';
 
 
 async function main(){

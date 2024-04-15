@@ -8,3 +8,26 @@
     font-size: calc(var(--def-font-size) * 1.5);
     padding: 0 10px;
 }
+
+.client{
+    width: 100%;
+}
+
+.switch{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--offset);
+}
+.switch-tab{
+    flex-grow: 1;
+    color: var(--color-accent-2);
+    border-bottom: 5px solid white;
+    font-size: calc(var(--def-font-size) * 1.5);
+    cursor: pointer;
+    text-align: center;
+}
+.switch-tab:hover{
+    color: var(--color-font-accent);
+    border-bottom: 5px solid var(--color-font-accent);
+}

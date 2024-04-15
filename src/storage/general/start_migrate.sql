@@ -177,16 +177,24 @@ create table persons (
     sex boolean not null check (sex in (0, 1)),
     birthday date not null);
 
+create table clients (
+    id integer primary key,
+    uid varchar(16) unique not null);
+
 create table passports (
     id integer primary key,
     series varchar(8) not null,
     number varchar(8) not null,
     police_name varchar(256) not null,
     police_code varchar(16) not null,
+    place_birth varchar(256) not null,
+    dt_issue date not null,
     address_id integer not null,
     person_id integer not null,
+    client_id integer not null,
     foreign key (address_id) references addresses(id),
-    foreign key (person_id) references persons(id));
+    foreign key (person_id) references persons(id),
+    foreign key (client_id) references clients(id));
 
 create table orgforms (
     id integer primary key,
@@ -215,11 +223,6 @@ create table buisiness_cards (
     foreign key (address_id) references addresses(id),
     foreign key (orgform_id) references orgforms(id));
 
-create table clients (
-    id integer primary key,
-    type varchar(16) not null,
-    uid varchar(16) not null);
-
 create table banks (
     id integer primary key,
     bik varchar(16) not null,
@@ -228,8 +231,8 @@ create table banks (
     rs varchar(32) not null,
     city varchar(64),
     address varchar(128),
-    buisiness_card_id integer not null,
-    foreign key (buisiness_card_id) references buisiness_cards(id));
+    owner_uid varchar(16) not null,
+    owner_type varchar(16) not null);
 
 create table clients_banks (
     id integer primary key,
@@ -237,3 +240,12 @@ create table clients_banks (
     bank_id integer not null,
     foreign key (client_id) references clients(id),
     foreign key (bank_id) references banks(id));
+
+create table sales (
+    id integer primary key,
+    bank_id integer not null,
+    flat_id integer not null);
+
+
+
+

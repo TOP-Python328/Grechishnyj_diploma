@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 
 from app.assist.models import Address
 
-from app.firms.models import Person, OrgForm, BuisinessCard, Bank
+from app.cards.models import Person, OrgForm, BuisinessCard, Bank
 
 
-def run_firms(request):
+def run_buisiness(request):
     username = request.user.username
     dbase = request.user.dbase
     orgforms = OrgForm.objects.using(dbase)
@@ -49,52 +49,58 @@ def run_firms(request):
             post_bik_address = str(request.POST['bik_address'])
             post_bik_ks = str(request.POST['bik_ks'])
             post_bik_rs = str(request.POST['bik_rs'])
+
+            # Запись в БД данных о руководителе компании
+            director=Person.objects.using(dbase).create(
+                last_name=post_last_name,
+                first_name=post_first_name,
+                patr_name=post_patr_name,
+                sex=post_sex,
+                birthday=post_birthday)
     
+            # Запись в БД данных об адресе компании
+            address=Address.objects.using(dbase).create(
+                country_name='Россия',
+                country_full_name='Российская Федерация',
+                region=post_region,
+                district=post_district,
+                locality=post_locality,
+                city=post_city,
+                street=post_street,
+                home=post_home,
+                flat=post_flat)
             
-            print(request.POST)
-
-
             # Запись в БД данных о новой компании
-            Bank(
+            buisiness=BuisinessCard.objects.using(dbase).create(
+                business=post_business,
+                orgform=OrgForm.objects.using(dbase).get(id=post_ogrn),
+                full_name=post_full_name,
+                short_name=post_short_name,
+                inn=post_inn,
+                kpp=post_kpp,
+                ogrn=post_ogrn,
+                site=post_site,
+                email=post_email,
+                address=address,
+                director=director,
+                director_power_type=post_director_power_type,
+                director_power_number=post_director_power_number,
+                director_power_date=post_director_power_date)
+            
+            # Запись в БД данных о расчетном счёте компании
+            bank=Bank.objects.using(dbase).create(
                 bik=post_bik_number,
                 branch=post_bik_branch,
                 city=post_bik_city,
                 address=post_bik_address,
                 ks=post_bik_ks,
                 rs=post_bik_rs,
-                buisiness_card=BuisinessCard.objects.using(dbase).create(
-                    business=post_business,
-                    orgform=OrgForm.objects.using(dbase).get(id=post_ogrn),
-                    full_name=post_full_name,
-                    short_name=post_short_name,
-                    inn=post_inn,
-                    kpp=post_kpp,
-                    ogrn=post_ogrn,
-                    site=post_site,
-                    email=post_email,
-                    address=Address.objects.using(dbase).create(
-                        country_name='Россия',
-                        country_full_name='Российская Федерация',
-                        region=post_region,
-                        district=post_district,
-                        locality=post_locality,
-                        city=post_city,
-                        street=post_street,
-                        home=post_home,
-                        flat=post_flat),
-                    director=Person.objects.using(dbase).create(
-                        last_name=post_last_name,
-                        first_name=post_first_name,
-                        patr_name=post_patr_name,
-                        sex=post_sex,
-                        birthday=post_birthday),
-                    director_power_type=post_director_power_type,
-                    director_power_number=post_director_power_number,
-                    director_power_date=post_director_power_date)
-                ).save(using=dbase)
+                owner_uid=post_inn,
+                owner_type='bisiness')
+    
     return render(
         request,
-        'firms/firms.html',
+        'cards/buisiness.html',
         {
             'title': 'Компании',
             'orgforms': orgforms,
@@ -241,7 +247,7 @@ def run_my_company(request):
     
     return render(
         request,
-        'firms/my_company.html',
+        'cards/my_company.html',
         {
             'title': 'Моя компания',
             'persons': persons,

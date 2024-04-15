@@ -13,7 +13,13 @@ class Person(models.Model):
     sex = models.BooleanField()
     birthday = models.DateField()
 
-class Passport(models.Model):
+class Client(models.Model):
+    """Клиент."""
+    class Meta:
+        db_table = 'clients'
+    uid = models.CharField(max_length=16, unique=True)
+
+class Passport(Client):
     """Паспорт."""
     class Meta:
         db_table = 'passports'
@@ -21,8 +27,11 @@ class Passport(models.Model):
     number = models.CharField(max_length=8)
     police_name = models.CharField(max_length=256)
     police_code = models.CharField(max_length=16)
+    place_birth = models.CharField(max_length=256)
+    dt_issue = models.DateField()
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='passports') 
 
 class OrgForm(models.Model):
     """Организационно правовая форма."""
@@ -50,12 +59,7 @@ class BuisinessCard(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     orgform = models.ForeignKey(OrgForm, on_delete=models.CASCADE)
 
-class Client(models.Model):
-    """Клиент."""
-    class Meta:
-        db_table = 'clients'
-    type = models.CharField(max_length=16)
-    uid = models.CharField(max_length=16)
+
 
 class Bank(models.Model):
     """Банк."""
@@ -67,7 +71,8 @@ class Bank(models.Model):
     rs = models.CharField(max_length=32)
     city = models.CharField(max_length=(64), null=True)
     address = models.CharField(max_length=(128), null=True)
-    buisiness_card = models.ForeignKey(BuisinessCard, on_delete=models.CASCADE)
+    owner_uid = models.CharField(max_length=16) # на удаление
+    owner_type = models.CharField(max_length=16) #buisiness and individuals # на удаление
 
 class ClientBank(models.Model):
     """Банковские счета клиентов."""

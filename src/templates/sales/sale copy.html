@@ -5,7 +5,63 @@
 <h2>Новый договор</h2>
 <div class="wrapper">
     <div class="account">
-        
+        <div class="account-point">
+            <div class="account-point-title">ДОГОВОР участия в долевом строительстве №</div>
+            <div class="account-point-data"><span class="accept">{{ flat.sale_number }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">город</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.address.city }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">дата договора</div>
+            <div class="account-point-data"><input style="width: 200px;" name="dt_sale" type="date" placeholder="Дата договора" value=""></div>
+        </div>
+<hr>
+        <div class="account-point">
+            <div class="account-point-title">Застройщик</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.orgform.full_name }}</span> </div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Застройщик полное наименование</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.full_name }}</span> </div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Застройщик сокращенное наименование</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.short_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор фамилия</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director.last_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор имя</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director.first_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор отчество</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director.patr_name }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Действующего на основании документ</div>
+            <div class="account-point-data"><span class="accept">{{ my_company.director_power_type }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Действующего на основании номер</div>
+            {% if my_company.director_power_number %}
+            <div class="account-point-data"><span class="accept">{{ my_company.director_power_number }}</span></div>
+            {% else %}
+            <div class="account-point-data"><span class="accept"> - </span></div>
+            {% endif %}
+        </div> 
+        <div class="account-point">
+            <div class="account-point-title">Действующего на основании дата</div>
+            {% if my_company.director_power_date %}
+            <div class="account-point-data"><span class="accept">{{ my_company.director_power_date }}</span></div>
+            {% else %}
+            <div class="account-point-data"><span class="accept"> - </span></div>
+            {% endif %}
+        </div>
     <form action="" method="post">
         {% csrf_token %}
         <input name="form" hidden value="create_new_sale">
@@ -80,9 +136,7 @@
                     <div class="account-point-data"><input name="passport_police_code" type="text" placeholder="Код подразделения" value=""></div>
                 </div>
             </fieldset>
-
-
-            <fieldset class="hide address-block" data-fieldset="address">
+            <fieldset class="hide" data-fieldset="address">
                     <select name="region" required>
                         <option value="">Регион</option>
                     </select>
@@ -102,8 +156,6 @@
                     <input name="home" type="text" placeholder="Дом" autocomplete="off"> 
                     <input name="flat" type="text" placeholder="Квартира" autocomplete="off">   
             </fieldset>
-
-
             <fieldset class="hide" data-fieldset="requisites">
                 <input name="bik_number" type="search" placeholder="Бик номер" autocomplete="off" value="">
                 <input name="bik_branch" readonly placeholder="Наименование отделения" autocomplete="off" value="">

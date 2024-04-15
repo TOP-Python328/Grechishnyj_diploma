@@ -5,7 +5,7 @@ from app.index import views as index
 from app.users import views as users
 from app.flats import views as flats
 from app.sales import views as sales
-from app.firms import views as firms
+from app.cards import views as cards
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -14,7 +14,6 @@ urlpatterns = [
     path('register', users.register, name='user_register'),
     path('login', users.login, name='user_login'),
     path('logout', users.logout, name='user_logout'),
-
 
     path('flats', flats.run_flats, name='run_flats'),
     path('houses', flats.run_houses, name='run_houses'),
@@ -25,8 +24,8 @@ urlpatterns = [
     path('sales', sales.run_sales, name='run_sales'),
     path('sale/<str:uid_flat>', sales.run_sale, name='run_sale'),
     
-    path('mycompany', firms.run_my_company, name='run_my_company'),
-    path('firms', firms.run_firms, name='run_firms')
+    path('mycompany', cards.run_my_company, name='run_my_company'),
+    path('buisiness', cards.run_buisiness, name='run_buisiness')
 
     
 
