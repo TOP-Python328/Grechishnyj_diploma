@@ -7,18 +7,18 @@ from app.sales.models import Sale, SaleBankClient
 
 def run_sales(request): 
     """Табличное предстваление сделок."""
-    # if request.method == 'GET':
-    #     flats = Flat.objects.using(request.user.dbase)
+    dbase = request.user.dbase
+    sales_banks_clients = SaleBankClient.objects.using(dbase).all()
+    for sale_bank_client in sales_banks_clients:
+        print(dir(sale_bank_client.bank_client.client))
+    print('===========================================================')
     return render(
         request,
         'sales/sales.html',
         {
             'title': 'Сделки',
-            # 'flats': flats,
-            'scripts': [ 
-                'scripts/popup.js', 
-                'scripts/form.js',
-            ]
+            'sales_banks_clients': sales_banks_clients,
+            'scripts': []
         }
     )
 
@@ -132,6 +132,7 @@ def run_contract(request, id_sale):
     username = request.user.username
     my_company = BuisinessCard.objects.using(dbase).get(business=username)
     sale = SaleBankClient.objects.using(databases).get(id=int(id_sale))
+    
 
     return render(
         request,

@@ -54,8 +54,7 @@ def run_house(request, uid: str):
     dbase=request.user.dbase 
     house=House.objects.using(dbase).get(id=int(uid))
     rooms=Room.objects.using(dbase).filter(flat__floor__section__house=house)
-    # sales=Sale.objects.using(dbase)
-    print(sales)
+
     return render(
         request,
         'flats/house.html',

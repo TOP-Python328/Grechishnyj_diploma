@@ -13,11 +13,16 @@
           </tr>
         </thead>
         <tbody>
-          
+          {% for sale_bank_client in sales_banks_clients %}
           <tr>
-            <td><a href="#"></a></td>
+            <td><a href="#">{{ sale_bank_client.sale.number }}</a></td>
+            <td><a href="#">{{ sale_bank_client.sale.dt_issue }}</a></td>
+            <td><a href="#">{{ sale_bank_client.sale.price }}</a></td>
+            <td><a href="#">{{ sale_bank_client.sale.decoration }}</a></td>
+            <td><a href="#">{{ sale_bank_client.bank_client.client.passports }}</a></td>
             <td><a href="#"></a></td>
           </tr>
+          {% endfor %}
           
         </tbody>
       </table>
