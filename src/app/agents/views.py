@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from app.assist.models import Address
 
-from app.cards.models import Person, OrgForm, BuisinessCard, Bank
+from app.agents.models import Person, OrgForm, BuisinessCard, Client, Bank, BankClient
 
 
 def run_buisiness(request):
@@ -97,6 +97,17 @@ def run_buisiness(request):
                 rs=post_bik_rs,
                 owner_uid=post_inn,
                 owner_type='bisiness')
+
+            # Если компания - клиент, то обновляем компанию, добавляем клиентов и записываем данные в банк-клиент
+            if request.POST['business'] == 'client':
+                buisiness.client=Client.objects.using(dbase).create(
+                    uid=f"{request.POST['inn']}")
+                buisiness.save(using=dbase)
+                bank_client=BankClient.objects.using(dbase).create(
+                    bank=bank,
+                    client=client)
+
+
     
     return render(
         request,

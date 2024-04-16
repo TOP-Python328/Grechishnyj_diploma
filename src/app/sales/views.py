@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from app.assist.models import Address
-from app.flats.models import Flat, Room
-from app.cards.models import BuisinessCard, Person, Passport, Bank, Client
+from app.flats.models import Flat, Room, SaleStatus
+from app.agents.models import BuisinessCard, Person, Passport, Bank, Client, BankClient
+from app.sales.models import Sale, SaleBankClient
 
 def run_sales(request): 
     """Табличное предстваление сделок."""
@@ -33,13 +34,8 @@ def run_sale(request, uid_flat):
     if request.method == 'POST':
         print(request.POST)
 
-
         if request.POST['form'] == 'create_new_sale':
-            # Добавление записи в БД об адресе клиента
-            client=Client.objects.using(dbase).create(
-                uid=f"{request.POST['passport_series']}{request.POST['passport_number']}"
-            )
-
+            # Если клиентов несколько - цикл
             address=Address.objects.using(dbase).create( 
                 country_name='Россия',
                 country_full_name='Российская Федерация',
@@ -57,10 +53,11 @@ def run_sale(request, uid_flat):
                 patr_name=request.POST['person_last_name'],
                 sex=request.POST['person_sex'],
                 birthday=request.POST['person_birthday'])
-            # Добавление записи в БД паспортных клиента
+            # Добавление записи в БД клиента
             client=Client.objects.using(dbase).create(
-                uid=f"{request.POST['passport_series']}{request.POST['passport_number']}"
-            )
+                uid=f"{request.POST['passport_series']}{request.POST['passport_number']}")
+            # Если клиент физическое лицо
+            # Добавление записи в БД паспортных данных клиента
             passport=Passport.objects.using(dbase).create(
                 client=client,
                 series=request.POST['passport_series'],
@@ -71,7 +68,10 @@ def run_sale(request, uid_flat):
                 police_code=request.POST['passport_police_code'],
                 person=person,
                 address=address)
-            # Добавление записи в БД о расчетным счете клиента
+            # Если клиент юридическое лицо
+            # Добавление записи в БД бизнес-карты клиента
+            # ...
+            # Добавление записи в БД о расчетном счете клиента
             bank=Bank.objects.using(dbase).create(
                 bik=request.POST['bik_number'],
                 branch=request.POST['bik_branch'],
@@ -81,16 +81,30 @@ def run_sale(request, uid_flat):
                 rs=request.POST['bik_rs'],
                 owner_uid=f'{passport.series}{passport.number}',
                 owner_type='individual')
-            # Добавление записи в БД о новом клиенте
-            # Client
-
-
-        
-
-        
-        
-    # 'form': ['create_new_sale'], 
- 
+            # Добавление записи в БД о расчетном счете клиента
+            bank_client=BankClient.objects.using(dbase).create(
+                client=client,
+                bank=bank)
+            # Добавление записи в БД о новой продаже
+            sale=Sale.objects.using(dbase).create(
+                number=request.POST['sale_number'],
+                city=request.POST['sale_city'],
+                dt_issue=request.POST['sale_date'],
+                decoration=request.POST['sale_interior_decoration'],
+                price=request.POST['sale_price'],
+                escrow_agent=BuisinessCard.objects.using(dbase).get(id=request.POST['escrow_agent']))
+            # Добавление записи в БД об участниках в сделке
+            sales_banks_clients=SaleBankClient.objects.using(dbase).create(
+                sale=sale,
+                bank_client=bank_client,
+                part=request.POST['sale_part'],
+                pay_days=request.POST['sale_pay_days'],
+                own_money=request.POST['sale_own_money'], 
+                credit_money=request.POST['sale_credit_money'])
+            # Изменения статуса продажи квартиры
+            flat.status = SaleStatus.objects.using(dbase).get(name='sold')
+            flat.save(using=dbase)
+        return redirect('run_sales', permanent=True)
 
     return render(
         request,
@@ -106,7 +120,25 @@ def run_sale(request, uid_flat):
                 'scripts/form.js', 
                 'scripts/client.js',
                 'scripts/address.js',
-                'scripts/bik.js',
-            ]
+                'scripts/bik.js']
+        }
+    )
+
+
+
+def run_contract(request, id_sale): 
+    """Договор долевого участия."""
+    dbase = request.user.dbase
+    username = request.user.username
+    my_company = BuisinessCard.objects.using(dbase).get(business=username)
+    sale = SaleBankClient.objects.using(databases).get(id=int(id_sale))
+
+    return render(
+        request,
+        'sales/contract.html',
+        {
+            'title': 'Договор долевого участия',
+            'sale': sale,
+            'scripts': []
         }
     )

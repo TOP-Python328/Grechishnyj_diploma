@@ -1,0 +1,126 @@
+@startuml
+
+hide class empty members
+
+title 
+	Сделка ДДУ. Модели классов. 
+end title
+  
+
+class Person ##[bold]grey{
+	Персона
+	..
+	+ last_name: CharField
+	+ first_name: CharField
+	+ patr_name: CharField
+	+ sex: BooleanField
+	+ birthday: DateField
+}
+
+class Client ##[bold]grey{
+	Покупатель
+	..
+	+ uid: CharField
+}
+
+class Passport ##[bold]grey{
+	Пасспорт
+	..
+	+ series: CharField
+	+ number: CharField
+	+ police_name: CharField
+	+ police_code: CharField
+	+ place_birth: CharField
+	+ dt_issue: DateField
+	--
+	+ address: ForeignKey(Address)
+	+ person: ForeignKey(Person)
+	+ client: ForeignKey(Client)
+}
+
+class OrgForm ##[bold]grey{
+	Форма ЮЛ
+	..
+	+ full_name: CharField
+	+ short_name: CharField
+}
+
+class BuisinessCard  ##[bold]grey{
+	Бизнес-карта ЮЛ
+	..
+	+ full_name: CharField
+	+ short_name: CharField
+	+ inn: CharField
+	+ kpp: CharField
+	+ ogrn: CharField
+	+ business: CharField
+	+ site: CharField
+	+ email: CharField
+	+ director_power_type: CharField
+	+ director_power_number: CharField
+	+ director_power_date: DateField
+	--
+	+ director: ForeignKey(Person)
+	+ address: ForeignKey(Address)
+	+ orgform: ForeignKey(OrgForm)
+	+ client: ForeignKey(Client)
+}
+
+class Bank ##[bold]grey{
+	Расчётный счет
+	..
+	+ bik: CharField
+	+ branch: CharField
+	+ ks: CharField
+	+ rs: CharField
+	+ city: CharField
+	+ address: CharField
+	+ owner_uid: CharField
+	+ owner_type: CharField
+}
+
+class BankClient  ##[bold]grey{
+	Cчета клиентов
+	--
+	+ client: ForeignKey(Client)
+	+ bank: ForeignKey(Bank)
+}
+
+class Sale  ##[bold]grey{
+	Договор
+	..
+	+ number: CharField
+	+ dt_issue: DateField
+	+ city: CharField
+	+ price: FloatField
+	+ decoration: BooleanField
+	--
+	+ escrow_agent: ForeignKey(BuisinessCard)
+}
+
+class SaleBankClient  ##[bold]grey{
+	Договор-Покупатели
+	..
+	+ part: FloatField
+	+ pay_days: CharField
+	+ own_money: FloatField
+	+ credit_money: FloatField
+	--
+	+ sale: ForeignKey(Sale)
+	+ bank_client: ForeignKey(BankClient)
+}
+
+
+
+SaleBankClient  -[#grey,bold]d-* Sale
+SaleBankClient  -[#grey,bold]l-* BankClient
+BankClient      -[#grey,bold]d-* Client
+Client          -[#grey,bold]-o  BuisinessCard
+Client          -[#grey,bold]-*  Passport
+Person         o-[#grey,bold]l-  Passport
+Person         o-[#grey,bold]r-  BuisinessCard
+Bank           *-[#grey,bold]r-  BankClient
+BuisinessCard  o-[#grey,bold]u-  Sale
+BuisinessCard   -[#grey,bold]r-* OrgForm
+@enduml
+

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CardsConfig(AppConfig):
+class AgentsConfig(AppConfig):
     default_auto_field = 'django.db.models.AutoField'
-    name = 'app.cards'
+    name = 'app.agents'

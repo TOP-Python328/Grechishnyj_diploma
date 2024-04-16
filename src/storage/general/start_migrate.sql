@@ -191,7 +191,7 @@ create table passports (
     dt_issue date not null,
     address_id integer not null,
     person_id integer not null,
-    client_id integer not null,
+    client_id integer,
     foreign key (address_id) references addresses(id),
     foreign key (person_id) references persons(id),
     foreign key (client_id) references clients(id));
@@ -219,9 +219,11 @@ create table buisiness_cards (
     director_id integer,
     address_id integer,
     orgform_id integer not null,
+    client_id integer,
     foreign key (director_id) references persons(id),
     foreign key (address_id) references addresses(id),
-    foreign key (orgform_id) references orgforms(id));
+    foreign key (orgform_id) references orgforms(id),
+    foreign key (client_id) references clients(id));
 
 create table banks (
     id integer primary key,
@@ -234,7 +236,7 @@ create table banks (
     owner_uid varchar(16) not null,
     owner_type varchar(16) not null);
 
-create table clients_banks (
+create table banks_clients (
     id integer primary key,
     client_id integer not null,
     bank_id integer not null,
@@ -243,9 +245,21 @@ create table clients_banks (
 
 create table sales (
     id integer primary key,
-    bank_id integer not null,
-    flat_id integer not null);
+    number varchar(32) not null,
+    dt_issue date not null,
+    price float not null default(0.0),
+    city varchar(32) not null,
+    decoration boolean not null check (decoration in (0, 1)),
+    escrow_agent_id integer,
+    foreign key (escrow_agent_id) references buisiness_cards(id));
 
-
-
-
+create table sales_banks_clients (
+    id integer primary key,
+    part float not null default(100.0), 
+    pay_days varchar(3) not null,
+    own_money float not null default(0.0), 
+    credit_money float not null default(0.0),
+    sale_id integer not null,
+    bank_client_id integer not null,
+    foreign key (sale_id) references sales(id),
+    foreign key (bank_client_id) references banks_clients(id));

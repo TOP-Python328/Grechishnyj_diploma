@@ -21,6 +21,7 @@
           <div class="back close">
             <div class="wrapper_form">
               <form class="flat" action="" method="post">
+                {{ flat.number }}
                 {% csrf_token %}
                 <input name="form" hidden value="update_flat">
                 <div class="column col-1 form_title">Квартира № {{ flat.number }}</div>
@@ -63,7 +64,6 @@
                   <div class="column col-2">
                     <div class="subtitle">Состав комнат</div>
                     {% for room in flat.room_set.all %}
-                    
                     <div class="select_item">
                       <input name="room_type" class="left" value="{{ room.room_type.name }}" readonly>
                       <input name="square" class="right" value="{{ room.square }}" readonly>
@@ -73,9 +73,11 @@
                 </div>
                 <div class="row">
                   <input class="column col-2" type="reset" value="Редактировать">
-                  <input class="column col-2" type="reset" value="Договор">
+                  {% if flat.status.name == "free" %}
                   <a class="button column col-2" href="{% url 'run_sale' flat.url %}">Новый контракт</a>
-                  
+                  {% elif flat.status.name == "sold" %}
+                  <a class="button column col-2" href="#">Смотреть договор</a>
+                  {% endif %}
                 </div>               
               </form>
             </div>

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-
+from django.db.models import Count, Avg, Sum
 from app.assist.models import Address
+from app.sales.models import Sale
 
 from app.flats.models import ( 
     SaleStatus, Microdistrict, House, Flat, RoomType, Section, Floor, FlatsPlan, FloorPlan, SectionPlan, 
     BuildingPermit, EnergySave, Seismic, HouseType, Room, LandPlot, Material)
 
-from django.db.models import Count, Avg, Sum
+
 
 
 
@@ -49,10 +50,12 @@ def run_houses(request):
     )
 
 def run_house(request, uid: str):
+    """Представление жилого дома."""
     dbase=request.user.dbase 
     house=House.objects.using(dbase).get(id=int(uid))
     rooms=Room.objects.using(dbase).filter(flat__floor__section__house=house)
-    print(rooms)
+    # sales=Sale.objects.using(dbase)
+    print(sales)
     return render(
         request,
         'flats/house.html',

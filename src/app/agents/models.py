@@ -19,7 +19,7 @@ class Client(models.Model):
         db_table = 'clients'
     uid = models.CharField(max_length=16, unique=True)
 
-class Passport(Client):
+class Passport(models.Model):
     """Паспорт."""
     class Meta:
         db_table = 'passports'
@@ -31,7 +31,7 @@ class Passport(Client):
     dt_issue = models.DateField()
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='passports') 
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='passports', null=True)
 
 class OrgForm(models.Model):
     """Организационно правовая форма."""
@@ -58,8 +58,7 @@ class BuisinessCard(models.Model):
     director = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     orgform = models.ForeignKey(OrgForm, on_delete=models.CASCADE)
-
-
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='buisiness', null=True)
 
 class Bank(models.Model):
     """Банк."""
@@ -74,10 +73,10 @@ class Bank(models.Model):
     owner_uid = models.CharField(max_length=16) # на удаление
     owner_type = models.CharField(max_length=16) #buisiness and individuals # на удаление
 
-class ClientBank(models.Model):
+class BankClient(models.Model):
     """Банковские счета клиентов."""
     class Meta:
-        db_table = 'clients_banks'
+        db_table = 'banks_clients'
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
 

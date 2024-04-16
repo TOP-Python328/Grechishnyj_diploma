@@ -4,8 +4,7 @@
 
 <h2>Новый договор</h2>
 <div class="wrapper">
-    <div class="account">
-        
+    <div class="account">    
     <form action="" method="post">
         {% csrf_token %}
         <input name="form" hidden value="create_new_sale">
@@ -16,12 +15,46 @@
             <div class="account-point-title">Дата договора</div>
             <div class="account-point-data"><input name="sale_date" type="date" value=""></div>
         </div>
+        <div class="account-point">
+            <div class="account-point-title">Внутреняя отделка</div>
+            <div class="account-point-data">
+                <div class="radio">
+                    <input type="radio" name="sale_interior_decoration" value="1" checked />
+                    <label>с отделкой</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="sale_interior_decoration" value="" />
+                    <label>без отделки</label>
+                </div>
+            </div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Эскроу агент</div>
+            <div class="account-point-data">
+                <select name="escrow_agent" required>
+                    <option value="">Выбрать эскроу агента</option>
+                    {% for escrow_agent in escrow_agents %}
+                    <option value="{{ escrow_agent.id }}">{{ escrow_agent.short_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Срок передачи</div>
+            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.dt_expiry }}</span></div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Сумма договора</div>
+            <div class="account-point-data"><input name="sale_price" type="text" placeholder="Сумма" value=""></div>
+        </div>
+        
         <div class="client">
             <div class="switch">
                 <div class="switch-tab" data-fieldset="person">Основные</div>
                 <div class="switch-tab" data-fieldset="passport">Паспорт</div>
                 <div class="switch-tab" data-fieldset="address">Адрес</div>
                 <div class="switch-tab" data-fieldset="requisites">Реквизиты</div>
+                <div class="switch-tab" data-fieldset="portion">Доля</div>
             </div>
             <fieldset data-fieldset="person">
                 <div class="account-point">
@@ -83,24 +116,24 @@
 
 
             <fieldset class="hide address-block" data-fieldset="address">
-                    <select name="region" required>
-                        <option value="">Регион</option>
-                    </select>
-                    <select name="district" required>
-                        <option value="">Район</option>
-                    </select>
-                    <select name="locality" required>
-                        <option value="город">Город</option>
-                        <option value="деревня">Деревня</option>
-                        <option value="поселок">Поселок</option>
-                        <option value="село">Село</option> 
-                    </select> 
-                    <select name="city" required>
-                        <option value="">Населенный пункт</option>
-                    </select>
-                    <input name="street" type="text" placeholder="Улица" autocomplete="off">
-                    <input name="home" type="text" placeholder="Дом" autocomplete="off"> 
-                    <input name="flat" type="text" placeholder="Квартира" autocomplete="off">   
+                <select name="region" required>
+                    <option value="">Регион</option>
+                </select>
+                <select name="district" required>
+                    <option value="">Район</option>
+                </select>
+                <select name="locality" required>
+                    <option value="город">Город</option>
+                    <option value="деревня">Деревня</option>
+                    <option value="поселок">Поселок</option>
+                    <option value="село">Село</option> 
+                </select> 
+                <select name="city" required>
+                    <option value="">Населенный пункт</option>
+                </select>
+                <input name="street" type="text" placeholder="Улица" autocomplete="off">
+                <input name="home" type="text" placeholder="Дом" autocomplete="off"> 
+                <input name="flat" type="text" placeholder="Квартира" autocomplete="off">   
             </fieldset>
 
 
@@ -112,6 +145,25 @@
                 <input name="bik_ks" readonly placeholder="Корреспондентский счёт" autocomplete="off" value="">
                 <input name="bik_rs" placeholder="Расчетный счёт" autocomplete="off" value="">
             </fieldset>
+
+            <fieldset class="hide" data-fieldset="portion">
+                <div class="account-point">
+                    <div class="account-point-title">Доля участия</div>
+                    <div class="account-point-data"><input name="sale_part" type="text" placeholder="Дней" value=""></div>
+                </div>
+                <div class="account-point">
+                    <div class="account-point-title">Оплата в течении (дней)</div>
+                    <div class="account-point-data"><input name="sale_pay_days" type="text" placeholder="Дней" value=""></div>
+                </div>
+                <div class="account-point">
+                    <div class="account-point-title">Собственные средства</div>
+                    <div class="account-point-data"><input name="sale_own_money" type="text" placeholder="Сумма" value=""></div>
+                </div>
+                <div class="account-point">
+                    <div class="account-point-title">Кредитные средства</div>
+                    <div class="account-point-data"><input name="sale_credit_money" name="" type="text" placeholder="Сумма" value=""></div>
+                </div>
+            </fieldset>
         </div>   
         <div class="row">
             <div class="column col-3"></div>
@@ -121,254 +173,6 @@
             <input class="column col-3" type="submit" value="Сохранить">
         </div>
     </form>    
-        
-        
-        
-<hr>
-        <div class="account-point">
-            <div class="account-point-title" style="font-weight: bold;">Общие положения</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.number }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом вид</div>
-            <div class="account-point-data"><span class="accept">Многоквартирный жилой дом</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом этажность</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.number_of_floors }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом общая площадь</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.square }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом материал стен</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.material_wall.name }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом материал перекрытий</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.material_floor.name }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом энергоэффективность</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.energy_save.name }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом сейсмостойкости</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.seismic.name }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес страна</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.country_full_name }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес регион</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.region }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес район</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.district }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес населенный пункт</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.locality }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес название пункта</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.city }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес улица</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.address.street }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Жилой дом адрес номер по ГП</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.number }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок адрес страна</div>
-            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.country_full_name }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок адрес регион</div>
-            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.region }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок адрес населенный пункт</div>
-            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.locality }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок адрес название пункта</div>
-            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.city }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок адрес улица</div>
-            <div class="account-point-data"><span class="danger">{{ flat.floor.section.house.address.street }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок площадь</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.square }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок кадастровый номер</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.number }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок категория</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.category }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок вид разрешенного использования</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.usage }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок право</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_type }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок право договор номер</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_number }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок право договор дата</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_date }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок право договор номер регистрации</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_reg_number }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок право договор дата регистрации</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.land_plot.owner_reg_date }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Земельный участок право договор дата выписки</div>
-            <div class="account-point-data"><input style="width: 200px;" name="" type="date" value=""></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Квартира площадь</div>
-            <div class="account-point-data"><span class="accept">{{ flat.square }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Разрешение на строительство номер</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.number }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Застройщик сайт</div>
-            <div class="account-point-data"><span class="accept">{{ my_company.site }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Эскроу агент</div>
-            <div class="account-point-data">
-                <select name="escrow_agent" required>
-                    <option value="">Выбрать эскроу агента</option>
-                    {% for escrow_agent in escrow_agents %}
-                    <option value="{{ orgform.id }}">{{ escrow_agent.short_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-    
-<hr>
-    <div class="account-point">
-        <div class="account-point-title" style="font-weight: bold;">Предмет Договора</div>
-    </div> 
-    <div class="account-point">
-        <div class="account-point-title">Номер квартиры</div>
-        <div class="account-point-data"><span class="accept">{{ flat.number }}</span></div>
-    </div>   
-    <div class="account-point">
-        <div class="account-point-title">Количество жилых комнат</div>
-        <div class="account-point-data"><span class="accept">{{ flat.living_rooms }}</span></div>
-    </div> 
-    <div class="account-point">
-        <div class="account-point-title">Количество комнат</div>
-        <div class="account-point-data"><span class="accept">{{ flat.count_rooms }}</span></div>
-    </div> 
-    <div class="account-point">
-        <div class="account-point-title">Площадь комнат</div>
-        <div class="account-point-data"><span class="accept">{{ flat.square }}</span></div>
-    </div> 
-    <div class="account-point">
-        <div class="account-point-title">Этаж</div>
-        <div class="account-point-data"><span class="accept">{{ flat.floor.number }}</span></div>
-    </div> 
-    <div class="account-point">
-        <div class="account-point-title">Секция</div>
-        <div class="account-point-data"><span class="accept">{{ flat.floor.section.number }}</span></div>
-    </div>
-    <div class="account-point">
-        <div class="account-point-title">Назначение объекта</div>
-        <div class="account-point-data"><span class="accept">Жилое помещение</span></div>
-    </div>
-
-<hr>
-    <div class="account-point">
-        <div class="account-point-title" style="font-weight: bold;">Состав объекта</div>
-    </div>
-    {% for room in rooms %}
-    <div class="account-point">
-        <div class="account-point-title">{{ room.room_type.name }}</div>
-        <div class="account-point-data"><span class="accept">{{ room.square }}</span></div>
-    </div>
-    {% endfor %}
-
-    <div class="account-point">
-        <div class="account-point-title">Внутреняя отделка</div>
-        <div class="account-point-data">
-            <span class="accept">
-            <div class="radio">
-                <input type="radio" name="sex" value="1" checked />
-                <label>с отделкой</label>
-            </div>
-            <div class="radio">
-                <input type="radio" name="sex" value="" />
-                <label>без отделки</label>
-            </div>
-            </span>
-        </div>
-    </div>
-<hr>
-    <div class="account-point">
-        <div class="account-point-title">Срок передачи</div>
-        <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.dt_expiry }}</span></div>
-    </div>
-    <div class="account-point">
-        <div class="account-point-title">Ознакомлен с проектной декларацией</div>
-        <div class="account-point-data"><span class="accept">{{ my_company.site }}</span></div>
-    </div>
-
-<hr>
-    <div class="account-point">
-        <div class="account-point-title" style="font-weight: bold;">Цена договора и оплата</div>
-    </div>
-    <div class="account-point">
-        <div class="account-point-title">Сумма договора</div>
-        <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Сумма" value=""></div>
-    </div>
-    <div class="account-point">
-        <div class="account-point-title">Оплата в течении (дней)</div>
-        <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Дней" value=""></div>
-    </div>
-    <div class="account-point">
-        <div class="account-point-title">Собственные средства</div>
-        <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Сумма" value=""></div>
-    </div>
-    <div class="account-point">
-        <div class="account-point-title">Кредитные средства</div>
-        <div class="account-point-data"><input style="width: 200px;" name="" type="text" placeholder="Сумма" value=""></div>
-    </div>
-
-    
-  
-    
-    
-
-
-    
     </div>
 </div>
 {% endblock main %}
