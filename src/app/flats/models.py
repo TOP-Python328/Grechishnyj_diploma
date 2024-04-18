@@ -97,6 +97,15 @@ class House(models.Model):
         """Этажность."""
         return max(len(section.floor_set.all()) for section in self.section_set.all())
 
+    @property
+    def count_flats(self):
+        """Количество квартир."""
+        flats = 0
+        for section in self.section_set.all():
+            for floor in section.floor_set.all():
+                flats += len(floor.flat_set.all())
+        return flats
+
 class SectionPlan(models.Model):
     """Типовые секции (подъезды)."""
     class Meta:

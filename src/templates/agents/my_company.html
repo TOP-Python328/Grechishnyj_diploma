@@ -5,102 +5,6 @@
 <div class="wrapper">
     <div class="account">
         <div class="account-point">
-            <div class="account-point-title">Организационно-правовая форма</div>
-            <div class="account-point-data">{{ my_bisiness_card.orgform.full_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Полное наименование</div>
-            <div class="account-point-data">{{ my_bisiness_card.full_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Сокращенное наименование</div>
-            <div class="account-point-data">{{ my_bisiness_card.short_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">ИНН</div>
-            <div class="account-point-data">{{ my_bisiness_card.inn }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">КПП</div>
-            <div class="account-point-data">{{ my_bisiness_card.kpp }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">ОГРН</div>
-            <div class="account-point-data">{{ my_bisiness_card.ogrn }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Сайт</div>
-            <div class="account-point-data">{{ my_bisiness_card.site }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Email</div>
-            <div class="account-point-data">{{ my_bisiness_card.email }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Директор фамилия</div>
-            <div class="account-point-data">{{ my_bisiness_card.director.last_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Директор имя</div>
-            <div class="account-point-data">{{ my_bisiness_card.director.first_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Директор имя</div>
-            <div class="account-point-data">{{ my_bisiness_card.director.patr_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Директор действует на основании</div>
-            {% if my_bisiness_card.director_power_type %}
-            <div class="account-point-data">{{ my_bisiness_card.director_power_type }}</div>
-            {% else %}
-            <div class="account-point-data"> - </div>
-            {% endif %}
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Директор номер документа оснований</div>
-            {% if my_bisiness_card.director_power_number %}
-            <div class="account-point-data">{{ my_bisiness_card.director_power_number }}</div>
-            {% else %}
-            <div class="account-point-data"> - </div>
-            {% endif %}
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Директор дата документа оснований</div>
-            {% if my_bisiness_card.director_power_date %}
-            <div class="account-point-data">{{ my_bisiness_card.director_power_date }}</div>
-            {% else %}
-            <div class="account-point-data"> - </div>
-            {% endif %}
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Банковские реквизиты</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Адрес страна</div>
-            <div class="account-point-data">{{ my_bisiness_card.address.country_full_name }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Адрес регион</div>
-            <div class="account-point-data">{{ my_bisiness_card.address.region }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Адрес город</div>
-            <div class="account-point-data">{{ my_bisiness_card.address.city }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Адрес улица</div>
-            <div class="account-point-data">{{ my_bisiness_card.address.street }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Адрес дом</div>
-            <div class="account-point-data">{{ my_bisiness_card.address.home }}</div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Адрес офис</div>
-            <div class="account-point-data">{{ my_bisiness_card.address.flat }}</div>
-        </div>
-
-        <div class="account-point">
             <div class="popup">
                 <button class="open_btn btn_simple">Основное</button>
                 <div class="back close">
@@ -137,7 +41,6 @@
                     <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-
             <div class="popup">
                 <button class="open_btn btn_simple">Адрес</button>
                 <div class="back close">
@@ -218,13 +121,128 @@
                     <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
             </div>
-
-
+            <div class="popup">
+                <button class="open_btn btn_simple">Банк</button>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="create_my_bank">
+                            <fieldset class="column col-1">
+                                <legend>Расчетный счёт</legend>
+                                <input name="bik_number" type="search" placeholder="Бик номер" autocomplete="off" value="">
+                                <input name="bik_branch" readonly placeholder="Наименование отделения" autocomplete="off" value="">
+                                <input name="bik_city" readonly placeholder="Город" autocomplete="off" value="">
+                                <input name="bik_address" readonly placeholder="Адрес" autocomplete="off" value="">
+                                <input name="bik_ks" readonly placeholder="Корреспондентский счёт" autocomplete="off" value="">
+                                <input name="bik_rs" placeholder="Расчетный счёт" autocomplete="off" value="">
+                            </fieldset> 
+                            <div class="row">
+                                <div class="column col-3"></div>
+                                <input class="column col-3" type="reset" value="Очистить">
+                                <input class="column col-3" type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
+                </div>
+            </div>
         </div>
-
-
-
-
+        <div class="account-point">
+            <div class="account-point-title">Организационно-правовая форма</div>
+            <div class="account-point-data">{{ my_business_card.orgform.full_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Полное наименование</div>
+            <div class="account-point-data">{{ my_business_card.full_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Сокращенное наименование</div>
+            <div class="account-point-data">{{ my_business_card.short_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">ИНН</div>
+            <div class="account-point-data">{{ my_business_card.inn }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">КПП</div>
+            <div class="account-point-data">{{ my_business_card.kpp }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">ОГРН</div>
+            <div class="account-point-data">{{ my_business_card.ogrn }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Сайт</div>
+            <div class="account-point-data">{{ my_business_card.site }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Email</div>
+            <div class="account-point-data">{{ my_business_card.email }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор фамилия</div>
+            <div class="account-point-data">{{ my_business_card.director.last_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор имя</div>
+            <div class="account-point-data">{{ my_business_card.director.first_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор имя</div>
+            <div class="account-point-data">{{ my_business_card.director.patr_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор действует на основании</div>
+            {% if my_business_card.director_power_type %}
+            <div class="account-point-data">{{ my_business_card.director_power_type }}</div>
+            {% else %}
+            <div class="account-point-data"> - </div>
+            {% endif %}
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор номер документа оснований</div>
+            {% if my_business_card.director_power_number %}
+            <div class="account-point-data">{{ my_business_card.director_power_number }}</div>
+            {% else %}
+            <div class="account-point-data"> - </div>
+            {% endif %}
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Директор дата документа оснований</div>
+            {% if my_business_card.director_power_date %}
+            <div class="account-point-data">{{ my_business_card.director_power_date }}</div>
+            {% else %}
+            <div class="account-point-data"> - </div>
+            {% endif %}
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Банковские реквизиты</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Адрес страна</div>
+            <div class="account-point-data">{{ my_business_card.address.country_full_name }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Адрес регион</div>
+            <div class="account-point-data">{{ my_business_card.address.region }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Адрес город</div>
+            <div class="account-point-data">{{ my_business_card.address.city }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Адрес улица</div>
+            <div class="account-point-data">{{ my_business_card.address.street }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Адрес дом</div>
+            <div class="account-point-data">{{ my_business_card.address.home }}</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Адрес офис</div>
+            <div class="account-point-data">{{ my_business_card.address.flat }}</div>
+        </div>
     </div>
 </div>
 {% endblock main %}

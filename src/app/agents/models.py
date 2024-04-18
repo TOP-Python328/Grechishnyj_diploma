@@ -3,6 +3,13 @@ from functools import cached_property
 from app.assist.models import Address
 from app.users.models import CustomUser
 
+class OrgForm(models.Model):
+    """Организационно правовая форма."""
+    class Meta:
+        db_table = 'orgforms'
+    full_name = models.CharField(max_length=256)
+    short_name = models.CharField(max_length=16)
+
 class Person(models.Model):
     """Персона."""
     class Meta:
@@ -13,11 +20,21 @@ class Person(models.Model):
     sex = models.BooleanField()
     birthday = models.DateField()
 
-class Client(models.Model):
-    """Клиент."""
+    def __str__(self):
+        return f'{self.last_name.title()} {self.first_name[0].upper()}'
+
+class Bank(models.Model):
+    """Банк."""
     class Meta:
-        db_table = 'clients'
-    uid = models.CharField(max_length=16, unique=True)
+        db_table = 'banks'
+    bik = models.CharField(max_length=16)
+    branch = models.CharField(max_length=128)
+    ks = models.CharField(max_length=32)
+    rs = models.CharField(max_length=32)
+    city = models.CharField(max_length=(64), null=True)
+    address = models.CharField(max_length=(128), null=True)
+    owner_uid = models.CharField(max_length=16) # на удаление
+    owner_type = models.CharField(max_length=16) #buisiness and individuals # на удаление
 
 class Passport(models.Model):
     """Паспорт."""
@@ -31,14 +48,7 @@ class Passport(models.Model):
     dt_issue = models.DateField()
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='passports', null=True)
-
-class OrgForm(models.Model):
-    """Организационно правовая форма."""
-    class Meta:
-        db_table = 'orgforms'
-    full_name = models.CharField(max_length=256)
-    short_name = models.CharField(max_length=16)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
 
 class BuisinessCard(models.Model):
     """Бизнес-карта."""
@@ -58,25 +68,12 @@ class BuisinessCard(models.Model):
     director = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     orgform = models.ForeignKey(OrgForm, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='buisiness', null=True)
-
-class Bank(models.Model):
-    """Банк."""
-    class Meta:
-        db_table = 'banks'
-    bik = models.CharField(max_length=16)
-    branch = models.CharField(max_length=128)
-    ks = models.CharField(max_length=32)
-    rs = models.CharField(max_length=32)
-    city = models.CharField(max_length=(64), null=True)
-    address = models.CharField(max_length=(128), null=True)
-    owner_uid = models.CharField(max_length=16) # на удаление
-    owner_type = models.CharField(max_length=16) #buisiness and individuals # на удаление
-
-class BankClient(models.Model):
-    """Банковские счета клиентов."""
-    class Meta:
-        db_table = 'banks_clients'
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
+
+class Client(models.Model):
+    """Клиент."""
+    class Meta:
+        db_table = 'clients'
+    passport = models.ForeignKey(Passport, on_delete=models.CASCADE, null=True)
+    business = models.ForeignKey(BuisinessCard, on_delete=models.CASCADE, null=True)
 

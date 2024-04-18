@@ -76,7 +76,7 @@
                   {% if flat.status.name == "free" %}
                   <a class="button column col-2" href="{% url 'run_sale' flat.url %}">Новый контракт</a>
                   {% elif flat.status.name == "sold" %}
-                  <a class="button column col-2" href="#">Смотреть договор</a>
+                  <a class="button column col-2" href="{% url 'run_contract' flat.url %}">Смотреть договор</a>
                   {% endif %}
                 </div>               
               </form>

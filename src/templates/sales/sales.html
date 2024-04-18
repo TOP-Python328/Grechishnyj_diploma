@@ -8,22 +8,33 @@
       <table>
         <thead>
           <tr>
-            <td>№</td>
             <td>Номер договора</td>
+            <td>Дата договора</td>
+            <td>Дом</td>
+            <td>Квартира</td>
+            <td>Отделка</td>
+            <td>Площадь</td>
+            <td>Клиент</td>
+            <td>Цена</td>
           </tr>
         </thead>
         <tbody>
-          {% for sale_bank_client in sales_banks_clients %}
+          {% for sale_client in sales_clients %}
           <tr>
-            <td><a href="#">{{ sale_bank_client.sale.number }}</a></td>
-            <td><a href="#">{{ sale_bank_client.sale.dt_issue }}</a></td>
-            <td><a href="#">{{ sale_bank_client.sale.price }}</a></td>
-            <td><a href="#">{{ sale_bank_client.sale.decoration }}</a></td>
-            <td><a href="#">{{ sale_bank_client.bank_client.client.passports }}</a></td>
-            <td><a href="#"></a></td>
+            <td><a href="#">{{ sale_client.sale.number }}</a></td>
+            <td><a href="#">{{ sale_client.sale.dt_issue }}</a></td>
+            <td><a href="#">{{ sale_client.sale.flat.floor.section.house.number }}</a></td>
+            <td><a href="#">{{ sale_client.sale.flat.number }}</a></td>
+            <td><a href="#">{{ sale_client.sale.decoration }}</a></td>
+            <td><a href="#">{{ sale_client.sale.flat.square }}</a></td>
+            {% if sale_client.client.passport %}
+            <td><a href="#">{{ sale_client.client.passport.person }}</a></td>
+            {% elif sale_client.bank_client.client.instance == "buisiness_card" %}
+            <td><a href="#">Бизнес-Карта</a></td>
+            {% endif %}
+            <td><a href="#">{{ sale_client.sale.price }}</a></td>
           </tr>
           {% endfor %}
-          
         </tbody>
       </table>
     </div>

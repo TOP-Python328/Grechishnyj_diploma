@@ -169,6 +169,13 @@ create table addresses (
     home varchar(16),
     flat varchar(4));
 
+create table orgforms (
+    id integer primary key,
+    full_name varchar(256) not null,
+    short_name varchar(16) not null);
+insert into orgforms (full_name, short_name) values ('Общество с ограниченной ответственностью', 'ООО');
+insert into orgforms (full_name, short_name) values ('Публичное акционерное общество', 'ПАО');
+
 create table persons (
     id integer primary key,
     last_name varchar(64) not null,
@@ -177,9 +184,16 @@ create table persons (
     sex boolean not null check (sex in (0, 1)),
     birthday date not null);
 
-create table clients (
+create table banks (
     id integer primary key,
-    uid varchar(16) unique not null);
+    bik varchar(16) not null,
+    branch varchar(128) not null,
+    ks varchar(32) not null,
+    rs varchar(32) not null,
+    city varchar(64),
+    address varchar(128),
+    owner_uid varchar(16) not null,
+    owner_type varchar(16) not null);
 
 create table passports (
     id integer primary key,
@@ -192,16 +206,10 @@ create table passports (
     address_id integer not null,
     person_id integer not null,
     client_id integer,
+    bank_id integer,
     foreign key (address_id) references addresses(id),
     foreign key (person_id) references persons(id),
-    foreign key (client_id) references clients(id));
-
-create table orgforms (
-    id integer primary key,
-    full_name varchar(256) not null,
-    short_name varchar(16) not null);
-insert into orgforms (full_name, short_name) values ('Общество с ограниченной ответственностью', 'ООО');
-insert into orgforms (full_name, short_name) values ('Публичное акционерное общество', 'ПАО');
+    foreign key (bank_id) references banks(id));
 
 create table buisiness_cards (
     id integer primary key,
@@ -220,28 +228,18 @@ create table buisiness_cards (
     address_id integer,
     orgform_id integer not null,
     client_id integer,
+    bank_id integer,
     foreign key (director_id) references persons(id),
     foreign key (address_id) references addresses(id),
     foreign key (orgform_id) references orgforms(id),
-    foreign key (client_id) references clients(id));
-
-create table banks (
-    id integer primary key,
-    bik varchar(16) not null,
-    branch varchar(128) not null,
-    ks varchar(32) not null,
-    rs varchar(32) not null,
-    city varchar(64),
-    address varchar(128),
-    owner_uid varchar(16) not null,
-    owner_type varchar(16) not null);
-
-create table banks_clients (
-    id integer primary key,
-    client_id integer not null,
-    bank_id integer not null,
-    foreign key (client_id) references clients(id),
     foreign key (bank_id) references banks(id));
+
+create table clients (
+    id integer primary key,
+    passport_id integer,
+    business_id integer,
+    foreign key (passport_id) references passports(id),
+    foreign key (business_id) references buisiness_cards(id));
 
 create table sales (
     id integer primary key,
@@ -250,16 +248,19 @@ create table sales (
     price float not null default(0.0),
     city varchar(32) not null,
     decoration boolean not null check (decoration in (0, 1)),
-    escrow_agent_id integer,
+    flat_id integer not null,
+    escrow_agent_id integer not null,
+    foreign key (flat_id) references flats(id),
     foreign key (escrow_agent_id) references buisiness_cards(id));
 
-create table sales_banks_clients (
+create table sales_clients (
     id integer primary key,
     part float not null default(100.0), 
     pay_days varchar(3) not null,
     own_money float not null default(0.0), 
     credit_money float not null default(0.0),
+    client_id integer not null,
     sale_id integer not null,
-    bank_client_id integer not null,
-    foreign key (sale_id) references sales(id),
-    foreign key (bank_client_id) references banks_clients(id));
+    foreign key (client_id) references clients(id),
+    foreign key (sale_id) references sales(id));
+

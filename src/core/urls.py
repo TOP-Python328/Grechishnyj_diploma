@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('sales', sales.run_sales, name='run_sales'),
     path('sale/<str:uid_flat>', sales.run_sale, name='run_sale'),
-    path('contract/<str:id_sale>', sales.run_contract, name='run_contract'),
+    path('contract/<str:uid_flat>', sales.run_contract, name='run_contract'),
     
     path('mycompany', agents.run_my_company, name='run_my_company'),
     path('buisiness', agents.run_buisiness, name='run_buisiness')

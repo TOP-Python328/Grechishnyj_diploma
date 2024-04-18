@@ -8,6 +8,7 @@
     <form action="" method="post">
         {% csrf_token %}
         <input name="form" hidden value="create_new_sale">
+        <input name="sale_flat" hidden value="{{ flat.id }}">
         <input name="sale_number" hidden value="{{ flat.sale_number }}">
         <input name="sale_city" hidden value="{{ my_company.address.city }}">
 

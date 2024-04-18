@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-
 from app.assist.models import Address
-
-from app.agents.models import Person, OrgForm, BuisinessCard, Client, Bank, BankClient
+from app.agents.models import Person, OrgForm, BuisinessCard, Client, Bank
 
 
 def run_buisiness(request):
@@ -69,6 +67,17 @@ def run_buisiness(request):
                 street=post_street,
                 home=post_home,
                 flat=post_flat)
+
+            # Запись в БД данных о расчетном счёте компании
+            bank=Bank.objects.using(dbase).create(
+                bik=post_bik_number,
+                branch=post_bik_branch,
+                city=post_bik_city,
+                address=post_bik_address,
+                ks=post_bik_ks,
+                rs=post_bik_rs,
+                owner_uid=post_inn,
+                owner_type='bisiness')
             
             # Запись в БД данных о новой компании
             buisiness=BuisinessCard.objects.using(dbase).create(
@@ -82,36 +91,18 @@ def run_buisiness(request):
                 site=post_site,
                 email=post_email,
                 address=address,
+                bank=bank,
                 director=director,
                 director_power_type=post_director_power_type,
                 director_power_number=post_director_power_number,
                 director_power_date=post_director_power_date)
             
-            # Запись в БД данных о расчетном счёте компании
-            bank=Bank.objects.using(dbase).create(
-                bik=post_bik_number,
-                branch=post_bik_branch,
-                city=post_bik_city,
-                address=post_bik_address,
-                ks=post_bik_ks,
-                rs=post_bik_rs,
-                owner_uid=post_inn,
-                owner_type='bisiness')
-
-            # Если компания - клиент, то обновляем компанию, добавляем клиентов и записываем данные в банк-клиент
-            if request.POST['business'] == 'client':
-                buisiness.client=Client.objects.using(dbase).create(
-                    uid=f"{request.POST['inn']}")
-                buisiness.save(using=dbase)
-                bank_client=BankClient.objects.using(dbase).create(
-                    bank=bank,
-                    client=client)
 
 
     
     return render(
         request,
-        'cards/buisiness.html',
+        'agents/buisiness.html',
         {
             'title': 'Компании',
             'orgforms': orgforms,
@@ -120,7 +111,6 @@ def run_buisiness(request):
                 'scripts/form.js',
                 'scripts/address.js',
                 'scripts/bik.js',
-
             ]
         }
     )
@@ -131,9 +121,9 @@ def run_my_company(request):
     persons = Person.objects.using(dbase)
     orgforms = OrgForm.objects.using(dbase)    
     try:
-        my_bisiness_card = BuisinessCard.objects.using(dbase).get(business=username)
+        my_business_card = BuisinessCard.objects.using(dbase).get(business=username)
     except Exception:
-        my_bisiness_card = None
+        my_business_card = None
 
     if request.method == 'GET':
         ...
@@ -148,7 +138,7 @@ def run_my_company(request):
             post_ogrn = int(request.POST['orgform'])
             post_site = str(request.POST['site'])
             post_email = str(request.POST['email'])
-            if not my_bisiness_card:
+            if not my_business_card:
                 BuisinessCard(
                     orgform=OrgForm.objects.using(dbase).get(id=post_ogrn),
                     business=username,
@@ -162,7 +152,7 @@ def run_my_company(request):
                 ).save(using=dbase)
             else:
                 ...
-                # print('I already have a business card', my_bisiness_card)
+                # print('I already have a business card', my_business_card)
 
         elif request.POST['form'] == 'create_my_address':
             post_region = str(request.POST['region'])
@@ -183,8 +173,8 @@ def run_my_company(request):
                 home=post_home,
                 flat=post_flat
             )
-            my_bisiness_card.address = address
-            my_bisiness_card.save(using=dbase)
+            my_business_card.address = address
+            my_business_card.save(using=dbase)
 
         elif request.POST['form'] == 'create_my_director':
             post_last_name = str(request.POST['last_name'])
@@ -202,11 +192,23 @@ def run_my_company(request):
                 sex=post_sex,
                 birthday=post_birthday,
             )
-            my_bisiness_card.director = director
-            my_bisiness_card.director_power_type = post_director_power_type
-            my_bisiness_card.director_power_number = post_director_power_number
-            my_bisiness_card.director_power_date = post_director_power_date
-            my_bisiness_card.save(using=dbase)
+            my_business_card.director = director
+            my_business_card.director_power_type = post_director_power_type
+            my_business_card.director_power_number = post_director_power_number
+            my_business_card.director_power_date = post_director_power_date
+            my_business_card.save(using=dbase)
+
+        elif request.POST['form'] == 'create_my_bank':
+            bank=Bank.objects.using(dbase).create(
+                bik=request.POST['bik_number'],
+                branch=request.POST['bik_branch'],
+                city=request.POST['bik_city'],
+                address=request.POST['bik_address'],
+                ks=request.POST['bik_ks'],
+                rs=request.POST['bik_rs']
+            )
+            my_business_card.bank=bank
+            my_business_card.save(using=dbase)                
 
 
 # ======================================================================================================
@@ -258,16 +260,17 @@ def run_my_company(request):
     
     return render(
         request,
-        'cards/my_company.html',
+        'agents/my_company.html',
         {
             'title': 'Моя компания',
             'persons': persons,
             'orgforms': orgforms,
-            'my_bisiness_card': my_bisiness_card,
+            'my_business_card': my_business_card,
             'scripts': [                 
                 'scripts/popup.js', 
                 'scripts/form.js',
                 'scripts/address.js',
+                'scripts/bik.js'
             ]
         }
     )

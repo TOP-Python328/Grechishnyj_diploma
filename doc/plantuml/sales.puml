@@ -2,125 +2,120 @@
 
 hide class empty members
 
+scale 1200*800
+
 title 
 	Сделка ДДУ. Модели классов. 
 end title
-  
 
-class Person ##[bold]grey{
+class OrgForm ##[bold]grey {
+    Форма ЮЛ
+    ..
+	+ full_name: CharField[256]
+    + short_name: CharField[16]
+}
+class Person ##[bold]grey {
 	Персона
 	..
-	+ last_name: CharField
-	+ first_name: CharField
-	+ patr_name: CharField
-	+ sex: BooleanField
-	+ birthday: DateField
+    + last_name: CharField[64]
+    + first_name: CharField[64]
+    + patr_name: CharField[64]
+    + sex: BooleanField
+    + birthday: DateField
 }
-
-class Client ##[bold]grey{
-	Покупатель
+class Bank ##[bold]grey {
+    Банк
 	..
-	+ uid: CharField
+    + bik: CharField[16]
+    + branch: CharField[128]
+    + ks: CharField[32]
+    + rs: CharField[32]
+    + city: CharField[64]
+    + address: CharField[128]
 }
-
-class Passport ##[bold]grey{
-	Пасспорт
+class Passport ##[bold]grey {
+    Паспорт
 	..
-	+ series: CharField
-	+ number: CharField
-	+ police_name: CharField
-	+ police_code: CharField
-	+ place_birth: CharField
-	+ dt_issue: DateField
+    + series: CharField[8]
+    + number: CharField[8]
+    + police_name: CharField[256]
+    + police_code: CharField[16]
+    + place_birth: CharField[256]
+    + dt_issue: DateField
 	--
-	+ address: ForeignKey(Address)
-	+ person: ForeignKey(Person)
-	+ client: ForeignKey(Client)
+    + address: ForeignKey(Address)
+    + person: ForeignKey(Person)
+    + bank: ForeignKey(Bank)
 }
-
-class OrgForm ##[bold]grey{
-	Форма ЮЛ
+class BuisinessCard ##[bold]grey {
+    Бизнес-карта
 	..
-	+ full_name: CharField
-	+ short_name: CharField
-}
-
-class BuisinessCard  ##[bold]grey{
-	Бизнес-карта ЮЛ
-	..
-	+ full_name: CharField
-	+ short_name: CharField
-	+ inn: CharField
-	+ kpp: CharField
-	+ ogrn: CharField
-	+ business: CharField
-	+ site: CharField
-	+ email: CharField
-	+ director_power_type: CharField
-	+ director_power_number: CharField
-	+ director_power_date: DateField
+    + full_name: CharField[256]
+    + short_name: CharField[64]
+    + inn: CharField[16]
+    + kpp: CharField[16]
+    + ogrn: CharField[16]
+    + business: CharField[32]
+    + site: CharField[64]
+    + email: CharField[64]
+    + director_power_type: CharField[32]
+    + director_power_number: CharField[32]
+    + director_power_date: DateField
 	--
-	+ director: ForeignKey(Person)
-	+ address: ForeignKey(Address)
-	+ orgform: ForeignKey(OrgForm)
-	+ client: ForeignKey(Client)
+    + director: ForeignKey(Person)
+    + address: ForeignKey(Address)
+    + orgform: ForeignKey(OrgForm)
+    + bank: ForeignKey(Bank)
 }
-
-class Bank ##[bold]grey{
-	Расчётный счет
-	..
-	+ bik: CharField
-	+ branch: CharField
-	+ ks: CharField
-	+ rs: CharField
-	+ city: CharField
-	+ address: CharField
-	+ owner_uid: CharField
-	+ owner_type: CharField
-}
-
-class BankClient  ##[bold]grey{
-	Cчета клиентов
+class Client ##[bold]grey {
+    Клиент
 	--
-	+ client: ForeignKey(Client)
-	+ bank: ForeignKey(Bank)
+    + passport: ForeignKey(Passport)
+    + business: ForeignKey(BuisinessCard)
 }
 
-class Sale  ##[bold]grey{
-	Договор
+
+class Sale ##[bold]grey{
+    Договор продажи
 	..
-	+ number: CharField
-	+ dt_issue: DateField
-	+ city: CharField
-	+ price: FloatField
-	+ decoration: BooleanField
+    + number: CharField[32]
+    + dt_issue: DateField
+    + city: CharField[32]
+    + price: FloatField
+    + decoration: BooleanField
 	--
-	+ escrow_agent: ForeignKey(BuisinessCard)
+    + flat: ForeignKey(Flat)
+    + escrow_agent: ForeignKey(BuisinessCard)
 }
 
-class SaleBankClient  ##[bold]grey{
-	Договор-Покупатели
+class SaleClient ##[bold]grey{
+    Сделки с клиентами
 	..
-	+ part: FloatField
-	+ pay_days: CharField
-	+ own_money: FloatField
-	+ credit_money: FloatField
+    + part: FloatField
+    + pay_days: CharField[3]
+    + own_money: FloatField
+    + credit_money: FloatField
 	--
-	+ sale: ForeignKey(Sale)
-	+ bank_client: ForeignKey(BankClient)
+    + sale: ForeignKey(Sale)
+    + client: ForeignKey(Client)
 }
+class Flat ##[bold]grey{}
 
 
+OrgForm    *-[#grey,bold]u- BuisinessCard
+Client      -[#grey,bold]-o  BuisinessCard
+Client      -[#grey,bold]-*  Passport
 
-SaleBankClient  -[#grey,bold]d-* Sale
-SaleBankClient  -[#grey,bold]l-* BankClient
-BankClient      -[#grey,bold]d-* Client
-Client          -[#grey,bold]-o  BuisinessCard
-Client          -[#grey,bold]-*  Passport
-Person         o-[#grey,bold]l-  Passport
-Person         o-[#grey,bold]r-  BuisinessCard
-Bank           *-[#grey,bold]r-  BankClient
-BuisinessCard  o-[#grey,bold]u-  Sale
-BuisinessCard   -[#grey,bold]r-* OrgForm
+Bank       o-[#grey,bold]u- BuisinessCard
+Bank       o-[#grey,bold]- Passport
+Person     o-[#grey,bold]r- BuisinessCard
+Person     o-[#grey,bold]l- Passport
+
+Sale        -[#grey,bold]r-o  Flat
+Sale        -[#grey,bold]-o  BuisinessCard
+
+SaleClient  -[#grey,bold]r-o Sale
+SaleClient  -[#grey,bold]l-o Client
+
+
 @enduml
-
