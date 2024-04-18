@@ -1,13 +1,9 @@
 @import url("./root.css");
 
-
-
-
 *{
     line-height: var(--def-line-height);
     font-size: var(--def-font-size);
     font-family: var(--def-font-family), sans-serif;
-    
     -webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -19,45 +15,28 @@ body {
     grid-template-columns: 200px 1fr; 
     height: 100vh;
     width: 100vw;
-    background: rgb(61, 61, 61);
-    padding: 50px;
-    border-radius: 25px;
+    background: rgb(211, 211, 211);
+    padding: 75px 250px;
     overflow: hidden;
 }
-
-
-
 /* header{
     border-bottom: 1px solid rgb(194, 193, 193);
 } */
-
 .content{
-
-
     flex-grow: 1;
     background: var(--color-base);
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    border-top-left-radius: 0;
+    border-top-right-radius: calc(var(--def-radius-box) * 4);
+    border-bottom-right-radius: calc(var(--def-radius-box) * 4);
+    border-bottom-left-radius: 0;
+    overflow: hidden;
+    box-shadow: 5px 5px 20px -5px var(--color-font-1);
 }
-
 aside{
-    background: linear-gradient(0deg, var(--color-accent-2) 0%, var(--color-accent-2) 100%);
-    /* width: calc(100vw / 12 * 1.5); */
-    width: 200px;
+    background: linear-gradient(0deg, var(--color-accent-2) 0%, var(--color-accent-1) 100%);
 }
-
-/* main{
-    overflow-y: scroll;
-    flex-grow: 1;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    border: 1px solid rgb(179, 177, 177);
-    gap: var(--main-offset);
-    padding: var(--main-offset);
-} */
 main {
     overflow-y: scroll;
     flex-grow: 1;
@@ -65,14 +44,13 @@ main {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    /* border: 1px solid rgb(194, 193, 193); */
     gap: var(--offset);
     padding: var(--offset);
     align-content: flex-start;
     padding-left: calc(var(--offset) + var(--offset) / 2);
 }
 footer{
-    background: wheat;
+    background: var(--color-base);
 }
 h2 {
     width: 100%;
@@ -81,20 +59,6 @@ h2 {
     font-size: calc(var(--def-font-size) * 1.7);
     border-radius: var(--def-radius-box);
 }
-/* article {
-    background: white;
-    border-radius: var(--def-radius-box);
-    width: calc(100% / 12 * 3 - var(--main-offset) * 3 / 4);
-    box-shadow: 0 0 5px 0 var(--color-font-2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-} */
-
-
-
-
 .wrapper{
     width: calc(100% + var(--offset) * 2);
     margin: 0 calc(var(--offset) * (-1));
@@ -117,7 +81,7 @@ h2 {
 }
 .card h3{
     padding: var(--offset);
-    font-size: calc(var(--def-font-size) * 1.8);
+    font-size: calc(var(--def-font-size) * 1.6);
     color: var(--color-font-1);
 }
 .card div.icon{
@@ -137,9 +101,6 @@ h2 {
 .card div.controls{
     padding: var(--offset) 0;
 }
-
-
-
 
 @media screen and (max-width: 1366px) {
     body { padding: 0; }

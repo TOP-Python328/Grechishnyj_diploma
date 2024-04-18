@@ -1,42 +1,22 @@
 
 <aside>
     <div class="logotype">
-        <!-- <i class="icon fa fa-home fa-3x"></i> -->
+        <span class="home"><i class="icon fa fa-home"></i></span>
+        <span class="sf">SF</span>
     </div>
-
-        
     <ul>
-        <li>Главная
         <li><a href="{% url 'main' %}">Dashboard</a></li>
-        <li><a href="{% url 'run_my_company' %}"><i class="icon fa fa-home"></i>  Моя компания</a></li>
-        <li><a href="#">Отделы</a></li>
-        <li><a href="#">Сотрудники</a></li>
+        <li><a href="{% url 'run_my_company' %}">Моя компания</a></li>
     </ul>
-
-
     <ul>
-        <li>Недвижимость
-        <li><a href="{% url 'run_microdistricts' %}">Микрорайоны</a></li>
-        <li><a href="{% url 'run_houses' %}"><i class="icon fa fa-home"></i>  Дома</a></li>
-        <li><a href="{% url 'run_flats' %}"><i class="icon fa fa-home"></i>  Квартиры</a></li>
-        <li><a href="{% url 'run_flat_constructor' %}"><i class="icon fa fa-home"></i>  Конструктор</a></li>
+        <li><a href="{% url 'run_houses' %}">Дома</a></li>
+        <li><a href="{% url 'run_flats' %}">Квартиры</a></li>
+        <li><a href="{% url 'run_flat_constructor' %}">Конструктор</a></li>
     </ul>
-
-
     <ul>
-        <li>Продажи
-            <li><a href="#"> Продажа</a></li>
-        <li><a href="#">Клиенты</a></li>
-        <li><a href="{% url 'run_sales' %}"><i class="icon fa fa-home"></i>  Договора</a></li>
-        <li><a href="#">Продажи</a></li>
+        <li><a href="{% url 'run_sales' %}">Договора</a></li>
     </ul>
-
-
     <ul>
-        <li>Списки
-        <li><a href="{% url 'run_buisiness' %}"><i class="icon fa fa-home"></i> Компании</a></li>
-        <li><a href="#">Физические лица</a></li>
-        <li><a href="#">Адреса</a></li>
+        <li><a href="{% url 'run_buisiness' %}">Компании</a></li>
     </ul>
-
 </aside>

@@ -1,10 +1,12 @@
 {% extends 'index.html' %}
 
 {% block main %}
-<h2>Моя компания</h2>
 <div class="wrapper">
     <div class="account">
-        <div class="account-point">
+        <div class="account-controls">
+            <div class="title">
+                {{ my_business_card.orgform.short_name }} {{ my_business_card.short_name }}
+            </div>
             <div class="popup">
                 <button class="open_btn btn_simple">Основное</button>
                 <div class="back close">
@@ -17,7 +19,7 @@
                                 <fieldset class="column col-1">
                                     <legend>Данные моей организации</legend>
                                     <select name="orgform" required>
-                                        <option value="">Организационн-правовая форма</option>
+                                        <option value="">Организационно-правовая форма</option>
                                         {% for orgform in orgforms %}
                                         <option value="{{ orgform.id }}">{{ orgform.full_name }}</option>
                                         {% endfor %}
@@ -97,13 +99,16 @@
                                     <input name="last_name" type="text" placeholder="Фамилия" autocomplete="off">
                                     <input name="first_name" type="text" placeholder="Имя" autocomplete="off">
                                     <input name="patr_name" type="text" placeholder="Отчество" autocomplete="off">
-                                    <div class="radio">
-                                        <input type="radio" name="sex" value="1" checked />
-                                        <label>Мужской</label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="sex" value="" />
-                                        <label>Женский</label>
+                                    <div class="radio-box">
+                                        <div class="radio-box-label">Пол:</div>
+                                        <div class="radio">
+                                            <input type="radio" name="sex" value="1" checked />
+                                            <span>Мужской</span>
+                                        </div>
+                                        <div class="radio">
+                                            <input type="radio" name="sex" value="" />
+                                            <span>Женский</span>
+                                        </div>
                                     </div>
                                     <input name="birthday" type="date" autocomplete="off">
                                     <input name="director_power_type" type="text" placeholder="Действует на основании" autocomplete="off">
@@ -181,19 +186,25 @@
             <div class="account-point-data">{{ my_business_card.email }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Директор фамилия</div>
+            <div class="account-point-header">Руководитель</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Фамилия</div>
             <div class="account-point-data">{{ my_business_card.director.last_name }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Директор имя</div>
+            <div class="account-point-title">Имя</div>
             <div class="account-point-data">{{ my_business_card.director.first_name }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Директор имя</div>
+            <div class="account-point-title">Отчество</div>
             <div class="account-point-data">{{ my_business_card.director.patr_name }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Директор действует на основании</div>
+            <div class="account-point-header">Документ подтверждающий полномочия руководителя</div>
+        </div>
+        <div class="account-point">
+            <div class="account-point-title">Наименование</div>
             {% if my_business_card.director_power_type %}
             <div class="account-point-data">{{ my_business_card.director_power_type }}</div>
             {% else %}
@@ -201,7 +212,7 @@
             {% endif %}
         </div>
         <div class="account-point">
-            <div class="account-point-title">Директор номер документа оснований</div>
+            <div class="account-point-title">Номер</div>
             {% if my_business_card.director_power_number %}
             <div class="account-point-data">{{ my_business_card.director_power_number }}</div>
             {% else %}
@@ -209,7 +220,7 @@
             {% endif %}
         </div>
         <div class="account-point">
-            <div class="account-point-title">Директор дата документа оснований</div>
+            <div class="account-point-title">Дата</div>
             {% if my_business_card.director_power_date %}
             <div class="account-point-data">{{ my_business_card.director_power_date }}</div>
             {% else %}
@@ -217,30 +228,30 @@
             {% endif %}
         </div>
         <div class="account-point">
-            <div class="account-point-title">Банковские реквизиты</div>
+            <div class="account-point-header">Адрес</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Адрес страна</div>
+            <div class="account-point-title">Страна</div>
             <div class="account-point-data">{{ my_business_card.address.country_full_name }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Адрес регион</div>
+            <div class="account-point-title">Регион</div>
             <div class="account-point-data">{{ my_business_card.address.region }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Адрес город</div>
+            <div class="account-point-title">Город</div>
             <div class="account-point-data">{{ my_business_card.address.city }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Адрес улица</div>
+            <div class="account-point-title">Улица</div>
             <div class="account-point-data">{{ my_business_card.address.street }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Адрес дом</div>
+            <div class="account-point-title">Дом</div>
             <div class="account-point-data">{{ my_business_card.address.home }}</div>
         </div>
         <div class="account-point">
-            <div class="account-point-title">Адрес офис</div>
+            <div class="account-point-title">Офис</div>
             <div class="account-point-data">{{ my_business_card.address.flat }}</div>
         </div>
     </div>

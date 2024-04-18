@@ -8,6 +8,9 @@
     min-height: 100vh;
     flex-basis: 100%;
 }
+.popup form{
+    margin-top: 100px;
+}
 form {
     background: white;
     border-radius: var(--def-radius-box);
@@ -19,8 +22,6 @@ form {
     /* margin-top: 100px; */
     padding: calc(var(--form-offset) * 2);
 }
-
-
 form .row{
     width: 100%;
     display: flex;
@@ -105,6 +106,14 @@ div.checkbox input[type="checkbox"]{
     border: 1px solid var(--color-input-quiet);
     border-radius: 5px;
 }
+div.radio-box{
+    display: flex;
+}
+div.radio-box-label{
+    font-size: calc(var(--def-font-size) * 1.5);
+    flex-grow: 1;
+    padding-left: calc(var(--offset) / 2);
+}
 div.radio{
     display: flex;
     justify-content: start;
@@ -112,8 +121,9 @@ div.radio{
     align-items: center;
     padding-left: calc(var(--def-line-height) / 4);
 }
-div.radio label{
+div.radio span{
     font-size: calc(var(--def-font-size) * 1.5);
+    color: var(--color-font-3);
 }
 div.radio input[type="radio"]{
     width: 24px;
@@ -221,7 +231,6 @@ button.btn_round{
     background: #000;
 }
 
-
 .auth_form a{
     font-size: calc(var(--def-font-size) * 1.5);
     color: var(--color-accent-2);
@@ -229,9 +238,10 @@ button.btn_round{
     text-align: center;
     margin-top: 50px;
 }
-/* input:read-only {
+input[readonly] {
     border: none;
-} */
+    background: #ececec;
+}
 div .subtitle{
     font-size: calc(var(--def-font-size) * 1.4);
     color: var(--color-font-accent);

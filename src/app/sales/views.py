@@ -7,18 +7,19 @@ from app.sales.models import Sale, SaleClient
 
 def run_sales(request): 
     """Табличное предстваление сделок."""
-    dbase = request.user.dbase
-    sales_clients = SaleClient.objects.using(dbase).all()
-    passports = Passport.objects.using(dbase).all()
-    buisiness_cards = BuisinessCard.objects.using(dbase).all()
-    # for sale_client in sales_clients:
-    #     print(f'{sale_client.client.instance=}')
+
+    if request.method == 'GET':
+        dbase = request.user.dbase
+        sales_clients = SaleClient.objects.using(dbase).all()
+        passports = Passport.objects.using(dbase).all()
+        buisiness_cards = BuisinessCard.objects.using(dbase).all()
 
     return render(
         request,
         'sales/sales.html',
         {
             'title': 'Сделки',
+            'h1': 'Сделки',
             'sales_clients': sales_clients,
             'passports': passports,
             'buisiness_cards': buisiness_cards,
@@ -28,6 +29,7 @@ def run_sales(request):
 
 def run_sale(request, uid_flat): 
     """Продажа квартиры."""
+    
     dbase = request.user.dbase
     username = request.user.username
     my_company = BuisinessCard.objects.using(dbase).get(business=username)
@@ -36,8 +38,6 @@ def run_sale(request, uid_flat):
     rooms = flat.room_set.all()
 
     if request.method == 'POST':
-        print(request.POST)
-
         if request.POST['form'] == 'create_new_sale':
             # Если клиентов несколько - цикл
             address=Address.objects.using(dbase).create( 
@@ -55,7 +55,7 @@ def run_sale(request, uid_flat):
                 last_name=request.POST['person_last_name'],
                 first_name=request.POST['person_first_name'],
                 patr_name=request.POST['person_last_name'],
-                sex=request.POST['person_sex'],
+                sex=True if request.POST['person_sex'] == '1' else False,
                 birthday=request.POST['person_birthday'])
             # Добавление записи в БД клиента
             # Если клиент физическое лицо
@@ -90,7 +90,7 @@ def run_sale(request, uid_flat):
                 number=request.POST['sale_number'],
                 city=request.POST['sale_city'],
                 dt_issue=request.POST['sale_date'],
-                decoration=request.POST['sale_interior_decoration'],
+                decoration=True if request.POST['sale_interior_decoration'] == '1' else False,
                 price=request.POST['sale_price'],
                 flat=Flat.objects.using(dbase).get(id=request.POST['sale_flat']),
                 escrow_agent=BuisinessCard.objects.using(dbase).get(id=request.POST['escrow_agent']))
@@ -112,6 +112,7 @@ def run_sale(request, uid_flat):
         'sales/sale.html',
         {
             'title': 'Новый договор',
+            'h1': 'Новый договор',
             'flat': flat,
             'rooms': rooms,
             'my_company': my_company,
@@ -125,22 +126,23 @@ def run_sale(request, uid_flat):
         }
     )
 
-
-
 def run_contract(request, uid_flat): 
     """Договор долевого участия."""
-    dbase = request.user.dbase
-    username = request.user.username
-    my_company = BuisinessCard.objects.using(dbase).get(business=username)
-    flat = Flat.objects.using(dbase).get(id=int(uid_flat))
-    sale = Sale.objects.using(dbase).get(flat=flat)
-    sales_clients = SaleClient.objects.using(dbase).filter(id=sale.id) 
+    
+    if request.method == 'GET':
+        dbase = request.user.dbase
+        username = request.user.username
+        my_company = BuisinessCard.objects.using(dbase).get(business=username)
+        flat = Flat.objects.using(dbase).get(id=int(uid_flat))
+        sale = Sale.objects.using(dbase).get(flat=flat)
+        sales_clients = SaleClient.objects.using(dbase).filter(id=sale.id) 
 
     return render(
         request,
         'sales/contract.html',
         {
-            'title': 'Договор долевого участия',
+            'title': f'ДДУ № {sale.number}',
+            'h1': f'ДДУ № {sale.number}',
             'my_company': my_company,
             'sale': sale,
             'flat': flat,

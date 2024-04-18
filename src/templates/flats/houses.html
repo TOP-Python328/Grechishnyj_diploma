@@ -1,26 +1,16 @@
 {% extends 'index.html' %}
 
 {% block main %}
-
-    
-
-
-
-        {% for microdistrict in microdistricts %}
-        
-        <h2>Микрорайон {{ microdistrict.name }}</h2>
-        <div class="wrapper card">
-            {% for house in microdistrict.house_set.all %}
-            <div>
-                <h3>Дом № {{ house.number }}</h3>
-                <div class="icon"><i class="icon fa fa-home"></i></div>
-                <div class="controls"><a class="button" href="{% url 'run_house' house.url %}">Посмотреть</a></div>
-            </div>
-            {% endfor %}
+    {% for microdistrict in microdistricts %}
+    <h2>Микрорайон {{ microdistrict.name }}</h2>
+    <div class="wrapper card">
+        {% for house in microdistrict.house_set.all %}
+        <div>
+            <h3>Дом № {{ house.number }}</h3>
+            <div class="icon"><i class="icon fa fa-home"></i></div>
+            <div class="controls"><a class="button" href="{% url 'run_house' house.url %}">Посмотреть</a></div>
         </div>
-
         {% endfor %}
-
-      
-    
+    </div>
+    {% endfor %}
 {% endblock main %}

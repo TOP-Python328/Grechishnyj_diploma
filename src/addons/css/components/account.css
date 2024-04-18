@@ -9,15 +9,46 @@
     border-radius: var(--def-radius-box);
     background: white;
 }
+.account-controls{
+    display: flex;
+    gap: var(--offset);
+    margin-bottom: calc(var(--offset));
+}
+.account-controls .title{
+    flex-grow: 1;
+    padding-left: calc(var(--offset) / 2);
+    font-size: calc(var(--def-font-size) * 1.7);
+    color: var(--color-accent-2); 
+    font-weight: 700;
+}
+.account-controls .popup{
+    flex-shrink: 1;
+}
 .account-point{
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(218, 216, 216);
+    background: rgb(245, 245, 245);
+    margin: 5px;
+    /* border-bottom: 1px solid rgb(218, 216, 216); */
 }
 .account-point-title, 
 .account-point-data {
+    flex-basis: 50%;
     font-size: calc(var(--def-font-size) * 1.5);
 }
+.account-point-header{
+    width: 100%;
+    font-weight: 600;
+    color: var(--color-accent-1);
+    font-size: calc(var(--def-font-size) * 1.5);
+    background: white;
+}
+.account-point-header,
+.account-point-title{
+    padding: 0 calc(var(--offset) / 2);
+}
+
 .accept{
     background: rgb(180, 252, 183);
     display: block;

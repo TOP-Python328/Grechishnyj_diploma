@@ -4,20 +4,30 @@
     font-size: calc(var(--def-font-size) * 1.5);
 }
 .sale-template span{
-    background: yellow;
     font-size: calc(var(--def-font-size) * 1.5);
     padding: 0 10px;
 }
-
-.client{
+.client, .contract{
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--offset) / 2)
 }
-
+.contract fieldset{
+    width: calc(100% / 2 - var(--offset) / 2)
+}
+.client fieldset{
+    width: calc(100% / 5 - var(--offset) / 5 * 2)
+}
+fieldset label{
+    color: var(--color-accent-1);
+    font-size: calc(var(--def-font-size) * 1.5);
+    font-weight: 700;
+}
 .switch{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-bottom: var(--offset);
 }
 .switch-tab{
     flex-grow: 1;

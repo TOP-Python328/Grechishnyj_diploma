@@ -11,112 +11,70 @@
         <input name="sale_flat" hidden value="{{ flat.id }}">
         <input name="sale_number" hidden value="{{ flat.sale_number }}">
         <input name="sale_city" hidden value="{{ my_company.address.city }}">
-
-        <div class="account-point">
-            <div class="account-point-title">Дата договора</div>
-            <div class="account-point-data"><input name="sale_date" type="date" value=""></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Внутреняя отделка</div>
-            <div class="account-point-data">
-                <div class="radio">
-                    <input type="radio" name="sale_interior_decoration" value="1" checked />
-                    <label>с отделкой</label>
-                </div>
-                <div class="radio">
-                    <input type="radio" name="sale_interior_decoration" value="" />
-                    <label>без отделки</label>
-                </div>
-            </div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Эскроу агент</div>
-            <div class="account-point-data">
+        <div class="contract">
+            <fieldset class="contract-about">
+                <label>Новый договор</label>
+                <input name="" readonly value="Договор № {{ flat.sale_number }}">
+                <input name="" readonly value="Жилой дом № {{ flat.floor.section.house.number }}">
+                <input name="" readonly value="Квартира № {{ flat.number }}">
+                <input name="" readonly value="Площадь {{ flat.square }}">
+            </fieldset>
+            <fieldset class="contract-data">
+                <label>Сведения о договоре</label>
+                <input name="sale_date" placeholder="Дата договора" onfocus="(this.type='date')" type="text" value="">
                 <select name="escrow_agent" required>
                     <option value="">Выбрать эскроу агента</option>
                     {% for escrow_agent in escrow_agents %}
                     <option value="{{ escrow_agent.id }}">{{ escrow_agent.short_name }}</option>
                     {% endfor %}
                 </select>
-            </div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Срок передачи</div>
-            <div class="account-point-data"><span class="accept">{{ flat.floor.section.house.building_permit.dt_expiry }}</span></div>
-        </div>
-        <div class="account-point">
-            <div class="account-point-title">Сумма договора</div>
-            <div class="account-point-data"><input name="sale_price" type="text" placeholder="Сумма" value=""></div>
-        </div>
-        
-        <div class="client">
-            <div class="switch">
-                <div class="switch-tab" data-fieldset="person">Основные</div>
-                <div class="switch-tab" data-fieldset="passport">Паспорт</div>
-                <div class="switch-tab" data-fieldset="address">Адрес</div>
-                <div class="switch-tab" data-fieldset="requisites">Реквизиты</div>
-                <div class="switch-tab" data-fieldset="portion">Доля</div>
-            </div>
-            <fieldset data-fieldset="person">
-                <div class="account-point">
-                    <div class="account-point-title">Гражданин фамилия</div>
-                    <div class="account-point-data"><input name="person_last_name" type="text" placeholder="Фамилия" value=""></div>
-                </div> 
-                <div class="account-point">
-                    <div class="account-point-title">Гражданин имя</div>
-                    <div class="account-point-data"><input name="person_first_name" type="text" placeholder="Имя" value=""></div>
-                </div> 
-                <div class="account-point">
-                    <div class="account-point-title">Гражданин отчество</div>
-                    <div class="account-point-data"><input name="person_patr_name" type="text" placeholder="отчество" value=""></div>
-                </div> 
-                <div class="account-point">
-                    <div class="account-point-title">Гражданин пол</div>
-                    <div class="account-point-data">
-                        <div class="radio">
-                            <input type="radio" name="person_sex" value="1" checked />
-                            <label>Мужской</label>
-                        </div>
-                        <div class="radio">
-                            <input type="radio" name="person_sex" value="" />
-                            <label>Женский</label>
-                        </div>
+                <input name="sale_price" type="text" placeholder="Сумма" value="">
+                <div class="radio-box">
+                    <div class="radio-box-label">Отделка:</div>
+                    <div class="radio">
+                        <input type="radio" name="sale_interior_decoration" value="1" checked>
+                        <span>Да</span>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="sale_interior_decoration" value="">
+                        <span>Нет</span>
                     </div>
                 </div>
-                <div class="account-point">
-                    <div class="account-point-title">Гражданин дата рождения</div>
-                    <div class="account-point-data"><input name="person_birthday" type="date"value=""></div>
+            </fieldset>
+        </div> 
+        <div class="client">
+            <fieldset data-fieldset="person">
+                <label>Клиент</label>
+                <input name="person_last_name" type="text" placeholder="Фамилия" value="">
+                <input name="person_first_name" type="text" placeholder="Имя" value="">
+                <input name="person_patr_name" type="text" placeholder="отчество" value="">
+                <input name="person_birthday" placeholder="Дата рождения" onfocus="(this.type='date')" type="text" value="">
+                <div class="radio-box">
+                    <div class="radio-box-label">Пол:</div>
+                    <div class="radio">
+                        <input type="radio" name="person_sex" value="1" checked>
+                        <span>М</span>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="person_sex" value="">
+                        <span>Ж</span>
+                    </div>
                 </div>
             </fieldset>
-            <fieldset class="hide" data-fieldset="passport">
-                <div class="account-point">
-                    <div class="account-point-title">Паспорт серия</div>
-                    <div class="account-point-data"><input name="passport_series" type="text" placeholder="Серия" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Паспорт номер</div>
-                    <div class="account-point-data"><input name="passport_number" type="text" placeholder="Номер" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Паспорт место рождения</div>
-                    <div class="account-point-data"><input name="passport_place_birth" type="text" placeholder="Место рождения" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Паспорт выдан когда</div>
-                    <div class="account-point-data"><input name="passport_dt_issue" type="date" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Паспорт выдан кем</div>
-                    <div class="account-point-data"><input name="passport_police_name" type="text" placeholder="Кем выдан" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Паспорт выдан код подразделения</div>
-                    <div class="account-point-data"><input name="passport_police_code" type="text" placeholder="Код подразделения" value=""></div>
-                </div>
+            <fieldset data-fieldset="passport">
+                <label>Паспорт</label>
+                <input name="passport_series" type="text" placeholder="Серия" value="">
+                <input name="passport_number" type="text" placeholder="Номер" value="">
+                <input name="passport_place_birth" type="text" placeholder="Место рождения" value="">
+                <input name="passport_dt_issue" placeholder="Дата получения" onfocus="(this.type='date')" type="text" value="">
+                <input name="passport_police_name" type="text" placeholder="Кем выдан" value="">
+                <input name="passport_police_code" type="text" placeholder="Код подразделения" value="">
+
             </fieldset>
 
 
-            <fieldset class="hide address-block" data-fieldset="address">
+            <fieldset class="address-block" data-fieldset="address">
+                <label>Адрес</label>
                 <select name="region" required>
                     <option value="">Регион</option>
                 </select>
@@ -138,7 +96,8 @@
             </fieldset>
 
 
-            <fieldset class="hide" data-fieldset="requisites">
+            <fieldset data-fieldset="requisites">
+                <label>Банк</label>
                 <input name="bik_number" type="search" placeholder="Бик номер" autocomplete="off" value="">
                 <input name="bik_branch" readonly placeholder="Наименование отделения" autocomplete="off" value="">
                 <input name="bik_city" readonly placeholder="Город" autocomplete="off" value="">
@@ -147,23 +106,12 @@
                 <input name="bik_rs" placeholder="Расчетный счёт" autocomplete="off" value="">
             </fieldset>
 
-            <fieldset class="hide" data-fieldset="portion">
-                <div class="account-point">
-                    <div class="account-point-title">Доля участия</div>
-                    <div class="account-point-data"><input name="sale_part" type="text" placeholder="Дней" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Оплата в течении (дней)</div>
-                    <div class="account-point-data"><input name="sale_pay_days" type="text" placeholder="Дней" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Собственные средства</div>
-                    <div class="account-point-data"><input name="sale_own_money" type="text" placeholder="Сумма" value=""></div>
-                </div>
-                <div class="account-point">
-                    <div class="account-point-title">Кредитные средства</div>
-                    <div class="account-point-data"><input name="sale_credit_money" name="" type="text" placeholder="Сумма" value=""></div>
-                </div>
+            <fieldset data-fieldset="portion">
+                <label>Доля участия</label>
+                <input name="sale_part" type="text" placeholder="Доля участия" value="">
+                <input name="sale_pay_days" type="text" placeholder="Оплата в течении (дней)" value="">
+                <input name="sale_own_money" type="text" placeholder="Собственные средства" value="">
+                <input name="sale_credit_money" name="" type="text" placeholder="Кредитные средства" value="">
             </fieldset>
         </div>   
         <div class="row">

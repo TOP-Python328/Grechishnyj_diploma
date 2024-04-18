@@ -21,7 +21,7 @@ class Person(models.Model):
     birthday = models.DateField()
 
     def __str__(self):
-        return f'{self.last_name.title()} {self.first_name[0].upper()}'
+        return f'{self.last_name.title()} {self.first_name[0].upper()}.{self.patr_name[0].upper()}.'
 
 class Bank(models.Model):
     """Банк."""

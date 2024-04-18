@@ -135,7 +135,7 @@ def run_my_company(request):
             post_short_name = str(request.POST['short_name'])
             post_inn = str(request.POST['inn'])
             post_kpp = str(request.POST['kpp'])
-            post_ogrn = int(request.POST['orgform'])
+            post_ogrn = str(request.POST['orgform'])
             post_site = str(request.POST['site'])
             post_email = str(request.POST['email'])
             if not my_business_card:
@@ -210,8 +210,6 @@ def run_my_company(request):
             my_business_card.bank=bank
             my_business_card.save(using=dbase)                
 
-
-# ======================================================================================================
         elif request.POST['form'] == 'new_person':
             post_last_name = str(request.POST['last_name'])
             post_first_name = str(request.POST['first_name'])
@@ -263,6 +261,7 @@ def run_my_company(request):
         'agents/my_company.html',
         {
             'title': 'Моя компания',
+            'h1': 'Моя компания',
             'persons': persons,
             'orgforms': orgforms,
             'my_business_card': my_business_card,
