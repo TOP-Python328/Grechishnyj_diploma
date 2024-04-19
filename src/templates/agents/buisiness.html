@@ -10,15 +10,19 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     <input name="form" hidden value="create_new_firm">
-                    <div class="column col-1 form_title">Новая компания</div>
-                    <div class="row">
-                        <fieldset class="column col-1">
-                            <legend>Реквизиты</legend>
+                    <div class="form_title">Новая компания</div>
+                    <div class="switch-box">
+                        <div class="switch">
+                            <div class="switch-tab" data-fieldset="requisites">Реквизиты</div>
+                            <div class="switch-tab" data-fieldset="address">Адрес</div>
+                            <div class="switch-tab" data-fieldset="director">Руководитель</div>
+                            <div class="switch-tab" data-fieldset="bank">Банк</div>
+                        </div>
+                        <fieldset data-fieldset="requisites">
                             <select name="business" required>
                                 <option value="">Тип компании</option>
                                 <option value="escrow">Эскроу</option>
                                 <option value="client">Клент</option>
-                                
                             </select>
                             <select name="orgform" required>
                                 <option value="">Организационн-правовая форма</option>
@@ -34,17 +38,12 @@
                             <input name="site"  type="text" placeholder="Сайт" value="" autocomplete="off">
                             <input name="email"  type="text" placeholder="Email" value="" autocomplete="off">
                         </fieldset> 
-                    
-                        <fieldset class="column col-1 address-block">
-                            <legend>Адрес</legend>
+                        <fieldset class="address-block hide" data-fieldset="address">
                             <select name="region" required>
                                 <option value="">Регион</option>
                             </select>
                             <select name="district" required>
                                 <option value="">Район</option>
-                            </select>
-                            <select name="city" required>
-                                <option value="">Населенный пункт</option>
                             </select>
                             <select name="locality" required>
                                 <option value="город">Город</option>
@@ -52,13 +51,14 @@
                                 <option value="поселок">Поселок</option>
                                 <option value="село">Село</option> 
                             </select> 
+                            <select name="city" required>
+                                <option value="">Населенный пункт</option>
+                            </select>
                             <input name="street" type="text" placeholder="Улица" autocomplete="off">
                             <input name="home" type="text" placeholder="Дом" autocomplete="off"> 
                             <input name="flat" type="text" placeholder="Офис" autocomplete="off">   
                         </fieldset>  
-
-                        <fieldset class="column col-1">
-                            <legend>Расчетный счёт</legend>
+                        <fieldset class="hide" data-fieldset="bank">
                             <input name="bik_number" type="search" placeholder="Бик номер" autocomplete="off" value="">
                             <input name="bik_branch" readonly placeholder="Наименование отделения" autocomplete="off" value="">
                             <input name="bik_city" readonly placeholder="Город" autocomplete="off" value="">
@@ -66,9 +66,7 @@
                             <input name="bik_ks" readonly placeholder="Корреспондентский счёт" autocomplete="off" value="">
                             <input name="bik_rs" placeholder="Расчетный счёт" autocomplete="off" value="">
                         </fieldset> 
-
-                        <fieldset class="column col-1">
-                            <legend>Руководитель</legend>
+                        <fieldset class="hide" data-fieldset="director">
                             <input name="last_name" type="text" placeholder="Фамилия" autocomplete="off">
                             <input name="first_name" type="text" placeholder="Имя" autocomplete="off">
                             <input name="patr_name" type="text" placeholder="Отчество" autocomplete="off">
@@ -78,13 +76,12 @@
                                 <input type="radio" name="sex" value="" />
                                 <label>Женский</label>
                             </div>
-                            <input name="birthday" type="date" autocomplete="off">
+                            <input name="birthday" type="text" placeholder="Дата рождения" onfocus="(this.type='date')" autocomplete="off">
                             <input name="director_power_type" type="text" placeholder="Действует на основании" autocomplete="off">
                             <input name="director_power_number" type="text" placeholder="Номер документа" autocomplete="off">
-                            <input name="director_power_date" type="date" placeholder="Дата документа" autocomplete="off">
+                            <input name="director_power_date" type="text" placeholder="Дата документа" onfocus="(this.type='date')" autocomplete="off">
                         </fieldset> 
                     </div>
-                
                     <div class="row">
                         <div class="column col-3"></div>
                         <input class="column col-3" type="reset" value="Очистить">

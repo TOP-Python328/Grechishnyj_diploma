@@ -1,8 +1,6 @@
 {% extends 'index.html' %}
 
 {% block main %}
-
-<h2>Новый договор</h2>
 <div class="wrapper">
     <div class="account">    
     <form action="" method="post">
@@ -66,13 +64,11 @@
                 <input name="passport_series" type="text" placeholder="Серия" value="">
                 <input name="passport_number" type="text" placeholder="Номер" value="">
                 <input name="passport_place_birth" type="text" placeholder="Место рождения" value="">
-                <input name="passport_dt_issue" placeholder="Дата получения" onfocus="(this.type='date')" type="text" value="">
+                <label>Выдан</label>
+                <input name="passport_dt_issue" placeholder="Дата выдачи" onfocus="(this.type='date')" type="text" value="">
                 <input name="passport_police_name" type="text" placeholder="Кем выдан" value="">
                 <input name="passport_police_code" type="text" placeholder="Код подразделения" value="">
-
             </fieldset>
-
-
             <fieldset class="address-block" data-fieldset="address">
                 <label>Адрес</label>
                 <select name="region" required>
@@ -94,8 +90,6 @@
                 <input name="home" type="text" placeholder="Дом" autocomplete="off"> 
                 <input name="flat" type="text" placeholder="Квартира" autocomplete="off">   
             </fieldset>
-
-
             <fieldset data-fieldset="requisites">
                 <label>Банк</label>
                 <input name="bik_number" type="search" placeholder="Бик номер" autocomplete="off" value="">
@@ -103,13 +97,15 @@
                 <input name="bik_city" readonly placeholder="Город" autocomplete="off" value="">
                 <input name="bik_address" readonly placeholder="Адрес" autocomplete="off" value="">
                 <input name="bik_ks" readonly placeholder="Корреспондентский счёт" autocomplete="off" value="">
-                <input name="bik_rs" placeholder="Расчетный счёт" autocomplete="off" value="">
+                <label>Счёт</label>
+                <input name="bik_rs" placeholder="Расчётный счёт" autocomplete="off" value="">
             </fieldset>
-
             <fieldset data-fieldset="portion">
                 <label>Доля участия</label>
                 <input name="sale_part" type="text" placeholder="Доля участия" value="">
+                <label>Срок оплаты</label>
                 <input name="sale_pay_days" type="text" placeholder="Оплата в течении (дней)" value="">
+                <label>Средства оплаты</label>
                 <input name="sale_own_money" type="text" placeholder="Собственные средства" value="">
                 <input name="sale_credit_money" name="" type="text" placeholder="Кредитные средства" value="">
             </fieldset>

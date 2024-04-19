@@ -11,9 +11,9 @@
     
 </head>
 <body>
+    
 
     {% if user.is_authenticated %}
-
         {% block aside %}
             {% include 'base/aside.html' %}
         {% endblock aside %}
@@ -47,9 +47,7 @@
         {% endfor %}
 
     {% else %}
-
         {% include 'auth/login.html' %}
-        
     {% endif %}
 
 

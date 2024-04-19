@@ -24,20 +24,74 @@ fieldset label{
     font-size: calc(var(--def-font-size) * 1.5);
     font-weight: 700;
 }
+.switch-box{
+    width: 100%;
+}
 .switch{
     width: 100%;
     display: flex;
+    gap: 5px;
     justify-content: space-between;
 }
 .switch-tab{
-    flex-grow: 1;
-    color: var(--color-accent-2);
+    flex-basis: 50%;
+    color: var(--color-accent-1);
     border-bottom: 5px solid white;
     font-size: calc(var(--def-font-size) * 1.5);
+    font-weight: 600;
     cursor: pointer;
     text-align: center;
+    margin: 15px 0;
 }
 .switch-tab:hover{
     color: var(--color-font-accent);
-    border-bottom: 5px solid var(--color-font-accent);
 }
+
+.sale-doc{
+    background: rgb(255, 255, 255);
+    padding: 100px;
+    line-height: 26px;
+    font-family: 'Times New Roman';
+    font-size: calc(var(--def-font-size) * 2.1)
+}
+
+.sale-doc p{
+    text-align: justify;
+    margin-bottom: 10px;
+}
+.sale-doc h3{
+    margin: 26px 0;
+    width: 100%;
+    text-align: center;
+    font-size: calc(var(--def-font-size) * 2)
+}
+.sale-doc h2{
+    text-align: center;
+    margin: 0 26px;
+    font-size: calc(var(--def-font-size) * 2.2)
+}
+p.full-line{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.sale-doc table{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-top: 1px solid grey;
+    border-left: 1px solid grey;
+}
+.sale-doc table tr{
+    border-bottom: 1px solid grey;
+}
+.sale-doc table tr td{
+    border-right: 1px solid grey;
+    padding: 0 15px;
+    font-size: calc(var(--def-font-size) * 1.8);
+    text-align: left;
+}
+.sale-doc table tr td:last-child{
+    text-align: right;
+}
+

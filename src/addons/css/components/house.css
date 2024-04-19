@@ -1,6 +1,6 @@
 @import url("./root.css");
 
-div.house {
+.house {
     background: white;
     padding: 50px;
     border-radius: 3px;
@@ -9,14 +9,14 @@ div.house {
     width: 100%;
     flex-wrap: wrap;
 }
-div.house .section {
+.section {
     padding: 4px;
     margin: 8px;
     text-align: center;
     display: flex;
     flex-direction: column-reverse;
 }
-div.house .section span{
+.section span{
     color: var(--color-font-3);
     font-size: calc(var(--def-font-size) * 1.3);
     font-weight: 600;
@@ -24,27 +24,22 @@ div.house .section span{
     margin: 2px;
     border-radius: 3px;
 }
-div.house .section .floor{
+.section .floor{
     display: flex;
     justify-content: space-between;
 }
 
-
-div.house .section .floor span {
+.section .floor span {
     min-width: var(--def-line-height);
     margin: 2px;
     border-radius: 3px;
     text-align: center;
     font-weight: 600;
     font-size: calc(var(--def-font-size) * 1.1);
-}
-div.house .section .floor span {
     background: none;
     color: var(--color-font-accent);
 }
-
-
-div.house .section .floor .popup span{
+.floor .popup span{
     display: block;
     background: var(--color-base);
     margin: 2px;
@@ -55,24 +50,20 @@ div.house .section .floor .popup span{
     cursor: pointer;
     transition: all 0.1s ease;
 }
-
-div.house .section .floor .popup span.free{
+.floor .popup span.free{
     color: var(--color-font-3);
 }
-div.house .section .floor .popup span.sold{
-
+.floor .popup span.sold{
     color: var(--color-font-2);
 }
-div.house .section .floor .popup span.free:hover{
+.floor .popup span.free:hover{
     background: var(--color-font-accent);
     color: white;
 }
-div.house .section .floor .popup.flat-item{
+.floor .popup.flat-item{
     flex-grow: 1;
 }
-/* div.house .section .floor .popup .open_btn{
-    width: 100%;
-} */
+
 
 
 

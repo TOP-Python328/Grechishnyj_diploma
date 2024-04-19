@@ -10,16 +10,15 @@
 }
 .popup form{
     margin-top: 100px;
+    box-shadow: 5px 5px 20px -5px var(--color-font-1);
+    border-radius: calc(var(--def-radius-box)* 4);
 }
 form {
     background: white;
-    border-radius: var(--def-radius-box);
-    /* box-shadow: 0 0 5px 0 black; */
     font-size: calc(var(--def-font-size) * 1.5);
     flex-basis: 500px;
     display: flex;
     flex-wrap: wrap;
-    /* margin-top: 100px; */
     padding: calc(var(--form-offset) * 2);
 }
 form .row{
@@ -71,11 +70,11 @@ form div.form_title{
 button, input, select, textarea, a.button{
     border-radius: var(--def-radius-box);
     background-color: white;
+    width: 100%;
 }
 
 input, select, textarea{ 
     border: 1px solid var(--color-input-quiet);
-    width: 100%;
     font-size: calc(var(--def-font-size) * 1.5);
     padding: 0 calc(var(--def-line-height) / 4);
 }

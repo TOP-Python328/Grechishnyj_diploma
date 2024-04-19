@@ -4,19 +4,23 @@
         <span class="home"><i class="icon fa fa-home"></i></span>
         <span class="sf">SF</span>
     </div>
-    <ul>
-        <li><a href="{% url 'main' %}">Dashboard</a></li>
-        <li><a href="{% url 'run_my_company' %}">Моя компания</a></li>
-    </ul>
-    <ul>
-        <li><a href="{% url 'run_houses' %}">Дома</a></li>
-        <li><a href="{% url 'run_flats' %}">Квартиры</a></li>
-        <li><a href="{% url 'run_flat_constructor' %}">Конструктор</a></li>
-    </ul>
-    <ul>
-        <li><a href="{% url 'run_sales' %}">Договора</a></li>
-    </ul>
-    <ul>
-        <li><a href="{% url 'run_buisiness' %}">Компании</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="{% url 'main' %}">Dashboard</a></li>
+            <li><a href="{% url 'run_my_company' %}">Компания</a></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'run_houses' %}">Дома</a></li>
+            <li><a href="{% url 'run_flats' %}">Квартиры</a></li>
+            <li><a href="{% url 'run_flat_constructor' %}">Конструктор</a></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'run_sales' %}">Договора</a></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'run_buisiness' %}">Компании</a></li>
+        </ul>
+
+    </nav>
+    
 </aside>

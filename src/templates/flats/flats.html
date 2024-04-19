@@ -31,9 +31,9 @@
             <td><a href="#">{{ flat.number }}</a></td>
             <td>
               {% if flat.status.name == "free" %}
-                <a href="#">свободно</a>
+                <a href="{% url 'run_sale' flat.url %}">свободно</a>
               {% elif flat.status.name == "sold" %}
-                <a href="#">продано</a>
+                <a href="{% url 'run_contract' flat.url %}">продано</a>
               {% endif %}
             </td>
           </tr>

@@ -21,10 +21,6 @@
                                     <fieldset>
                                         <legend>Новая комната</legend>
                                         <input name="room_name" type="text" placeholder="Наименование комнаты" autocomplete="off">
-                                        <!-- <div class="checkbox">
-                                            <label>Жилая / не жилая</label>
-                                            <input type="checkbox" name="living">
-                                        </div> -->
                                         <div class="radio">
                                             <input type="radio" name="living" value="1" checked />
                                             <label>Жилая</label>
@@ -227,12 +223,14 @@
                         <form action="" method="post">
                             {% csrf_token %}
                             <input name="form" hidden value="new_house">
-                            <div class="row">
-                                <div class="column col-1 form_title">Добавить жилой дом</div>
-                            </div>
-                            <div class="row">
-                                <fieldset class="column col-2">
-                                    <legend>Характеристики</legend>
+                            <div class="form_title">Новый дом</div>
+                            <div class="switch-box">
+                                <div class="switch">
+                                    <div class="switch-tab" data-fieldset="characteristics">Характеристики</div>
+                                    <div class="switch-tab" data-fieldset="sections">Секции</div>
+                                    <div class="switch-tab" data-fieldset="address">Адрес</div>
+                                </div>
+                                <fieldset data-fieldset="characteristics">
                                     <select name="building_permit" required>
                                         <option value="">Разрешение на строительство</option>
                                         {% for building_permit in building_permits %}
@@ -275,9 +273,26 @@
                                         <option value="{{ material.id }}">{{ material.name }}</option>
                                         {% endfor %}
                                     </select>
+                                </fieldset> 
+                                <fieldset class="address-block hide" data-fieldset="address">
+                                    <select name="region" required>
+                                        <option value="">Регион</option>
+                                    </select>
+                                    <select name="district" required>
+                                        <option value="">Район</option>
+                                    </select>
+                                    <select name="locality" required>
+                                        <option value="город">Город</option>
+                                        <option value="деревня">Деревня</option>
+                                        <option value="поселок">Поселок</option>
+                                        <option value="село">Село</option> 
+                                    </select> 
+                                    <select name="city" required>
+                                        <option value="">Населенный пункт</option>
+                                    </select>
+                                    <input name="street" type="text" placeholder="Улица" autocomplete="off">
                                 </fieldset>
-                                <fieldset class="column col-2">
-                                    <legend>Секции</legend>
+                                <fieldset class="hide" data-fieldset="sections">
                                     <div class="select_box">
                                         <div class="select_title">
                                             <input name="house_number"  type="text" placeholder="Номер дома по ГП" value="" autocomplete="off"> 
@@ -300,33 +315,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </fieldset>  
+                                </fieldset> 
                             </div>
-                                <fieldset class="row address-block">
-                                    <legend>Адрес</legend>
-                                    <div class="column col-3">
-                                        <select name="region" required>
-                                            <option value="">Регион</option>
-                                        </select>
-                                        <select name="district" required>
-                                            <option value="">Район</option>
-                                        </select>
-                                    </div>
-                                    <div class="column col-3">
-                                        <select name="city" required>
-                                            <option value="">Населенный пункт</option>
-                                        </select>
-                                        <select name="locality" required>
-                                            <option value="город">Город</option>
-                                            <option value="деревня">Деревня</option>
-                                            <option value="поселок">Поселок</option>
-                                            <option value="село">Село</option> 
-                                        </select> 
-                                    </div>
-                                    <div class="column col-3">
-                                        <input name="street" type="text" placeholder="Улица" autocomplete="off">
-                                    </div>  
-                                </fieldset>   
                             <div class="row">
                                 <div class="column col-3"></div>
                                 <input class="column col-3" type="reset" value="Очистить">
@@ -368,10 +358,10 @@
                                             <option value="собственность">Cобственность</option>
                                         </select>
                                         <input name="owner_number" type="text" placeholder="Номер документа подтверждающего право" autocomplete="off">
-                                        <input name="owner_date" type="date" placeholder="Дата подтверждающего документа" autocomplete="off">
+                                        <input name="owner_date" type="text" placeholder="Дата документа" onfocus="(this.type='date')" autocomplete="off">
                                         <input name="owner_reg_number" type="text" placeholder="Регистрациионный номер документа" autocomplete="off">
-                                        <input name="owner_reg_date" type="date" placeholder="Дата регистрации документа" autocomplete="off">
-                                        <input name="document_egrn" type="date" placeholder="Дата выписки ЕГРН" autocomplete="off">      
+                                        <input name="owner_reg_date" type="text" placeholder="Дата регистрации" onfocus="(this.type='date')" autocomplete="off">
+                                        <input name="document_egrn" type="text" placeholder="Дата выписки ЕГРН" onfocus="(this.type='date')" autocomplete="off">      
                                     </fieldset>
                                 </div>
                             </div>
@@ -405,8 +395,8 @@
                                     <fieldset>
                                         <legend>Новое разрешение на строительство</legend>
                                         <input name="number" type="text" placeholder="Номер разрешения" autocomplete="off">
-                                        <input name="dt_issue" type="date" autocomplete="off">
-                                        <input name="dt_expiry" type="date" autocomplete="off">
+                                        <input name="dt_issue" type="text" placeholder="Дата выдачи" onfocus="(this.type='date')" autocomplete="off">
+                                        <input name="dt_expiry" type="text" placeholder="Действует до" onfocus="(this.type='date')" autocomplete="off">
                                         <select name="land_plot" required>
                                             <option value="">Земельный участок</option>
                                             {% for land_plot in land_plots %}

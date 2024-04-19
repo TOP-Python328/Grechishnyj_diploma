@@ -96,21 +96,20 @@ def run_buisiness(request):
                 director_power_type=post_director_power_type,
                 director_power_number=post_director_power_number,
                 director_power_date=post_director_power_date)
-            
-
-
     
     return render(
         request,
         'agents/buisiness.html',
         {
             'title': 'Компании',
+            'h1': 'Компании',
             'orgforms': orgforms,
             'scripts': [                 
                 'scripts/popup.js', 
                 'scripts/form.js',
                 'scripts/address.js',
                 'scripts/bik.js',
+                'scripts/switchtab.js',
             ]
         }
     )
@@ -253,8 +252,6 @@ def run_my_company(request):
             ).save(using=dbase)
 
         return redirect('run_my_company', permanent=True)
-
-
     
     return render(
         request,
@@ -273,5 +270,3 @@ def run_my_company(request):
             ]
         }
     )
-
-

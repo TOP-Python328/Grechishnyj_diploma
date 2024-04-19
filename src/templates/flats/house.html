@@ -2,92 +2,89 @@
 
 {% block main %}
 <h2>Микрорайон {{ house.microdistrict.name }} Дом № {{ house.number }}</h2>
-<div class="house">
-  {% for section in house.section_set.all %}
-  <div class="section">
-  <span>Подъезд № {{ section.number }}</span>
-    {% for floor in section.floor_set.all %}
-    <div class="floor">
-      <span>
-      {% if floor.get_number_as_int < 10 %}
-        0{{ floor.number }}
-      {% else %}
-        {{ floor.number }}
-      {% endif %}
-      </span>
-      {% for flat in floor.flat_set.all %}
-        <div class="popup flat-item">
-          <span class="open_btn {{ flat.status.name }}">{{ flat.number }}</span>
-          <div class="back close">
-            <div class="wrapper_form">
-              <form class="flat" action="" method="post">
-                {{ flat.number }}
-                {% csrf_token %}
-                <input name="form" hidden value="update_flat">
-                <div class="column col-1 form_title">Квартира № {{ flat.number }}</div>
-                <div class="row">
-                  <div class="column col-2">
-                    <div class="subtitle">Общие сведения</div>
-                    <div class="select_item">
-                      <input name="" class="left" value="микрорайон" readonly>
-                      <input name="" class="right" value="{{ flat.floor.section.house.microdistrict.name }}" readonly>
+    <div class="house">
+    {% for section in house.section_set.all %}
+        <div class="section">
+        <span>Подъезд № {{ section.number }}</span>
+            {% for floor in section.floor_set.all %}
+            <div class="floor">
+            <span>
+            {% if floor.get_number_as_int < 10 %}
+                0{{ floor.number }}
+            {% else %}
+                {{ floor.number }}
+            {% endif %}
+            </span>
+            {% for flat in floor.flat_set.all %}
+                <div class="popup flat-item">
+                <span class="open_btn {{ flat.status.name }}">{{ flat.number }}</span>
+                <div class="back close">
+                    <div class="wrapper_form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="form" hidden value="update_flat">
+                            <div class="form_title">Квартира № {{ flat.number }}</div>
+                            <div class="switch-box">
+                                <div class="switch">
+                                    <div class="switch-tab" data-fieldset="flat">Сведения о квартире</div>
+                                    <div class="switch-tab" data-fieldset="rooms">Состав комнат</div>
+                                </div>
+                                <fieldset data-fieldset="flat">
+                                    <div class="account-point">
+                                        <div class="account-point-title">Микрорайон</div>
+                                        <div class="account-point-data">{{ flat.floor.section.house.microdistrict.name }}</div>
+                                    </div>
+                                    <div class="account-point">
+                                        <div class="account-point-title">Номер дома</div>
+                                        <div class="account-point-data">{{ flat.floor.section.house.number }}</div>
+                                    </div>
+                                    <div class="account-point">
+                                        <div class="account-point-title">Секция</div>
+                                        <div class="account-point-data">{{ flat.floor.section.number }}</div>
+                                    </div>                        
+                                    <div class="account-point">
+                                        <div class="account-point-title">Этаж</div>
+                                        <div class="account-point-data">{{ flat.floor.number }}</div>
+                                    </div>
+                                    <div class="account-point">
+                                        <div class="account-point-title">Жилых комнат</div>
+                                        <div class="account-point-data">{{ flat.living_rooms }}</div>
+                                    </div>
+                                    <div class="account-point">
+                                        <div class="account-point-title">Всего комнат</div>
+                                        <div class="account-point-data">{{ flat.count_rooms }}</div>
+                                    </div>
+                                    <div class="account-point">
+                                        <div class="account-point-title">Общая площадь</div>
+                                        <div class="account-point-data">{{ flat.square }}</div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="hide" data-fieldset="rooms">
+                                    {% for room in flat.room_set.all %}
+                                    <div class="account-point">
+                                        <div class="account-point-title">{{ room.room_type.name }}</div>
+                                        <div class="account-point-data">{{ room.square }}</div>
+                                    </div>
+                                    {% endfor %}
+                                </fieldset>
+                            </div>
+                            <div class="account-controls">
+                                <input type="reset" value="Редактировать">
+                                {% if flat.status.name == "free" %}
+                                <a class="button" href="{% url 'run_sale' flat.url %}">Новый контракт</a>
+                                {% elif flat.status.name == "sold" %}
+                                <a class="button" href="{% url 'run_contract' flat.url %}">Смотреть договор</a>
+                            {% endif %}
+                            </div>      
+                        </form>
                     </div>
-                    <div class="select_item">
-                      <input name="" class="left" value="дом" readonly>
-                      <input name="" class="right" value="{{ flat.floor.section.house.number }}" readonly>
-                    </div>
-                    <div class="select_item">
-                      <input name="" class="left" value="секция" readonly>
-                      <input name="" class="right" value="{{ flat.floor.section.number }}" readonly>
-                    </div>
-                    <div class="select_item">
-                      <input name="" class="left" value="этаж" readonly>
-                      <input name="" class="right" value="{{ flat.floor.number }}" readonly>
-                    </div>
-                    <div class="select_item">
-                      <input name="" class="left" value="планировка" readonly>
-                      <input name="" class="right" value="{{ flat.flat_plan.name }}" readonly>
-                    </div>
-                    <div class="select_item">
-                      <input name="" class="left" value="площадь" readonly>
-                      <input name="total_square" class="right" value="{{ flat.square }}" readonly>
-                    </div>
-                    <div class="select_item">
-                      <input name="" class="left" value="статус" readonly>
-                      {% if flat.status.name == "free" %}
-                          <input name="" class="right" value="свободно" readonly>
-                      {% elif flat.status.name == "sold" %}
-                          <input name="" class="right" value="продано" readonly>
-                      {% endif %}
-                    </div>
-                  </div>
-                  <div class="column col-2">
-                    <div class="subtitle">Состав комнат</div>
-                    {% for room in flat.room_set.all %}
-                    <div class="select_item">
-                      <input name="room_type" class="left" value="{{ room.room_type.name }}" readonly>
-                      <input name="square" class="right" value="{{ room.square }}" readonly>
-                    </div>
-                    {% endfor %}
-                  </div>
+                    <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
                 </div>
-                <div class="row">
-                  <input class="column col-2" type="reset" value="Редактировать">
-                  {% if flat.status.name == "free" %}
-                  <a class="button column col-2" href="{% url 'run_sale' flat.url %}">Новый контракт</a>
-                  {% elif flat.status.name == "sold" %}
-                  <a class="button column col-2" href="{% url 'run_contract' flat.url %}">Смотреть договор</a>
-                  {% endif %}
-                </div>               
-              </form>
+                </div>
+            {% endfor %}
             </div>
-            <button class="close_btn btn_round close"><i class="fa fa-times fa-lg"></i></button>
-          </div>
+            {% endfor %}
         </div>
-      {% endfor %}
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  {% endfor %}
-</div>
 {% endblock main %}

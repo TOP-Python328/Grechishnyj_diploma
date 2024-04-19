@@ -54,7 +54,7 @@ def run_sale(request, uid_flat):
             person=Person.objects.using(dbase).create(
                 last_name=request.POST['person_last_name'],
                 first_name=request.POST['person_first_name'],
-                patr_name=request.POST['person_last_name'],
+                patr_name=request.POST['person_patr_name'],
                 sex=True if request.POST['person_sex'] == '1' else False,
                 birthday=request.POST['person_birthday'])
             # Добавление записи в БД клиента

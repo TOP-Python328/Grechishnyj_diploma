@@ -10,6 +10,7 @@
     background: white;
 }
 .account-controls{
+    width: 100%;
     display: flex;
     gap: var(--offset);
     margin-bottom: calc(var(--offset));
@@ -25,17 +26,17 @@
     flex-shrink: 1;
 }
 .account-point{
-    width: 100%;
     display: flex;
     justify-content: space-between;
     background: rgb(245, 245, 245);
     margin: 5px;
     /* border-bottom: 1px solid rgb(218, 216, 216); */
 }
+.account-point-header,
 .account-point-title, 
 .account-point-data {
-    flex-basis: 50%;
     font-size: calc(var(--def-font-size) * 1.5);
+    padding: 0 calc(var(--offset) / 2);
 }
 .account-point-header{
     width: 100%;
@@ -44,11 +45,6 @@
     font-size: calc(var(--def-font-size) * 1.5);
     background: white;
 }
-.account-point-header,
-.account-point-title{
-    padding: 0 calc(var(--offset) / 2);
-}
-
 .accept{
     background: rgb(180, 252, 183);
     display: block;

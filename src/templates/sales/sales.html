@@ -15,6 +15,7 @@
             <td>Площадь</td>
             <td>Клиент</td>
             <td>Цена</td>
+            <td>Договор</td>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
             <td><a href="#">Бизнес-Карта</a></td>
             {% endif %}
             <td><a href="#">{{ sale_client.sale.price }}</a></td>
+            <td><a href="{% url 'run_contract' sale_client.sale.flat.url %}">Смотреть</a></td>
           </tr>
           {% endfor %}
         </tbody>

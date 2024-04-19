@@ -42,6 +42,9 @@ aside div.logotype span .fa{
     font-size: 30px;
     color: white;
 }
+aside nav{
+    padding-top: var(--def-line-height);
+}
 
 aside a{
     display: block;

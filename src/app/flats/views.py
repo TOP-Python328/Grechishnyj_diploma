@@ -54,7 +54,7 @@ def run_house(request, uid: str):
     dbase=request.user.dbase 
     house=House.objects.using(dbase).get(id=int(uid))
     rooms=Room.objects.using(dbase).filter(flat__floor__section__house=house)
-
+    print(dir(request.META))
     return render(
         request,
         'flats/house.html',
@@ -65,6 +65,7 @@ def run_house(request, uid: str):
             'scripts': [                 
                 'scripts/popup.js', 
                 'scripts/form.js',
+                'scripts/switchtab.js',
             ]
         }
     )
@@ -78,6 +79,7 @@ def run_flats(request):
         'flats/flats.html',
         {
             'title': 'Квартиры',
+            'h1': 'Квартиры',
             'flats': flats,
             'scripts': [ 
                 'scripts/popup.js', 
@@ -267,6 +269,7 @@ def run_flat_constructor(request):
                 'scripts/form.js',
                 'scripts/validate.js',
                 'scripts/address.js',
+                'scripts/switchtab.js'
             ]
         }
     )
