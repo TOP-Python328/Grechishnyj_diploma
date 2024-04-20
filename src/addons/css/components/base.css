@@ -103,9 +103,8 @@ h2 {
     padding: var(--offset) 0;
 }
 
-@media screen and (max-width: 1366px) {
-    body { padding: 0; }
-}
+
+
 
 
 
